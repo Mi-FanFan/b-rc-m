@@ -1,0 +1,146 @@
+@import "../themes/default";
+
+@viewer-prefix-cls: ~"@{mi-prefix}-viewer";
+
+.@{viewer-prefix-cls} {
+
+  &-img-list {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  &-img-container {
+    //padding: .2rem;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+  }
+  &-img-item {
+    width: 30%;
+    margin: 1.5%;
+    text-align: center;
+  }
+
+  &-img-item img {
+    max-width: 90%;
+    max-height: 90%;
+
+    //max-height: 4.25rem;
+  }
+
+  &-overlay {
+    position: fixed;
+    z-index: @zindex-viewer;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition: all .3s @ease-in-out;
+    overflow: hidden;
+    background: #000000;
+    backface-visibility: hidden;
+  }
+
+  &-wrap {
+    background: #333;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+    background: #333333;
+    &-back {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+
+      & > a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        color: #ffffff;
+        text-decoration: none;
+        text-indent: -8px;
+      }
+    }
+
+    &-page {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 13px;
+      text-align: center;
+      color: #ddd;
+      &-current {
+
+      }
+      &-total {
+
+      }
+    }
+  }
+
+  &-view {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 40px;
+  }
+
+  &-imgbox {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+  }
+  &-imgbox &-imglist {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-imgbox &-imglist li {
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: top;
+    list-style: none;
+
+    &:before{
+      content: ' ';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
+  }
+
+}
