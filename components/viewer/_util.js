@@ -1,6 +1,28 @@
 /**
  * Created by Freeman on 2016/12/29.
  */
-export const formatPage = val =>{
-  return val.toString().length<2?'0'+val:val;
+export const formatPage = val => {
+  return val.toString().length < 2 ? '0' + val : val;
+}
+
+/**
+ * @name   求两点之间中间点的坐标
+ * @params  {a}  点A的坐标
+ * @params  {b}  点B的坐标
+ * @return  {x: number, y: number} 两点之间的距离
+ */
+const distance = (a, b) => {
+  if (!a || !b) return;
+  var x = (a.x + b.x) / 2,
+    y = (a.y + b.y) / 2;
+  return {x: x, y: y};
+}
+
+export const getOrigin = (e, val) => {
+  const touchX = val === undefined ? e.touch.x : distance(e.touch.touches[0], e.touch.touches[1]).x,
+    touchY = val === undefined ? e.touch.y : distance(e.touch.touches[0], e.touch.touches[1]).y
+  return {
+    x: touchX + 'px',
+    y: touchY + 'px',
+  }
 }

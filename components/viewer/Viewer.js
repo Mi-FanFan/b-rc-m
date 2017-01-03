@@ -14,15 +14,22 @@ class Viewer extends Component {
     this.handleTouchMove = this.handleTouchMove.bind(this)
     this.handleTouchEnd = this.handleTouchEnd.bind(this)
     this.handleTouchCancel = this.handleTouchCancel.bind(this)
+    this.handleDoubleClick = this.handleDoubleClick.bind(this)
+    this.handleZoomIn = this.handleZoomIn.bind(this)
+    this.handleZoomOut = this.handleZoomOut.bind(this)
 
     this.state = {
       index: props.startIndex,
       showViewer: false,
-      dragging:false,
+      dragging: false,//是否单指滑动
+      isZoom: false,//是否放大
       startX: 0,
       startY: 0,
       endX: 0,
-      endY: 0
+      endY: 0,
+      originX: '50%',
+      originY: '50%',
+      scale: 1,
     }
   }
 
@@ -45,9 +52,9 @@ class Viewer extends Component {
       return
     }
     this.setState({
-      dragging:true,
-      startX:e.touches[0].clientX,
-      startY:e.touches[0].clientY,
+      dragging: true,
+      startX: e.touches[0].clientX,
+      startY: e.touches[0].clientY,
     })
     this.handleTouchMove(e)
   }
@@ -58,8 +65,8 @@ class Viewer extends Component {
       return
     }
     this.setState({
-      endX:e.touches[0].clientX,
-      endY:e.touches[0].clientY,
+      endX: e.touches[0].clientX,
+      endY: e.touches[0].clientY,
     })
   }
 
@@ -68,28 +75,28 @@ class Viewer extends Component {
     if (e.touches.length > 1) {
       return
     }
-    let diff  = 0
-    let distance = this.state.endX -this.state.startX
-    if (distance>0){
+    let diff = 0
+    let distance = this.state.endX - this.state.startX
+    if (distance > 0) {
       diff = -1
-    }else if (distance<0){
+    } else if (distance < 0) {
       diff = 1
     }
 
-     let index = this.state.index + diff
-    if (index === this.props.data.length){
-      index = this.props.data.length-1
+    let index = this.state.index + diff
+    if (index === this.props.data.length) {
+      index = this.props.data.length - 1
     }
-    if (index === -1){
+    if (index === -1) {
       index = 0
     }
     this.setState({
-      startX:0,
-      startY:0,
-      endX:0,
-      endY:0,
-      index:index,
-      dragging:false
+      startX: 0,
+      startY: 0,
+      endX: 0,
+      endY: 0,
+      index: index,
+      dragging: false
     })
   }
 
@@ -97,18 +104,48 @@ class Viewer extends Component {
 
   }
 
+  handleDoubleClick(e) {
+    console.log('doubleClick' + e);
+    if (this.state.isZoom) {
+      this.handleZoomOut(e)
+    } else {
+      this.handleZoomIn(e)
+    }
+  }
+
+  handleZoomIn(e) {
+    this.setState({
+      isZoom: true,
+      scale: 2,
+    })
+  }
+
+  handleZoomOut(e) {
+    this.setState({
+      isZoom: false,
+      scale: 1,
+    })
+  }
+
   render() {
     const {prefixCls, data} = this.props;
 
     const width = document.documentElement.clientWidth;
-    const leftTranslate = -(this.state.index * width) +(this.state.endX -this.state.startX)
-    const durate = this.state.dragging? 0:.3;
+    const leftTranslate = -(this.state.index * width) + (this.state.endX - this.state.startX)
+    const durate = this.state.dragging ? 0 : .3;
     const imgListStyle = {
       width: width * data.length,
       transition: 'transform .3s ease-out',
       WebkitTransition: `transform ${durate}s ease-out`,
       transform: `translate3d(${leftTranslate}px,0px,0px)`
     };
+    const imgStyle = {
+      transition: 'transform .3s ease-out',
+      WebkitTransition: `transform ${durate}s ease-out`,
+      transformOrigin: `${this.state.originX} ${this.state.originY} 0px`,
+      WebkitTransformOrigin: `${this.state.originX} ${this.state.originY} 0px`,
+      transform: `scale(${this.state.scale},${this.state.scale},1)`
+    }
     return (
       <div className="">
         <div className="mi-viewer-img-list">
@@ -116,7 +153,7 @@ class Viewer extends Component {
             {
               data.map((url, index) => (
                 <li key={index} className="mi-viewer-img-item" onClick={() => this.handleItemClick(index)}>
-                  <img src={url} role="presentation"/>
+                  <img src={url} role="presentation" style={imgStyle}/>
                 </li>
               ))
             }
