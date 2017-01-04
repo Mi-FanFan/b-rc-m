@@ -3,18 +3,18 @@
  */
 import React, {Component, PropTypes} from 'react'
 import Animate from 'rc-animate'
-//import classNames from 'classnames'
+import classNames from 'classnames'
 import {formatPage} from './_util'
 class Viewer extends Component {
   constructor(props) {
     super(props)
+    this.handleResize = this.handleResize.bind(this)
     this.handleItemClick = this.handleItemClick.bind(this)
     this.handleBack = this.handleBack.bind(this)
     this.handleTouchStart = this.handleTouchStart.bind(this)
     this.handleTouchMove = this.handleTouchMove.bind(this)
     this.handleTouchEnd = this.handleTouchEnd.bind(this)
     this.handleTouchCancel = this.handleTouchCancel.bind(this)
-    this.handleDoubleClick = this.handleDoubleClick.bind(this)
     this.handleZoomIn = this.handleZoomIn.bind(this)
     this.handleZoomOut = this.handleZoomOut.bind(this)
 
@@ -22,7 +22,7 @@ class Viewer extends Component {
       index: props.startIndex,
       showViewer: false,
       dragging: false,//是否单指滑动
-      isZoom: false,//是否放大
+      zooming: false,//是否放大
       startX: 0,
       startY: 0,
       endX: 0,
@@ -30,7 +30,28 @@ class Viewer extends Component {
       originX: '50%',
       originY: '50%',
       scale: 1,
+      screenWidth: 0,
+      screenHeight: 0,
+      delta:0,
     }
+  }
+
+  componentWillMount() {
+    this.setState({
+      screenWidth: window.innerWidth,
+      screenHeight: window.innerHeight
+    })
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize)
+  }
+
+  handleResize() {
+    this.setState({
+      screenWidth: window.innerWidth,
+      screenHeight: window.innerHeight
+    })
   }
 
   handleItemClick(index) {
@@ -49,6 +70,9 @@ class Viewer extends Component {
   handleTouchStart(e) {
     e.preventDefault()
     if (e.touches.length > 1) {
+      this.setState({
+        zooming: true,
+      })
       return
     }
     this.setState({
@@ -61,7 +85,11 @@ class Viewer extends Component {
 
   handleTouchMove(e) {
     e.preventDefault()
+
     if (e.touches.length > 1) {
+      this.setState({
+        delta:Math.abs(e.touches[0].pageX-e.touches[1].pageX)
+      })
       return
     }
     this.setState({
@@ -73,6 +101,7 @@ class Viewer extends Component {
   handleTouchEnd(e) {
     e.preventDefault()
     if (e.touches.length > 1) {
+
       return
     }
     let diff = 0
@@ -104,56 +133,50 @@ class Viewer extends Component {
 
   }
 
-  handleDoubleClick(e) {
-    console.log('doubleClick' + e);
-    if (this.state.isZoom) {
-      this.handleZoomOut(e)
-    } else {
-      this.handleZoomIn(e)
-    }
-  }
-
   handleZoomIn(e) {
     this.setState({
-      isZoom: true,
-      scale: 2,
+      zooming: true,
     })
   }
 
   handleZoomOut(e) {
     this.setState({
-      isZoom: false,
-      scale: 1,
+      zooming: false,
     })
   }
 
   render() {
     const {prefixCls, data} = this.props;
 
-    const width = document.documentElement.clientWidth;
-    const leftTranslate = -(this.state.index * width) + (this.state.endX - this.state.startX)
+    const width = this.state.screenWidth;
+    const height = this.state.screenHeight - 40;
+    let imgListTranslate = -(this.state.index * width)
+    if (this.state.dragging){
+      imgListTranslate += this.state.endX - this.state.startX
+    }
     const durate = this.state.dragging ? 0 : .3;
     const imgListStyle = {
       width: width * data.length,
       transition: 'transform .3s ease-out',
       WebkitTransition: `transform ${durate}s ease-out`,
-      transform: `translate3d(${leftTranslate}px,0px,0px)`
+      transform: `translate3d(${imgListTranslate}px,0px,0px)`
     };
     const imgStyle = {
-      transition: 'transform .3s ease-out',
-      WebkitTransition: `transform ${durate}s ease-out`,
+      width: width,
+      transition: 'all .3s ease-out',
+      WebkitTransition: `all ${durate}s ease-out`,
       transformOrigin: `${this.state.originX} ${this.state.originY} 0px`,
       WebkitTransformOrigin: `${this.state.originX} ${this.state.originY} 0px`,
-      transform: `scale(${this.state.scale},${this.state.scale},1)`
+      transform: `scale3d(${this.state.scale},${this.state.scale},1)`
     }
     return (
       <div className="">
-        <div className="mi-viewer-img-list">
+        <div className={classNames('mi-viewer-img-list',{'display-none':this.state.showViewer})}>
           <ul className="mi-viewer-img-container">
             {
               data.map((url, index) => (
                 <li key={index} className="mi-viewer-img-item" onClick={() => this.handleItemClick(index)}>
-                  <img src={url} role="presentation" style={imgStyle}/>
+                  <img src={url} role="presentation" />
                 </li>
               ))
             }
@@ -169,6 +192,7 @@ class Viewer extends Component {
                   <div className="mi-viewer-toolbar-back">
                     <a href="javascript:;" onClick={this.handleBack}>〈</a>
                   </div>
+                  {this.state.delta}
                   <div className="mi-viewer-toolbar-page">
                     <span className="mi-viewer-toolbar-page-current">{formatPage(this.state.index + 1)}</span>
                     <span>/</span>
@@ -186,8 +210,12 @@ class Viewer extends Component {
                     <ul className="mi-viewer-imglist" style={imgListStyle}>
                       {
                         data.map((url, index) => (
-                          <li key={index} style={{width: width}}>
-                            <img src={url} role="presentation" style={{width: width}}/>
+                          <li key={index} style={{width: width, height: height}}>
+                            <img
+                              src={url}
+                              role="presentation"
+                              style={imgStyle}
+                            />
                           </li>
                         ))
                       }
