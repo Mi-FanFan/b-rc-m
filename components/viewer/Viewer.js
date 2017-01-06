@@ -70,8 +70,10 @@ class Viewer extends Component {
   handleTouchStart(e) {
     e.preventDefault()
     if (e.touches.length > 1) {
+      let delta = Math.abs(e.touches[0].pageX-e.touches[1].pageX)
       this.setState({
         zooming: true,
+        delta:delta,
       })
       return
     }
@@ -87,8 +89,10 @@ class Viewer extends Component {
     e.preventDefault()
 
     if (e.touches.length > 1) {
+      let delta = Math.abs(e.touches[0].pageX-e.touches[1].pageX)
       this.setState({
-        delta:Math.abs(e.touches[0].pageX-e.touches[1].pageX)
+        delta:delta,
+        scale:this.state.scale + (delta-this.state.delta)/this.state.screenWidth
       })
       return
     }
@@ -101,7 +105,11 @@ class Viewer extends Component {
   handleTouchEnd(e) {
     e.preventDefault()
     if (e.touches.length > 1) {
-
+      let delta = Math.abs(e.touches[0].pageX-e.touches[1].pageX)
+      this.setState({
+        delta:delta,
+        scale:this.state.scale + (delta-this.state.delta)/this.state.screenWidth
+      })
       return
     }
     let diff = 0

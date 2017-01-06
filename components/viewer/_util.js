@@ -26,3 +26,31 @@ export const getOrigin = (e, val) => {
     y: touchY + 'px',
   }
 }
+export const calculatePos = (e,startX,startY,startTime) => {
+  let x, y
+  // If not a touch, determine point from mouse coordinates
+  if (e.changedTouches) {
+    x = e.changedTouches[0].clientX
+    y = e.changedTouches[0].clientY
+  } else {
+    x = e.clientX
+    y = e.clientY
+  }
+
+  const xd = startX - x
+  const yd = startY - y
+
+  const axd = Math.abs(xd)
+  const ayd = Math.abs(yd)
+
+  const time = Date.now() - startTime
+  const velocity = Math.sqrt(axd * axd + ayd * ayd) / time
+
+  return {
+    deltaX: xd,
+    deltaY: yd,
+    absX: axd,
+    absY: ayd,
+    velocity: velocity
+  }
+}
