@@ -6,7 +6,7 @@ import Accordion from '../../component/accordion';
 
 import Logo from './images/logo.png';
 import IconForm from './images/icon_nav_form.png';
-//import IconFeedback from './images/icon_nav_feedback.png';
+import IconFeedback from './images/icon_nav_feedback.png';
 import IconLayout from './images/icon_nav_layout.png';
 //import IconNav from './images/icon_nav_nav.png';
 //import IconSearch from './images/icon_nav_search.png';
@@ -45,7 +45,16 @@ const menus = [
         to: '/swipe'
       },
     ]
-  }
+  },{
+    name: 'Feedbacks',
+    icon: IconFeedback,
+    items: [
+      {
+        label: 'Toast',
+        to: '/toaster'
+      },
+    ]
+  },
 ]
 
 const Home = (props) => {

@@ -7,7 +7,7 @@ import 'weui';
 import "babel-polyfill";
 import  '../components/style/index.less'
 import Pages from './index';
-const { Home, Button, Icons, Viewer,Swipe} = Pages;
+const { Home, Button, Icons, Viewer,Swipe,Toaster} = Pages;
 
 
 class App extends React.Component {
@@ -40,6 +40,7 @@ ReactDOM.render((
                     <Route path="icons" component={Icons}/>
                     <Route path="viewer" component={Viewer}/>
                     <Route path="swipe" component={Swipe}/>
+                    <Route path="toaster" component={Toaster}/>
             </Route>
     </Router>
 ), document.getElementById('container'));
