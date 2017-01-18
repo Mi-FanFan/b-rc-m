@@ -69,8 +69,10 @@
     "lesshint": "^2.1.0",
     "open-browser-webpack-plugin": "*",
     "postcss-loader": "^0.8.2",
+    "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
     "react-addons-test-utils": "^15.4.1",
+    "react-dom": "^15.4.1",
     "react-router": "^3.0.0",
     "rimraf": "*",
     "style-loader": "*",
@@ -79,10 +81,7 @@
     "webpack": "*",
     "webpack-dev-server": "*",
     "weui": "^1.1.0",
-    "react-weui": "1.0.3"
-  },
-  "peerDependencies": {
-    "react": "0.14.x || ^15.0.0-0 || 15.x",
-    "react-dom": "^0.14.x || ^15.0.0-0 || 15.x"
+    "react-weui": "1.0.3",
+    "svg-sprite-loader": "^0.0.31"
   }
 }
