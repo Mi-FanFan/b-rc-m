@@ -6,8 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot --inline --compress --colors --port 8082",
     "clean": "rimraf ./lib",
-    "build:less": "gulp",
-    "build": "npm run clean &  babel ./components --out-dir ./lib --copy-files && npm run build:less"
+    "build": "npm run clean && webpack --config ./webpack.build.config"
   },
   "repository": {
     "type": "git",
@@ -47,7 +46,6 @@
     "codemirror": "*",
     "css-loader": "*",
     "enzyme": "*",
-    "babel-plugin-import": "^1.0.0",
     "eslint": "*",
     "eslint-config-react-app": "*",
     "eslint-loader": "*",
@@ -58,30 +56,26 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "fastclick": "^1.0.6",
     "file-loader": "*",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-clean-css": "^2.3.2",
-    "gulp-less": "^3.3.0",
-    "gulp-rename": "^1.2.2",
     "html-webpack-plugin": "^2.14.0",
     "less": "*",
     "less-loader": "*",
     "lesshint": "^2.1.0",
     "open-browser-webpack-plugin": "*",
     "postcss-loader": "^0.8.2",
+    "postcss-pxtorem": "^4.0.0",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
     "react-addons-test-utils": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-router": "^3.0.0",
+    "react-weui": "1.0.3",
     "rimraf": "*",
     "style-loader": "*",
+    "svg-sprite-loader": "^0.0.31",
     "uglify-loader": "*",
     "url-loader": "*",
-    "webpack": "*",
-    "webpack-dev-server": "*",
-    "weui": "^1.1.0",
-    "react-weui": "1.0.3",
-    "svg-sprite-loader": "^0.0.31"
+    "webpack": "1.14.0",
+    "webpack-dev-server": "1.16.2",
+    "weui": "^1.1.0"
   }
 }
