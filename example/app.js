@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {Router, Route, IndexRoute, hashHistory} from 'react-router';
+import {Router, Route, IndexRoute, Link, hashHistory} from 'react-router';
 import FastClick from 'fastclick';
 import "babel-polyfill";
 import {Drawer, List, NavBar} from 'antd-mobile'
@@ -9,7 +9,7 @@ import {Drawer, List, NavBar} from 'antd-mobile'
 import Pages from './index';
 const {Home, Button, Icons, Viewer, Swipe, Toaster} = Pages;
 import './app.less'
-
+import {menus} from './menus'
 class App extends React.Component {
 
   constructor(props) {
@@ -27,19 +27,37 @@ class App extends React.Component {
   }
 
   render() {
-    const sidebar = (<List>
-      {[...Array(20).keys()].map((i, index) => {
-        if (index === 0) {
-          return (<List.Item key={index}
-                             thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
-                             multipleLine
-          >分类</List.Item>);
+    const sidebar = (
+      <div>
+        <div className="demo-drawer-home">
+          <a href="/kitchen-sink/">
+            Ant Design Mobile
+          </a>
+        </div>
+        {
+          menus.map((menu, index) => (
+            <List renderHeader={() => menu.name} key={index}>
+              {
+                menu.items.map((item, index) => {
+                  return (
+                    <List.Item
+                      key={index}
+                    >
+                      <Link
+                        to={item.to}
+                      >
+                        {item.label}
+                      </Link>
+                    </List.Item>
+                  );
+                })}
+            </List>
+          ))
         }
-        return (<List.Item key={index}
-                           thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
-        >分类{index}</List.Item>);
-      })}
-    </List>);
+      </div>
+
+
+    );
     const drawerProps = {
       open: this.state.open,
       position: this.state.position,
@@ -48,14 +66,14 @@ class App extends React.Component {
     return (
       <div style={{height: '100%'}}>
         <div className="demo-drawer-trigger">
-          <NavBar iconName="bars" onLeftClick={this.onOpenChange}>头</NavBar>
+          <NavBar iconName="bars" onLeftClick={this.onOpenChange}></NavBar>
         </div>
         <div className="demo-drawer-container">
           <Drawer
             className="my-drawer"
             sidebar={sidebar}
             dragHandleStyle={{display: 'none'}}
-            contentStyle={{color: '#A6A6A6', textAlign: 'center', paddingTop: 42}}
+            contentStyle={{color: '#A6A6A6', textAlign: 'center'}}
             {...drawerProps}
           >
             {this.props.children}
