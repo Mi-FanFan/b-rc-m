@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, ButtonArea} from 'react-weui';
+import {Button} from 'antd-mobile';
 import Page from '../../component/page';
 import {Toaster} from '../../../components'
 

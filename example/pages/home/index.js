@@ -1,5 +1,5 @@
 import React from 'react';
-import {Flex, FlexItem, Cells, Cell, CellBody, CellFooter} from 'react-weui';
+import {Flex} from 'antd-mobile';
 import {Link} from 'react-router';
 import Page from '../../component/page';
 import Accordion from '../../component/accordion';
@@ -59,40 +59,25 @@ const menus = [
 
 const Home = (props) => {
   return (
-    <Page
-      className="home"
-      title={<img src={Logo} alt="weui" height="21px"/>}
-      subTitle="A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications."
-      spacing
-    >
-      <ul>
-        {menus.map((menu, i) => (
-          <li key={i}>
-            <Accordion
-              header={
-                <Flex>
-                  <FlexItem component="p">
-                    {menu.name}
-                  </FlexItem>
-                  <img src={menu.icon} alt/>
-                </Flex>
-              }
-            >
-              <Cells>
-                {menu.items.map((item, j) => (
-                  <Cell key={j} component={Link} to={item.to} access>
-                    <CellBody>
-                      {item.label}
-                    </CellBody>
-                    <CellFooter/>
-                  </Cell>
-                ))}
-              </Cells>
-            </Accordion>
-          </li>
-        ))}
-      </ul>
+    <Page>
+      <section
+        className="demo-home"
+        style={{
+          height:'1334px',
+          overflowY:'scroll'
+        }}
+      >
+        <div className="demo-home-hd">
+          <div className="logo" style={{backgroundImage: 'url(&quot;https://zos.alipayobjects.com/rmsportal/wIjMDnsrDoPPcIV.png&quot;);'}}></div>
+          <h1 className="demo-home-title">MiFanFan Mobile</h1>
+          <h2 className="demo-home-subtitle">服务于MiFanFan无线业务的react组件</h2>
+        </div>
+        <div className="demo-home-bd">
+
+        </div>
+      </section>
     </Page>
+
   );
 };
 
