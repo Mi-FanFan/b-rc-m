@@ -30,9 +30,9 @@ class App extends React.Component {
     const sidebar = (
       <div>
         <div className="demo-drawer-home">
-          <a href="/kitchen-sink/">
-            Ant Design Mobile
-          </a>
+          <Link to="/">
+            MiFanFan Mobile
+          </Link>
         </div>
         {
           menus.map((menu, index) => (
