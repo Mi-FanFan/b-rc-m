@@ -1,0 +1,95 @@
+@import "../mixins";
+@import "../themes/default";
+
+@buttonPrefixCls: mi-button;
+
+.@{buttonPrefixCls} {
+  // do not use width:100%, can not set margin
+  display: block;
+  outline: 0 none;
+  -webkit-appearance: none;
+  .box-sizing();
+  padding: 0;
+  text-align: center;
+  font-size: @button-font-size;
+  height: @button-height;
+  line-height: @button-height;
+  .border-radius(@radius-md);
+
+  // default
+  color: @color-text-base;
+  background-color: @fill-base;
+  border: @border-width-sm solid @border-color-base;
+  // &:active, // uc browser not work normal
+  &&-active {
+    background-color: @fill-tap;
+  }
+
+  &-primary {
+    color: @color-text-base-inverse;
+    background-color: @primary-button-fill;
+    border: @border-width-sm solid @primary-button-fill;
+    // &:active, // uc browser not work normal
+    &.@{buttonPrefixCls}-active {
+      background-color: @primary-button-fill-tap;
+    }
+  }
+
+  &-ghost {
+    color: @ghost-button-color;
+    background-color: transparent;
+    border: @border-width-sm solid @ghost-button-color;
+    // &:active, // uc browser not work normal
+    &.@{buttonPrefixCls}-active {
+      color: @color-text-base-inverse;
+      background-color: @ghost-button-fill-tap;
+      border: @border-width-sm solid @ghost-button-color;
+    }
+  }
+
+  &-inline {
+    display: inline-block;
+    padding: 0 @h-spacing-lg;
+  }
+
+  &-small {
+    font-size: @button-font-size-sm;
+    height: @button-height-sm;
+    line-height: @button-height-sm;
+    .border-radius(@radius-md);
+    padding: 0 @h-spacing-sm;
+  }
+
+  &-warning {
+    color: @brand-warning;
+    background-color: @fill-base;
+    border:1PX solid @brand-warning;
+  }
+
+  &,
+  &-primary,
+  &-ghost,
+  &-warning {
+    &.@{buttonPrefixCls}-across {
+      .border-radius(0);
+      border-left: 0;
+      border-right: 0;
+    }
+    &.@{buttonPrefixCls}-disabled {
+      color: @color-text-disabled;
+      background-color: @fill-disabled;
+      border: 0;
+    }
+  }
+
+  &-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  > .mi-icon {
+    margin-right: 0.5em;
+  }
+
+}
