@@ -2,7 +2,7 @@ import React from 'react';
 import {Button} from 'antd-mobile';
 import Page from '../../component/page';
 import {Toaster} from '../../../components'
-
+import './toast.less'
 export default class ButtonDemo extends React.Component {
 
     constructor(props){
@@ -36,10 +36,10 @@ export default class ButtonDemo extends React.Component {
     render() {
         return (
             <Page className="toaster" title="Toaster" subTitle="通知" spacing>
-              <Button onClick={()=>this.handle('default','Warn Toptip')} type="default">Default Toptip</Button>
-              <Button onClick={()=>this.handle('primary','Primary Toptip')} type="default">Primary Toptip</Button>
-              <Button onClick={()=>this.handle('info','Info Toptip')} type="default">Info Toptip</Button>
-              <Button onClick={()=>this.handle('warn','Warn Toptip')} type="default">Warn Toptip</Button>
+              <Button className="toast-btn" onClick={()=>this.handle('default','Warn Toptip')} type="default">Default Toptip</Button>
+              <Button className="toast-btn" onClick={()=>this.handle('primary','Primary Toptip')} type="default">Primary Toptip</Button>
+              <Button className="toast-btn" onClick={()=>this.handle('info','Info Toptip')} type="default">Info Toptip</Button>
+              <Button className="toast-btn" onClick={()=>this.handle('warn','Warn Toptip')} type="default">Warn Toptip</Button>
               <Toaster msg={this.state.msg} hideCallBack={this.handleHide}/>
             </Page>
         );

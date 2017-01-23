@@ -7,7 +7,7 @@ export default class Page extends React.Component {
         const {title, subTitle, spacing, className, children, footer} = this.props;
 
         return (
-            <div style={{height:'100%'}}>
+            <div style={{height:'100%'}} className="page">
               {children}
             </div>
         );
