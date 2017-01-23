@@ -10,5 +10,6 @@ export {default as Viewer} from './viewer';
 export {default as Swipeable} from './swipeable/Swipeable';
 export {default as Toaster} from './Toaster';
 export {default as Progress} from './progress';
+export {default as NavBar} from './nav-bar';
 
 

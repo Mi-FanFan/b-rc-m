@@ -5,13 +5,15 @@ import Viewer from './pages/viewer/index';
 import Swipe from './pages/swipe/index';
 import Toaster from './pages/toaster/index';
 import Progress from './pages/progress';
+import NavBarPage from './pages/nav-bar';
 
 export default {
-    Home,
-    Button,
-    Icons,
-    Viewer,
-    Swipe,
-    Toaster,
+  Home,
+  Button,
+  Icons,
+  Viewer,
+  Swipe,
+  Toaster,
   Progress,
+  NavBarPage,
 }
