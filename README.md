@@ -12,6 +12,15 @@ With [npm](http://npmjs.com)
  npm install b-rc-m --save
  ```
  
+ ## Dev 
+ 
+  ```
+  $ yarn 
+  
+  $ npm run start
+  
+  ```
+ 
  ##Example
  
  
