@@ -24,6 +24,12 @@ export default class ButtonDemo extends React.Component {
               <Button inline size="small">inline small</Button>
             </Flex>
           </div>
+          <div>
+            <div className="demo-title">
+              应用场景示例
+            </div>
+
+          </div>
         </div>
       </Page>
     );
