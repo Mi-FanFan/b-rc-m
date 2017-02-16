@@ -19,7 +19,7 @@ export default class extends React.Component {
           <Progress percent={40} unfilled="hide"/>
           <div className="show-info">
             <div className="progress">
-              <Progress percent={40}/>
+              <Progress percent={40} color="red"/>
             </div>
             <div>40%</div>
           </div>

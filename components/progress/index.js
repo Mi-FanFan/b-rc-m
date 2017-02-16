@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import '../style/components/progress.less'
 class Progress extends Component {
   render() {
-    const {percent,prefixCls, position, unfilled, style ,appearTransition} = this.props;
+    const {percent,prefixCls, position, unfilled, style ,appearTransition,color} = this.props;
     const wrapCls = classNames({
       [`${prefixCls}-bar`]:true,
       [`${prefixCls}-fixed-bar`]:position === 'fixed',
@@ -12,7 +12,8 @@ class Progress extends Component {
 
     const percentStyle = {
       width:!appearTransition?`${percent}%`:0,
-      height:0
+      //height:0
+      backgroundColor:color
     }
 
     return (
@@ -27,6 +28,7 @@ Progress.propTypes = {
   position: PropTypes.oneOf(['fixed', 'normal']),
   unfilled: PropTypes.oneOf(['show', 'hide']),
   style: PropTypes.object,
+  color: PropTypes.string,
   /** web only */
   prefixCls: PropTypes.string,
   appearTransition: PropTypes.bool,

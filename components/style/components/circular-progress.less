@@ -1,0 +1,23 @@
+@import "../mixins";
+@import "../themes/default";
+
+@circularProgressPrefixClass: mi-circular-progress;
+.@{circularProgressPrefixClass}{
+ &-root{
+   position: relative;
+   display: inline-block;
+
+ }
+  &-wrapper{
+    display: inline-block;
+    transition: transform 20s linear;
+  }
+  &-svg{
+    position: relative;
+  }
+  &-path{
+    stroke-linecap: round;
+    transition: all 1.5s ease-in-out;
+  }
+
+}
