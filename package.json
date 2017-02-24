@@ -28,7 +28,7 @@
     "rc-touchable": "*"
   },
   "devDependencies": {
-    "antd-mobile": "^0.9.14",
+    "antd-mobile": "^1.0.0",
     "autoprefixer": "*",
     "babel-cli": "*",
     "babel-core": "*",
@@ -56,7 +56,7 @@
     "eslint-plugin-import": "*",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "*",
-    "extract-text-webpack-plugin": "beta",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "fastclick": "*",
     "file-loader": "*",
     "html-webpack-plugin": "*",

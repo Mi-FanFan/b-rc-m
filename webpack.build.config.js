@@ -32,10 +32,10 @@ module.exports = {
       },
       {
         test: /\.less/,
-        loader: ExtractTextPlugin.extract(
+        use: ExtractTextPlugin.extract(
           {
-            fallbackLoader: "style-loader",
-            loader: ['css', 'postcss', 'less'],
+            fallback: "style-loader",
+            use: ['css', 'postcss', 'less'],
           }
         )
       },

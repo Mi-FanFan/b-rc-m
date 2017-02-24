@@ -1,0 +1,49 @@
+@flexPrefixCls: mi-flexbox;
+
+.@{flexPrefixCls}{
+  display: flex;
+
+
+  //主轴的方向
+  &-dir-row{
+    flex-direction: row;
+  }
+  &-dir-row-reverse{
+    flex-direction: row-reverse;
+  }
+  &-dir-column{
+    flex-direction: column;
+  }
+  &-dir-column-reverse{
+    flex-direction: column-reverse;
+  }
+  //Item换行
+  &-wrap{
+    flex-wrap: wrap;
+  }
+  &-nowrap{
+    flex-wrap: nowrap;
+  }
+  &-wrap-reverse{
+    flex-wrap: wrap-reverse;
+  }
+  //Flex项目在Main-Axis上的对齐方式
+  &-justify-start{
+    justify-content: flex-start;
+  }
+  &-justify-end{
+    justify-content: flex-end;
+  }
+  &-justify-center{
+    justify-content: center;
+  }
+  &-justify-between{
+    justify-content: space-between;
+  }
+  &-justify-around{
+    justify-content: space-around;
+  }
+
+
+
+}
