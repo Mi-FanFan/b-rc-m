@@ -4,9 +4,9 @@ import Page from '../../component/page';
 import './icons.less';
 
 const icons = [
-  'check', 'check-circle', 'check-circle-o',
-  'cross', 'cross-circle', 'cross-circle-o',
-  'up', 'down', 'left', 'right', 'ellipsis', 'loading', 'koubei-o', 'koubei',
+  'check', 'check-circle', 'check-circle-o',  'cross',   'cross-circle',
+  'cross-circle-o',  'up', 'down', 'left', 'right',
+  'ellipsis', 'loading', 'koubei-o', 'koubei','question-circle'
 ];
 
 export default class IconDemo extends React.Component {

@@ -1,0 +1,27 @@
+@import "../mixins";
+@import "../themes/default";
+
+@progressPrefixClass: mi-progress;
+.@{progressPrefixClass}{
+ &-bar{
+   background-color: @border-color-base;
+   display: block;
+
+   &-inner{
+     height: @border-width-lg;
+     background-color: @brand-primary;
+     transition: all .3s linear 0s;
+   }
+ }
+  &-fixed-bar{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: @progressZIndex;
+  }
+  &-hide-bar{
+    background: transparent;
+  }
+
+}
