@@ -7,7 +7,7 @@ import "babel-polyfill";
 import {Drawer, List, NavBar} from 'antd-mobile'
 //import  '../components/style/index.less'
 import Pages from './index';
-const {Home, Button, Icons, Viewer, Swipe, Toaster,Progress,NavBarPage} = Pages;
+const {Home, Button, Icons, Viewer, Swipe, Toaster,Progress,NavBarPage,FlexPage,GridPage} = Pages;
 import './app.less'
 import {menus} from './menus'
 class App extends React.Component {
@@ -99,6 +99,8 @@ ReactDOM.render((
       <Route path="toaster" component={Toaster}/>
       <Route path="progress" component={Progress}/>
       <Route path="nav-bar" component={NavBarPage}/>
+      <Route path="flex" component={FlexPage}/>
+      <Route path="grid" component={GridPage}/>
     </Route>
   </Router>
 ), document.getElementById('container'));

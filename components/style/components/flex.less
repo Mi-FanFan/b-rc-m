@@ -1,49 +1,93 @@
+@import '../../style/mixins';
 @flexPrefixCls: mi-flexbox;
-
-.@{flexPrefixCls}{
+/* flexbox */
+.@{flexPrefixCls} {
+  text-align: left;
+  overflow-y: hidden;
   display: flex;
-
-
-  //主轴的方向
-  &-dir-row{
-    flex-direction: row;
+  .box-align;
+  &&-dir-row {
+    .flex-direction(row);
   }
-  &-dir-row-reverse{
-    flex-direction: row-reverse;
+  &&-dir-row-reverse {
+    .flex-direction(row-reverse);
   }
-  &-dir-column{
-    flex-direction: column;
+  &&-dir-column {
+    .flex-direction(column);
   }
-  &-dir-column-reverse{
-    flex-direction: column-reverse;
-  }
-  //Item换行
-  &-wrap{
-    flex-wrap: wrap;
-  }
-  &-nowrap{
-    flex-wrap: nowrap;
-  }
-  &-wrap-reverse{
-    flex-wrap: wrap-reverse;
-  }
-  //Flex项目在Main-Axis上的对齐方式
-  &-justify-start{
-    justify-content: flex-start;
-  }
-  &-justify-end{
-    justify-content: flex-end;
-  }
-  &-justify-center{
-    justify-content: center;
-  }
-  &-justify-between{
-    justify-content: space-between;
-  }
-  &-justify-around{
-    justify-content: space-around;
+  &&-dir-column-reverse {
+    .flex-direction(column-reverse);
   }
 
+  &&-nowrap {
+    .flex-wrap(nowrap);
+  }
+  &&-wrap {
+    .flex-wrap(wrap);
+  }
+  &&-wrap-reverse {
+    .flex-wrap(wrap-reverse);
+  }
+
+  &&-justify-start {
+    .flex-justify(flex-start);
+  }
+  &&-justify-end {
+    .flex-justify(flex-end);
+  }
+  &&-justify-center {
+    .flex-justify(center);
+  }
+  &&-justify-between {
+    .flex-justify(space-between);
+  }
+  &&-justify-around {
+    .flex-justify(space-around);
+  }
+
+  &&-align-top {
+    .box-align(flex-start);
+  }
+  &&-align-bottom {
+    .box-align(flex-end);
+  }
+  &&-align-middle {
+    .box-align(center);
+  }
+  &&-align-stretch {
+    .box-align(stretch);
+  }
+  &&-align-baseline {
+    .box-align(baseline);
+  }
+
+  &&-align-content-start {
+    .box-align-content(flex-start);
+  }
+  &&-align-content-end {
+    .box-align(flex-end);
+  }
+  &&-align-content-center {
+    .box-align(center);
+  }
+  &&-align-content-between {
+    .box-align(stretch);
+  }
+  &&-align-content-around {
+    .box-align(baseline);
+  }
+  &&-align-content-stretch {
+    .box-align(baseline);
+  }
 
 
+  & &-item {
+    .box-sizing();
+    .box-flex(1);
+    margin-left: @h-spacing-md;
+    min-width: 20px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
 }

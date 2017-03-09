@@ -7,6 +7,20 @@ import IconFeedback from './images/icon_nav_feedback.png';
 import IconLayout from './images/icon_nav_layout.png';
 export const menus = [
   {
+    name: 'Layout',
+    icon: IconForm,
+    items: [
+      {
+        label: 'Flex',
+        to: '/flex'
+      },
+      {
+        label: 'Grid',
+        to: '/grid'
+      },
+    ]
+  },
+  {
     name: 'UI Bars',
     icon: IconForm,
     items: [
