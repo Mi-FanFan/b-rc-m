@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames';
-import '../style/components/progress.less'
 class Progress extends Component {
   render() {
     const {percent,prefixCls, position, unfilled, style ,appearTransition,color} = this.props;

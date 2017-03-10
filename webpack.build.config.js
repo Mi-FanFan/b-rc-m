@@ -6,7 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var pkg = require(path.join(process.cwd(), 'package.json'));
 module.exports = {
   entry: {
-    [pkg.name]: './index.js',
+    [pkg.name]: './components/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

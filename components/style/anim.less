@@ -1,6 +1,6 @@
 /*do not import this file except components/style/index.less*/
 
-.am {
+.mi {
   .effect() {
     animation-duration: 0.2s;
     animation-fill-mode: both;
@@ -21,16 +21,16 @@
 
   &-fade-enter&-fade-enter-active,
   &-fade-appear&-fade-appear-active {
-    animation-name: amFadeIn;
+    animation-name: miFadeIn;
     animation-play-state: running;
   }
 
   &-fade-leave&-fade-leave-active {
-    animation-name: amFadeOut;
+    animation-name: miFadeOut;
     animation-play-state: running;
   }
 
-  @keyframes amFadeIn {
+  @keyframes miFadeIn {
     0% {
       opacity: 0;
     }
@@ -39,7 +39,7 @@
     }
   }
 
-  @keyframes amFadeOut {
+  @keyframes miFadeOut {
     0% {
       opacity: 1;
     }
@@ -62,16 +62,16 @@
 
   &-slide-up-enter&-slide-up-enter-active,
   &-slide-up-appear&-slide-up-appear-active {
-    animation-name: amSlideUpIn;
+    animation-name: miSlideUpIn;
     animation-play-state: running;
   }
 
   &-slide-up-leave&-slide-up-leave-active {
-    animation-name: amSlideUpOut;
+    animation-name: miSlideUpOut;
     animation-play-state: running;
   }
 
-  @keyframes amSlideUpIn {
+  @keyframes miSlideUpIn {
     0% {
       transform: translate(0, 100%);
     }
@@ -79,7 +79,7 @@
       transform: translate(0, 0);
     }
   }
-  @keyframes amSlideUpOut {
+  @keyframes miSlideUpOut {
     0% {
       transform: translate(0, 0);
     }
@@ -110,16 +110,16 @@
 
   &-zoom-enter&-zoom-enter-active,
   &-zoom-appear&-zoom-appear-active {
-    animation-name: amZoomIn;
+    animation-name: miZoomIn;
     animation-play-state: running;
   }
 
   &-zoom-leave&-zoom-leave-active {
-    animation-name: amZoomOut;
+    animation-name: miZoomOut;
     animation-play-state: running;
   }
 
-  @keyframes amZoomIn {
+  @keyframes miZoomIn {
     0% {
       opacity: 0;
       transform-origin: 50% 50%;
@@ -131,7 +131,7 @@
       transform: scale(1, 1);
     }
   }
-  @keyframes amZoomOut {
+  @keyframes miZoomOut {
     0% {
       opacity: 1;
       transform-origin: 50% 50%;
@@ -160,16 +160,16 @@
 
   &-slide-down-enter&-slide-down-enter-active,
   &-slide-down-appear&-slide-down-appear-active {
-    animation-name: amSlideDownIn;
+    animation-name: miSlideDownIn;
     animation-play-state: running;
   }
 
   &-slide-down-leave&-slide-down-leave-active {
-    animation-name: amSlideDownOut;
+    animation-name: miSlideDownOut;
     animation-play-state: running;
   }
 
-  @keyframes amSlideDownIn {
+  @keyframes miSlideDownIn {
     0% {
       transform: translate(0, -100%);
     }
@@ -177,7 +177,7 @@
       transform: translate(0, 0);
     }
   }
-  @keyframes amSlideDownOut {
+  @keyframes miSlideDownOut {
     0% {
       transform: translate(0, 0);
     }
