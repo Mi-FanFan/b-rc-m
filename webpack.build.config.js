@@ -9,7 +9,7 @@ module.exports = {
     [pkg.name]: './components/index.js',
   },
   output: {
-    path: path.resolve(__dirname, 'lib'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     library: pkg.name,
     libraryTarget: 'umd'
