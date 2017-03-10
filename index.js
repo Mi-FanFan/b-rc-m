@@ -1,8 +1,6 @@
 /**
  * Created by Freeman on 2016/12/30.
  */
-//import css
-import './components/style/index.less'
 
 export {default as Icon} from './components/icon'
 export {default as Button} from './components/button'

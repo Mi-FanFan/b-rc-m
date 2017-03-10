@@ -1,6 +1,6 @@
 {
   "name": "b-rc-m",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "react components for budee front-end mobile project",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,6 @@
   "author": "Mi-FanFan",
   "license": "MIT",
   "dependencies": {
-    "babel-runtime": "*",
     "classnames": "~2.2.1",
     "omit.js": "~0.1.0",
     "rc-animate": "^2.3.1",
@@ -43,6 +42,7 @@
     "babel-preset-es2017": "*",
     "babel-preset-react": "*",
     "babel-preset-stage-2": "*",
+    "babel-runtime": "*",
     "babel-standalone": "*",
     "codemirror": "*",
     "css-loader": "*",
