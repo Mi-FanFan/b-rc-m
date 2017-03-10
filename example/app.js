@@ -5,7 +5,7 @@ import {Router, Route, IndexRoute, Link, hashHistory} from 'react-router';
 import FastClick from 'fastclick';
 import "babel-polyfill";
 import {Drawer, List, NavBar} from 'antd-mobile'
-import  '../styles/index.less'
+import  '../dist/b-rc-m.css'
 import Pages from './index';
 const {Home, Button, Icons, Viewer, Swipe, Toaster,Progress,NavBarPage,FlexPage,GridPage} = Pages;
 import './app.less'

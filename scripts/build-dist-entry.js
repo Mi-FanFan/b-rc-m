@@ -15,7 +15,7 @@ var componentsLessContent = ''
 fs.readdir(componentsPath, function (err, files) {
   files.forEach(function (file) {
     if (fs.existsSync(path.join(componentsPath, file, 'style', 'index.less'))) {
-      componentsLessContent += `import "../components/${path.join(file, 'style', 'index.less')}";\n`
+      componentsLessContent += `import '../components/${path.join(file, "style", "index.less")}';\n`
     }
   })
 
