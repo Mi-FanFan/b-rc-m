@@ -1,13 +1,15 @@
 {
   "name": "b-rc-m",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "react components for budee front-end mobile project",
   "main": "./lib",
   "scripts": {
     "start": "webpack-dev-server --hot --inline --compress --colors --port 8082",
-    "clean": "rimraf ./lib",
+    "clean": "rimraf ./lib ./dist",
     "build": "npm run clean  && babel ./components --out-dir ./lib --copy-files",
-    "prepublish": "npm run build"
+    "dist": "webpack --config ./webpack.build.config",
+    "prepublish": "npm run build && npm run dist",
+    "build-dist-entry": "node ./scripts/build-dist-entry"
   },
   "repository": {
     "type": "git",

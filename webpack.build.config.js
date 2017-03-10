@@ -6,7 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var pkg = require(path.join(process.cwd(), 'package.json'));
 module.exports = {
   entry: {
-    [pkg.name]: './components/index.js',
+    [pkg.name]: './build/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -83,7 +83,7 @@ module.exports = {
     new webpack.BannerPlugin(`${pkg.name} v${pkg.version} \n\nCopyright 2017-present, MiFanFan, Inc.\nAll rights reserved. \nReleased under the MIT license.`),
   ],
   externals: {
-    react: {
+    'react': {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
@@ -95,5 +95,10 @@ module.exports = {
       commonjs: 'react-dom',
       amd: 'react-dom',
     },
+    'classnames': {
+      commonjs: 'classnames',
+      commonjs2: 'classnames',
+      amd: 'classnames',
+    }
   }
 };
