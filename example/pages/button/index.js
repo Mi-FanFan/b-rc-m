@@ -1,6 +1,6 @@
 import React from 'react';
 import {Flex} from 'antd-mobile';
-import {Button} from '.././../../components';
+import {Button} from '.././../../';
 import Page from '../../component/page';
 import './button.less';
 

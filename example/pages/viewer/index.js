@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from '../../component/page';
-import Viewer from '../../../components/viewer';
+import {Viewer} from '../../../';
 import './viewer.less';
 const data = [
   'http://7jpp73.com1.z0.glb.clouddn.com/M_1.jpg',

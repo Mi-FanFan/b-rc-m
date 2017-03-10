@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid} from '.././../../components';
+import {Grid} from '.././../../';
 import Page from '../../component/page';
 import './grid.less';
 

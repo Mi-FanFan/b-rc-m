@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavBar, Icon} from '.././../../components';
+import {NavBar, Icon} from '.././../../';
 import Page from '../../component/page';
 import './nav-bar.less';
 

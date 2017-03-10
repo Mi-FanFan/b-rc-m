@@ -2,7 +2,7 @@
  * Created by Freeman on 2017/1/6.
  */
 import React, {Component} from 'react';
-import {Swipeable} from '../../../components/index';
+import {Swipeable} from '../../../';
 
 const DIRECTIONS = ['Left', 'Right', 'Up', 'Down'];
 
