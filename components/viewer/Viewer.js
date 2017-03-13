@@ -46,7 +46,7 @@ class Viewer extends Component {
   componentDidMount() {
     this.setState({
       width: document.documentElement.clientWidth,
-      height: "100%"
+      height: "auto"
     })
   }
   handleItemClick(index) {
@@ -367,12 +367,15 @@ class Viewer extends Component {
                       {
                         data.map((url, index) => (
                           <li key={index} ref={`li${index}`} style={{width,height}}>
-                            <img className="mi-viewer-img" ref={`img${index}`} src={url} role="presentation"
-                                 style={this.state.index === index ?imgStyle:{width,height}}
-                                 onTouchStart={this.handleImgTouchStart}
-                                 onTouchMove={this.handleImgTouchMove}
-                                 onTouchEnd={this.handleImgTouchEnd}
-                            />
+                            <div className="mi-viewer-imgWrap">
+                              <img ref={`img${index}`} src={url} role="presentation"
+                                   style={this.state.index === index ?imgStyle:{width}}
+                                   onTouchStart={this.handleImgTouchStart}
+                                   onTouchMove={this.handleImgTouchMove}
+                                   onTouchEnd={this.handleImgTouchEnd}
+                              />
+                            </div>
+
                           </li>
                         ))
                       }

@@ -73,7 +73,7 @@
     "react-addons-css-transition-group": "*",
     "react-addons-test-utils": "*",
     "react-dom": "*",
-    "react-router": "*",
+    "react-router": "^3.0.0",
     "rimraf": "*",
     "style-loader": "*",
     "svg-sprite-loader": "*",
