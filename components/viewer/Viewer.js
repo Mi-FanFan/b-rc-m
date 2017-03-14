@@ -364,7 +364,7 @@ class Viewer extends Component {
                     <ul className="mi-viewer-imglist" style={imgListStyle}>
                       {
                         data.map((url, index) => (
-                          <li key={index} ref={`li${index}`} style={{width}}>
+                          <li key={index} ref={`li${index}`} style={{width,height}}>
                             <div className="mi-viewer-imgWrap">
                               <img ref={`img${index}`} src={url} role="presentation"
                                    style={this.state.index === index ?imgStyle:{width}}
