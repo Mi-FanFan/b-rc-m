@@ -3,7 +3,7 @@
  */
 import React, {Component, PropTypes} from 'react'
 import Animate from 'rc-animate'
-//import classNames from 'classnames'
+import classNames from 'classnames'
 import {formatPage} from './_util'
 class Viewer extends Component {
   constructor(props) {
@@ -341,10 +341,8 @@ class Viewer extends Component {
             }
           </ul>
         </div>
-        {
-          this.state.showViewer &&
-          <Animate component="" transitionName="slide-right">
-            <div className="mi-viewer-overlay">
+          <Animate component="" transitionName="slide-right" >
+            <div className={classNames('mi-viewer-overlay',{'display-none':!this.state.showViewer})}>
               <div className="mi-view-wrap">
                 <div className="mi-viewer-toolbar">
                   <div className="mi-viewer-toolbar-back">
@@ -366,7 +364,7 @@ class Viewer extends Component {
                     <ul className="mi-viewer-imglist" style={imgListStyle}>
                       {
                         data.map((url, index) => (
-                          <li key={index} ref={`li${index}`} style={{width,height}}>
+                          <li key={index} ref={`li${index}`} style={{width}}>
                             <div className="mi-viewer-imgWrap">
                               <img ref={`img${index}`} src={url} role="presentation"
                                    style={this.state.index === index ?imgStyle:{width}}
@@ -385,7 +383,6 @@ class Viewer extends Component {
               </div>
             </div>
           </Animate>
-        }
       </div>
     )
   }
