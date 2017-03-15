@@ -120,6 +120,11 @@ class Viewer extends Component {
 
   }
   handleImgTouchStart(e) {
+
+    if(!this.refs[`div${this.state.index}`].style.height) {
+      this.refs[`div${this.state.index}`].style.height=this.refs[`img${this.state.index}`].clientHeight+'px'
+      this.refs[`div${this.state.index}`].style.width= this.refs[`img${this.state.index}`].clientWidth+'px'
+    }
     if (e.touches.length > 1) {
       this.preDistance = Math.pow((e.touches[1].clientX - e.touches[0].clientX), 2) + Math.pow((e.touches[1].clientY - e.touches[0].clientY), 2)
     }else {
@@ -147,7 +152,7 @@ class Viewer extends Component {
           height = parseFloat(this.refs['img'+this.state.index].offsetHeight) * 1.04 + 'px',
           k = parseFloat(width) / document.documentElement.clientWidth,
           X = (e.touches[0].clientX + e.touches[1].clientX) / 2,
-          Y = (e.touches[0].clientY + e.touches[1].clientY) / 2,
+          Y = (e.touches[0].clientY + e.touches[1].clientY - 500 )  /  2,
           top = (1-k) * Y + 'px',
           left = (1-k) * X + 'px'
         this.setState({
@@ -165,7 +170,7 @@ class Viewer extends Component {
       }
       //缩小
       else if(this.preDistance > distance ){
-        if(parseFloat(this.refs['img'+this.state.index].style.width) < parseFloat(this.refs.li0.style.width) * 0.6){
+        if(parseFloat(this.refs['img'+this.state.index].style.width) < parseFloat(this.refs.li0.style.width)){
           return
         }
         let width = parseFloat(this.refs['img'+this.state.index].style.width) / 1.04 + 'px'
@@ -173,12 +178,7 @@ class Viewer extends Component {
         let k = parseFloat(width) / document.documentElement.clientWidth,
           top = (1-k) * this.state.enlargeY + 'px',
           left = (1-k) * this.state.enlargeX + 'px'
-        if(parseFloat(this.refs['img'+this.state.index].style.width) < parseFloat(this.refs.li0.style.width)) {
-          let X = parseFloat(this.refs.li0.style.width) / 2,
-            Y = parseFloat(this.refs.li0.clientHeight) / 2
-          top = (1-k) * Y + 'px'
-          left = (1-k) * X + 'px'
-        }
+
         this.setState({
           top,
           left,
@@ -240,8 +240,8 @@ class Viewer extends Component {
         let imgTop = parseFloat(this.state.imgPreTop) + imgMoveDistanceY * 1.5
         if (imgTop > 0) {
           imgTop = 0
-        } else if (imgTop < -(parseFloat(this.refs['img' + this.state.index].style.height) - parseFloat(this.refs.li0.offsetHeight))) {
-          imgTop = -(parseFloat(this.refs['img' + this.state.index].style.height) - parseFloat(this.refs.li0.offsetHeight))
+        } else if (imgTop < -(parseFloat(this.refs['img' + this.state.index].style.height) - parseFloat(this.refs[`div${this.state.index}`].offsetHeight))) {
+          imgTop = -(parseFloat(this.refs['img' + this.state.index].style.height) - parseFloat(this.refs[`div${this.state.index}`].offsetHeight))
         }
         this.setState({
           top: imgTop + 'px',
@@ -314,7 +314,7 @@ class Viewer extends Component {
   render() {
     const {prefixCls, data} = this.props;
     const width = document.documentElement.clientWidth;
-    const height = document.documentElement.clientHeight - 40;
+    const height = document.documentElement.clientHeight - 40*window.devicePixelRatio;
     const leftTranslate = -(this.state.index * width) +(this.state.endX - this.state.startX)
     const durate = this.state.dragging? 0:.3;
     const imgListStyle = {
@@ -365,7 +365,7 @@ class Viewer extends Component {
                       {
                         data.map((url, index) => (
                           <li key={index} ref={`li${index}`} style={{width,height}}>
-                            <div className="mi-viewer-imgWrap">
+                            <div className="mi-viewer-imgWrap" ref={`div${index}`}>
                               <img ref={`img${index}`} src={url} role="presentation"
                                    style={this.state.index === index ?imgStyle:{width}}
                                    onTouchStart={this.handleImgTouchStart}
