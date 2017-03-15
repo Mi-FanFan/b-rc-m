@@ -40,6 +40,7 @@ class Viewer extends Component {
       imgPreTop: 0,
       firstIdentifier: 0,
       direction: 0,    //图片放大滑动过边界，判断方向1为向左，2为向右，0为保持原位置。
+      isSetHeight: true,
     }
   }
 
@@ -120,10 +121,16 @@ class Viewer extends Component {
 
   }
   handleImgTouchStart(e) {
+    const {data} = this.props
 
-    if(!this.refs[`div${this.state.index}`].style.height) {
-      this.refs[`div${this.state.index}`].style.height=this.refs[`img${this.state.index}`].clientHeight+'px'
-      this.refs[`div${this.state.index}`].style.width= this.refs[`img${this.state.index}`].clientWidth+'px'
+    if(this.state.isSetHeight) {
+      for(let i = 0 ; i < data.length; i++) {
+        this.refs[`div${i}`].style.height=this.refs[`img${i}`].clientHeight+'px'
+        this.refs[`div${i}`].style.width= this.refs[`img${i}`].clientWidth+'px'
+      }
+      this.setState({
+        isSetHeight: false
+      })
     }
     if (e.touches.length > 1) {
       this.preDistance = Math.pow((e.touches[1].clientX - e.touches[0].clientX), 2) + Math.pow((e.touches[1].clientY - e.touches[0].clientY), 2)
