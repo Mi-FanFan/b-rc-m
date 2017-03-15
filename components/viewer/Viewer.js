@@ -40,7 +40,6 @@ class Viewer extends Component {
       imgPreTop: 0,
       firstIdentifier: 0,
       direction: 0,    //图片放大滑动过边界，判断方向1为向左，2为向右，0为保持原位置。
-      isSetHeight: true,
     }
   }
 
@@ -50,7 +49,9 @@ class Viewer extends Component {
       height: "auto"
     })
   }
+
   handleItemClick(index) {
+
     this.setState({
       index: index,
       showViewer: true
@@ -86,7 +87,15 @@ class Viewer extends Component {
       endY:e.touches[0].clientY,
     })
   }
+  componentDidUpdate() {
+    const {data} = this.props
+    if(this.refs['div0'].style.height && parseInt(this.refs['div0'].style.height,10) !== 0 ) return
 
+    for(let i = 0 ; i < data.length; i++) {
+      this.refs[`div${i}`].style.height = this.refs[`img${i}`].offsetHeight + 'px'
+      this.refs[`div${i}`].style.width = this.refs[`img${i}`].offsetWidth + 'px'
+    }
+  }
   handleTouchEnd(e) {
     e.preventDefault()
     if (e.touches.length > 1) {
@@ -121,17 +130,6 @@ class Viewer extends Component {
 
   }
   handleImgTouchStart(e) {
-    const {data} = this.props
-
-    if(this.state.isSetHeight) {
-      for(let i = 0 ; i < data.length; i++) {
-        this.refs[`div${i}`].style.height=this.refs[`img${i}`].clientHeight+'px'
-        this.refs[`div${i}`].style.width= this.refs[`img${i}`].clientWidth+'px'
-      }
-      this.setState({
-        isSetHeight: false
-      })
-    }
     if (e.touches.length > 1) {
       this.preDistance = Math.pow((e.touches[1].clientX - e.touches[0].clientX), 2) + Math.pow((e.touches[1].clientY - e.touches[0].clientY), 2)
     }else {
@@ -318,6 +316,7 @@ class Viewer extends Component {
 
 
   }
+
   render() {
     const {prefixCls, data} = this.props;
     const width = document.documentElement.clientWidth;

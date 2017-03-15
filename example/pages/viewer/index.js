@@ -3,12 +3,12 @@ import Page from '../../component/page';
 import {Viewer} from '../../../components';
 import './viewer.less';
 const data = [
-  'http://7jpp73.com1.z0.glb.clouddn.com/M_1.jpg',
-  'http://7jpp73.com1.z0.glb.clouddn.com/M_2.jpg',
-  'http://7jpp73.com1.z0.glb.clouddn.com/M_3.jpg',
-  'http://7jpp73.com1.z0.glb.clouddn.com/M_4.jpg',
-  'http://7jpp73.com1.z0.glb.clouddn.com/M_5.jpg',
-  'http://7jpp73.com1.z0.glb.clouddn.com/M_6.jpg',
+  'http://static.budee.com/yyren/image/14/3761.jpg?w=1200',
+  'http://static.budee.com/yyren/image/14/3761.jpg?w=1200',
+  'http://static.budee.com/yyren/image/244/5/390212.jpg?w=1200',
+  'http://static.budee.com/yyren/image/244/5/390212.jpg?w=1200',
+  'http://static.budee.com/yyren/image/244/5/390212.jpg?w=1200',
+  'http://static.budee.com/yyren/image/244/5/390212.jpg?w=1200',
 ]
 export default class ViewerDemo extends React.Component {
 
