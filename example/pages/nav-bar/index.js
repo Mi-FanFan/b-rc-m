@@ -1,5 +1,8 @@
 import React from 'react';
-import {NavBar, Icon} from '../../../build';
+import NavBar from '../../../components/nav-bar';
+import  '../../../components/nav-bar/style';
+import Icon from '../../../components/icon';
+import '../../../components/icon/style';
 import Page from '../../component/page';
 import './nav-bar.less';
 

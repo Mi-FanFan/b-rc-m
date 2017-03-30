@@ -1,6 +1,7 @@
 import React from 'react';
 import {WhiteSpace} from 'antd-mobile'
-import {Flex} from '../../../build';
+import Flex from '../../../components/flex';
+import '../../../components/flex/style';
 import Page from '../../component/page';
 import './flex.less';
 

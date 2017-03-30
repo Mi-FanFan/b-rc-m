@@ -60,6 +60,10 @@ export const menus = [
         label: 'Swipe',
         to: '/swipe'
       },
+      {
+        label: 'Loading',
+        to: '/loading'
+      },
     ]
   },{
     name: 'Feedbacks',

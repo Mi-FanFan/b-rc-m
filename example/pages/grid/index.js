@@ -1,5 +1,6 @@
 import React from 'react';
-import {Grid} from '.././../../';
+import Grid from '.././../../components/grid';
+import '.././../../components/grid/style';
 import Page from '../../component/page';
 import './grid.less';
 

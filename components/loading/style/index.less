@@ -1,0 +1,55 @@
+@import '../../style/mixins';
+
+@loadingPrefixCls: mi-loading;
+/* loading */
+.@{loadingPrefixCls} {
+  div {
+    float: left;
+    width: 8px;
+    height: 50px;
+    margin: 0 4px;
+    border-radius: 4px;
+    background-color: #c21e25;
+    animation: line-up-down 1s infinite linear;
+  }
+
+  > div:nth-child(1) {
+    animation-delay: 0s !important;
+  }
+  > div:nth-child(2) {
+    animation-delay: -.2s !important;
+  }
+  > div:nth-child(3) {
+    animation-delay: -.4s !important;
+  }
+  > div:nth-child(4) {
+    animation-delay: -.6s !important;
+  }
+  > div:nth-child(5) {
+    animation-delay: -0.8s !important;
+  }
+  > div:nth-child(6) {
+    animation-delay: -1.0s !important;
+  }
+  > div:nth-child(7) {
+    animation-delay: -1.2s !important;
+  }
+  > div:nth-child(8) {
+    animation-delay: -1.4s !important;
+  }
+  > div:nth-child(9) {
+    animation-delay: -1.6s !important;
+  }
+
+  @keyframes line-up-down {
+    0%, 100% {
+      transform: translateY(0)
+    }
+    25% {
+      transform: translateY(-25px)
+    }
+    75% {
+      transform: translateY(25px)
+    }
+  }
+}

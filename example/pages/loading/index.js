@@ -1,9 +1,9 @@
 import React from 'react';
 import {WhiteSpace} from 'antd-mobile'
-import Progress from '.././../../components/progress';
-import '.././../../components/progress/style';
+import Loading from '../../../components/loading';
+import '../../../components/loading/style';
 import Page from '../../component/page';
-import './progress.less';
+import './loading.less';
 
 export default class extends React.Component {
 
@@ -13,16 +13,15 @@ export default class extends React.Component {
         <div className="demo-title">
           应用场景示例
         </div>
-        <div className="progress-container">
-          <Progress position="fixed" percent={30} style={{border: '1px solid red'}}/>
-          <Progress percent={30}/>
+        <div className="loading-container">
+          <Loading />
+
           <WhiteSpace/>
-          <Progress percent={40} unfilled="hide"/>
+
           <div className="show-info">
-            <div className="progress">
-              <Progress percent={40} color="red"/>
+            <div className="loading">
+              <Loading />
             </div>
-            <div>40%</div>
           </div>
         </div>
       </Page>
