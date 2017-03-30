@@ -33,4 +33,4 @@ Loading.defaultProps = {
   prefixCls: 'mi-loading',
 }
 
-export default Loading
+export default Loading;

@@ -4,11 +4,11 @@
   "description": "react components for budee front-end mobile project",
   "main": "./lib",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --compress --colors --port 8082",
+    "start": " webpack-dev-server ",
     "clean": "rimraf ./lib ./dist",
     "build": "npm run clean  && babel ./components --out-dir ./lib --copy-files",
     "dist": "webpack --config ./webpack.build.config",
-    "prepublish": "npm run build && npm run dist",
+    "pre-publish": "npm run build && npm run dist",
     "build-dist-entry": "node ./scripts/build-dist-entry"
   },
   "repository": {
@@ -73,6 +73,7 @@
     "react-addons-css-transition-group": "*",
     "react-addons-test-utils": "*",
     "react-dom": "*",
+    "react-hot-loader": "3.0.0-beta.6",
     "react-router": "^3.0.0",
     "rimraf": "*",
     "style-loader": "*",
