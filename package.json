@@ -7,9 +7,8 @@
     "start": " webpack-dev-server ",
     "clean": "rimraf ./lib ./dist",
     "build": "npm run clean  && babel ./components --out-dir ./lib --copy-files",
-    "dist": "webpack --config ./webpack.build.config",
-    "pre-publish": "npm run build && npm run dist",
-    "build-dist-entry": "node ./scripts/build-dist-entry"
+    "dist": "gulp default",
+    "prepublish": "npm run build && npm run dist"
   },
   "repository": {
     "type": "git",
@@ -62,6 +61,14 @@
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "fastclick": "*",
     "file-loader": "*",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-header": "^1.8.8",
+    "gulp-less": "^3.3.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-postcss": "^6.4.0",
+    "gulp-rename": "^1.2.2",
     "html-webpack-plugin": "*",
     "less": "*",
     "less-loader": "*",
