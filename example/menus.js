@@ -28,6 +28,10 @@ export const menus = [
         label: 'NavBar',
         to: '/nav-bar'
       },
+      {
+        label: 'Popover',
+        to: '/popover'
+      },
     ]
   },
   {
