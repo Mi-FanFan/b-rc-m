@@ -24,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "~2.2.1",
+    "mff-tabs": "^1.2.1",
     "omit.js": "~0.1.0",
     "rc-animate": "^2.3.1",
     "rc-touchable": "*"
@@ -82,10 +83,10 @@
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
     "react-addons-test-utils": "^15.5.1",
+    "react-dev-utils": "^0.5.2",
     "react-dom": "^15.5.4",
     "react-hot-loader": "3.0.0-beta.6",
     "react-router": "^3.0.0",
-    "react-dev-utils": "^0.5.2",
     "rimraf": "*",
     "style-loader": "*",
     "svg-sprite-loader": "*",
