@@ -19,6 +19,7 @@ import FlexPage from './pages/flex';
 import GridPage from './pages/grid';
 import LoadingPage from './pages/loading';
 import PopoverPage from './pages/popover';
+import TabsPage from './pages/tabs';
 
 
 
@@ -41,6 +42,7 @@ ReactDOM.render((
       <Route path="grid" component={GridPage}/>
       <Route path="loading" component={LoadingPage}/>
       <Route path="popover" component={PopoverPage}/>
+      <Route path="tabs" component={TabsPage}/>
     </Route>
   </Router>
 ), document.getElementById('container'));

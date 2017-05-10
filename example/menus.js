@@ -21,7 +21,7 @@ export const menus = [
     ]
   },
   {
-    name: 'UI Bars',
+    name: 'Navigation',
     icon: IconForm,
     items: [
       {
@@ -31,6 +31,10 @@ export const menus = [
       {
         label: 'Popover',
         to: '/popover'
+      },
+      {
+        label: 'Tabs',
+        to: '/tabs'
       },
     ]
   },

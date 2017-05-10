@@ -24,7 +24,7 @@ class Tabs extends Component {
 
   renderTabBar = () => {
     const {children, animated, speed, pageSize, tabBarhammerOptions, onTabClick} = this.props
-    if (children.length > (pageSize as number)) {
+    if (children.length > pageSize) {
       return (
         <SwipeableInkTabBar
           onTabClick={onTabClick}
@@ -82,7 +82,7 @@ Tabs.propTypes = {
 }
 
 Tabs.defaultProps = {
-  prefixCls: 'mff-tabs',
+  prefixCls: 'mi-tabs',
   animated: true,
   swipeable: true,
   tabBarPosition: 'top',
