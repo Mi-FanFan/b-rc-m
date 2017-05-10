@@ -21,12 +21,20 @@ export const menus = [
     ]
   },
   {
-    name: 'UI Bars',
+    name: 'Navigation',
     icon: IconForm,
     items: [
       {
         label: 'NavBar',
         to: '/nav-bar'
+      },
+      {
+        label: 'Popover',
+        to: '/popover'
+      },
+      {
+        label: 'Tabs',
+        to: '/tabs'
       },
     ]
   },

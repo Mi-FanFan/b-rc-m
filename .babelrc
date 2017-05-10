@@ -7,10 +7,16 @@
     "react-hot-loader/babel",
     [
       "import",
-      {
-        "style": "css",
-        "libraryName": "antd-mobile"
-      }
+      [
+        {
+          "libraryName": "b-rc-m",
+          "style": true
+        },
+        {
+          "style": "css",
+          "libraryName": "antd-mobile"
+        }
+      ]
     ]
   ],
   "env": {

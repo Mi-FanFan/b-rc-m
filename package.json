@@ -4,7 +4,7 @@
   "description": "react components for budee front-end mobile project",
   "main": "./lib",
   "scripts": {
-    "start": " webpack-dev-server ",
+    "start": "node scripts/start.js",
     "clean": "rimraf ./lib ./dist",
     "build": "npm run clean  && babel ./components --out-dir ./lib --copy-files",
     "dist": "gulp default",
@@ -24,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "~2.2.1",
+    "mff-tabs": "^1.2.1",
     "omit.js": "~0.1.0",
     "rc-animate": "^2.3.1",
     "rc-touchable": "*"
@@ -48,8 +49,10 @@
     "babel-preset-stage-2": "*",
     "babel-runtime": "*",
     "babel-standalone": "*",
+    "case-sensitive-paths-webpack-plugin": "^2.0.0",
     "codemirror": "*",
     "css-loader": "*",
+    "detect-port": "^1.1.1",
     "enzyme": "*",
     "eslint": "*",
     "eslint-config-react-app": "*",
@@ -58,7 +61,7 @@
     "eslint-plugin-import": "*",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "*",
-    "extract-text-webpack-plugin": "^2.0.0-rc.3",
+    "extract-text-webpack-plugin": "^2.1.0",
     "fastclick": "*",
     "file-loader": "*",
     "gulp": "^3.9.1",
@@ -76,10 +79,12 @@
     "open-browser-webpack-plugin": "*",
     "postcss-loader": "*",
     "postcss-pxtorem": "*",
-    "react": "*",
-    "react-addons-css-transition-group": "*",
-    "react-addons-test-utils": "*",
-    "react-dom": "*",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-addons-css-transition-group": "^15.5.2",
+    "react-addons-test-utils": "^15.5.1",
+    "react-dev-utils": "^0.5.2",
+    "react-dom": "^15.5.4",
     "react-hot-loader": "3.0.0-beta.6",
     "react-router": "^3.0.0",
     "rimraf": "*",
@@ -87,7 +92,7 @@
     "svg-sprite-loader": "*",
     "uglify-loader": "*",
     "url-loader": "*",
-    "webpack": "^2.2.0",
-    "webpack-dev-server": "^2.2.0"
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }

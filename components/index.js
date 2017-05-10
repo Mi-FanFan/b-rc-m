@@ -10,6 +10,8 @@ export {default as Toaster} from './toaster';
 export {default as Progress} from './progress';
 export {default as Loading} from './loading';
 export {default as NavBar} from './nav-bar';
+export {default as Popover} from './popover';
+export {default as Tabs} from './tabs';
 //layout
 export {default as Flex} from './flex';
 export {default as Grid} from './grid';
