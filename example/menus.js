@@ -36,6 +36,10 @@ export const menus = [
         label: 'Tabs',
         to: '/tabs'
       },
+      {
+        label: 'ListView',
+        to: '/listview'
+      },
     ]
   },
   {

@@ -20,6 +20,7 @@ import GridPage from './pages/grid';
 import LoadingPage from './pages/loading';
 import PopoverPage from './pages/popover';
 import TabsPage from './pages/tabs';
+import ListViewPage from './pages/listview';
 
 
 
@@ -43,6 +44,7 @@ ReactDOM.render((
       <Route path="loading" component={LoadingPage}/>
       <Route path="popover" component={PopoverPage}/>
       <Route path="tabs" component={TabsPage}/>
+      <Route path="listview" component={ListViewPage}/>
     </Route>
   </Router>
 ), document.getElementById('container'));

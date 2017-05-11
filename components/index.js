@@ -15,4 +15,6 @@ export {default as Tabs} from './tabs';
 //layout
 export {default as Flex} from './flex';
 export {default as Grid} from './grid';
+export {default as List} from './list';
+export {default as ListView} from './list-view';
 
