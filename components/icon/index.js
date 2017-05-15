@@ -2,6 +2,7 @@
  * Created by Freeman on 2016/12/30.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 class Icon extends React.Component {
