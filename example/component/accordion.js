@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import CSSTransitionGroup from 'react-transition-group'
 
 class Accordion extends Component {
     static defaultProps = {
@@ -32,14 +32,12 @@ class Accordion extends Component {
                         transition : 'opacity .3s'
                     }}>{ header }</div>
                 </div>
-                <ReactCSSTransitionGroup
+                <CSSTransitionGroup
                   transitionName={transitionName}
-                  transitionAppear={true}
-                  transitionAppearTimeout={500}
                   transitionEnterTimeout={300}
-                  transitionLeaveTimeout={0}>
+                  >
                     {content}
-                </ReactCSSTransitionGroup>
+                </CSSTransitionGroup>
             </div>
         )
     }

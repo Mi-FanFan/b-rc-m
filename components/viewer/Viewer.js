@@ -1,7 +1,8 @@
 /**
  * Created by Freeman on 2016/12/29.
  */
-import React, {Component, PropTypes} from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Animate from 'rc-animate'
 import classNames from 'classnames'
 import {formatPage} from './_util'

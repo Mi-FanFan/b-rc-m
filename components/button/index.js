@@ -1,7 +1,8 @@
 /**
  * Created by Freeman on 2017/1/19.
  */
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Touchable from 'rc-touchable'
 import Icon from '../icon'

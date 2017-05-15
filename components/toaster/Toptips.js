@@ -2,7 +2,8 @@
  * Created by Freeman on 2017/1/12.
  * 顶部提示框组件
  */
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames'
 const Toptips = (props) => {
   const {className, type, children, show, ...others} = props;

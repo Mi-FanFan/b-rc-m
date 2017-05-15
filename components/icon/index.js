@@ -43,9 +43,9 @@ class Icon extends React.Component {
   }
 }
 Icon.propTypes = {
-  type: React.PropTypes.string.isRequired,
-  className: React.PropTypes.string,
-  style: React.PropTypes.object,
-  size: React.PropTypes.oneOf(['xxs', 'xs', 'sm', 'md', 'lg'])
+  type: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  size: PropTypes.oneOf(['xxs', 'xs', 'sm', 'md', 'lg'])
 };
 export default Icon;

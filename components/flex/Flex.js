@@ -1,7 +1,8 @@
 /**
  * Created by Freeman on 2017/2/24.
  */
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames';
 const Flex = ({direction, wrap, justify, align, alignContent, className, children, prefixCls, style, onClick}) => {
 

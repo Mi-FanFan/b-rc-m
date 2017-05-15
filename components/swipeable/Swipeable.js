@@ -2,6 +2,7 @@
  * Created by Freeman on 2017/1/6.
  */
 import React, {Component} from 'react'
+import PropTypes from 'prop-types';
 class Swipeable extends Component {
   constructor(props) {
     super(props)
@@ -197,22 +198,22 @@ class Swipeable extends Component {
   }
 }
 Swipeable.propTypes = {
-  onSwiped: React.PropTypes.func,
-  onSwiping: React.PropTypes.func,
-  onSwipingUp: React.PropTypes.func,
-  onSwipingRight: React.PropTypes.func,
-  onSwipingDown: React.PropTypes.func,
-  onSwipingLeft: React.PropTypes.func,
-  onSwipedUp: React.PropTypes.func,
-  onSwipedRight: React.PropTypes.func,
-  onSwipedDown: React.PropTypes.func,
-  onSwipedLeft: React.PropTypes.func,
-  flickThreshold: React.PropTypes.number,
-  delta: React.PropTypes.number,
-  preventDefaultTouchmoveEvent: React.PropTypes.bool,
-  stopPropagation: React.PropTypes.bool,
-  nodeName: React.PropTypes.string,
-  trackMouse: React.PropTypes.bool
+  onSwiped: PropTypes.func,
+  onSwiping: PropTypes.func,
+  onSwipingUp: PropTypes.func,
+  onSwipingRight: PropTypes.func,
+  onSwipingDown: PropTypes.func,
+  onSwipingLeft: PropTypes.func,
+  onSwipedUp: PropTypes.func,
+  onSwipedRight: PropTypes.func,
+  onSwipedDown: PropTypes.func,
+  onSwipedLeft: PropTypes.func,
+  flickThreshold: PropTypes.number,
+  delta: PropTypes.number,
+  preventDefaultTouchmoveEvent: PropTypes.bool,
+  stopPropagation: PropTypes.bool,
+  nodeName: PropTypes.string,
+  trackMouse: PropTypes.bool
 }
 
 Swipeable.defaultProps = {

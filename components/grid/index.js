@@ -1,7 +1,8 @@
 /**
  * Created by Freeman on 2017/3/9.
  */
-import React, {Component, PropTypes}from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Flex from '../flex';
 export default class Grid extends Component {

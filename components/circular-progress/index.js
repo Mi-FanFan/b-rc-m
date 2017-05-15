@@ -1,7 +1,8 @@
 /**
  * Created by Freeman on 2017/2/16.
  */
-import React, {Component, PropTypes} from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 class CircularProgress extends Component {
   constructor(props) {
     super(props)

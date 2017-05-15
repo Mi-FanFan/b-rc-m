@@ -2,7 +2,8 @@
  * Created by Freeman on 2017/1/23.
  * 顶部导航
  */
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Icon from '../icon'
 import splitObject from '../utils/splitObject'
