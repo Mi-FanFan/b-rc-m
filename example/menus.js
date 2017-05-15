@@ -49,6 +49,9 @@ export const menus = [
       {
         label: 'Button',
         to: '/button'
+      },{
+        label: 'InputNumber',
+        to: '/input-number'
       },
     ]
   },

@@ -37,41 +37,14 @@ export default class extends React.Component {
 
   constructor (props) {
     super(props)
-    const getSectionData = (dataBlob, sectionID) => dataBlob[sectionID]
-    const getRowData = (dataBlob, sectionID, rowID) => dataBlob[rowID]
+
 
     const dataSource = new ListView.DataSource({
-      getRowData,
-      getSectionHeaderData: getSectionData,
       rowHasChanged: (row1, row2) => row1 !== row2,
-      sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
     })
 
-    this.dataBlob = {}
-    this.sectionIDs = []
-    this.rowIDs = []
-    this.genData = (pIndex = 0) => {
-      for (let i = 0; i < NUM_SECTIONS; i++) {
-        const ii = (pIndex * NUM_SECTIONS) + i
-        const sectionName = `Section ${ii}`
-        this.sectionIDs.push(sectionName)
-        this.dataBlob[sectionName] = sectionName
-        this.rowIDs[ii] = []
-
-        for (let jj = 0; jj < NUM_ROWS_PER_SECTION; jj++) {
-          const rowName = `S${ii}, R${jj}`
-          this.rowIDs[ii].push(rowName)
-          this.dataBlob[rowName] = rowName
-        }
-      }
-      // new object ref
-      this.sectionIDs = [].concat(this.sectionIDs)
-      this.rowIDs = [].concat(this.rowIDs)
-    }
-
     this.state = {
-      dataSource: dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
-      isLoading: true,
+      dataSource: dataSource.cloneWithRows(data),
     }
   }
 
@@ -83,8 +56,7 @@ export default class extends React.Component {
     setTimeout(() => {
       this.genData()
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
-        isLoading: false,
+        dataSource: this.state.dataSource.cloneWithRows(data),
       })
     }, 600)
   }
@@ -126,6 +98,7 @@ export default class extends React.Component {
       />
     )
     const row = (rowData, sectionID, rowID) => {
+      console.log(rowData)
       if (index < 0) {
         index = data.length - 1
       }

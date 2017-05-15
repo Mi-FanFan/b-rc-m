@@ -1,0 +1,56 @@
+@import "../../style/themes/default";
+
+@input-number-prefix-cls: ~"@{mi-prefix}-input-number";
+
+.handler-disabled() {
+  color: #ccc !important;
+}
+
+.@{input-number-prefix-cls} {
+
+  padding: 0 48px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+
+  &-handler {
+    font-size: 36px;
+    width: 52px;
+    height: 52px;
+    line-height: 52px;
+    text-decoration: none;
+    position: absolute;
+    right: 0;
+    overflow: hidden;
+    background: #F5F5F5;
+    color: #222;
+  }
+
+  &-input {
+    font-size: 28px;
+    width: 90px;
+    height: 44px;
+    padding: 4px 8px;
+    outline: 0;
+  }
+
+  &-handler-inc {
+    right: 0;
+    top: 0;
+  }
+
+  &-handler-dec {
+    left: 0;
+    top: 0;
+  }
+  &-handler, &-input {
+    text-align: center;
+    border: 2px solid #e0e0e0;
+  }
+
+  &-handler-disabled{
+    .handler-disabled();
+  }
+
+}

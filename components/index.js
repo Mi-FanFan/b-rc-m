@@ -18,3 +18,6 @@ export {default as Grid} from './grid';
 export {default as List} from './list';
 export {default as ListView} from './list-view';
 
+//Data Entry
+export {default as InputNumber} from './input-number';
+
