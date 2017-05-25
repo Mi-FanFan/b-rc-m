@@ -5,7 +5,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import FastClick from 'fastclick';
-import "babel-polyfill";
 import App from './app';
 import Home from './pages/home/index';
 import Button from './pages/button/index';

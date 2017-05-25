@@ -1,7 +1,6 @@
 import React from 'react'
 import { WhiteSpace } from 'antd-mobile'
-import Loading from '../../../components/loading'
-import '../../../components/loading/style'
+import {Loading} from 'b-rc-m'
 import Page from '../../component/page'
 import './loading.less'
 

@@ -5,7 +5,7 @@
 export {default as Icon} from './icon'
 export {default as Button} from './button'
 export {default as Viewer} from './viewer';
-export {default as Swipeable} from './swipeable/Swipeable';
+export {default as Swipeable} from './swipeable';
 export {default as Toaster} from './toaster';
 export {default as Progress} from './progress';
 export {default as Loading} from './loading';

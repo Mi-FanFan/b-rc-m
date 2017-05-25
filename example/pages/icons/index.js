@@ -1,6 +1,5 @@
 import React from 'react';
-import Icon from '../../../components/icon';
-import '../../../components/icon/style';
+import {Icon} from 'b-rc-m';
 import Page from '../../component/page';
 import './icons.less';
 

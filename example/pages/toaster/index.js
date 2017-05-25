@@ -1,8 +1,7 @@
 import React from 'react';
 import {Button} from 'antd-mobile';
 import Page from '../../component/page';
-import Toaster from '../../../components/toaster'
-import '../../../components/toaster/style'
+import {Toaster} from 'b-rc-m'
 import './toast.less'
 export default class ButtonDemo extends React.Component {
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import Page from '../../component/page';
-import Viewer from '../../../components/viewer';
-import '../../../components/viewer/style';
+import {Viewer} from 'b-rc-m';
 import './viewer.less';
 const data = [
   'http://static.budee.com/yyren/image/14/3761.jpg?w=1200',

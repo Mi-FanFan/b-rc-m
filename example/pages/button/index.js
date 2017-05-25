@@ -1,7 +1,6 @@
 import React from 'react';
 import {Flex} from 'antd-mobile';
-import Button from '../../../components/button';
-import '../../../components/button/style';
+import {Button} from 'b-rc-m';
 import Page from '../../component/page';
 import './button.less';
 

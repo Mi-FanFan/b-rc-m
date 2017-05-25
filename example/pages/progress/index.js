@@ -1,7 +1,6 @@
 import React from 'react';
 import {WhiteSpace} from 'antd-mobile'
-import Progress from '.././../../components/progress';
-import '.././../../components/progress/style';
+import {Progress} from 'b-rc-m';
 import Page from '../../component/page';
 import './progress.less';
 

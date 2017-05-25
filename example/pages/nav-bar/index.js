@@ -1,8 +1,5 @@
 import React from 'react';
-import NavBar from '../../../components/nav-bar';
-import  '../../../components/nav-bar/style';
-import Icon from '../../../components/icon';
-import '../../../components/icon/style';
+import {NavBar,Icon} from 'b-rc-m';
 import Page from '../../component/page';
 import './nav-bar.less';
 

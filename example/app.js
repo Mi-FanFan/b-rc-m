@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router';
-import "babel-polyfill";
 import {Drawer, List, NavBar} from 'antd-mobile'
 import './app.less'
 import {menus} from './menus'
