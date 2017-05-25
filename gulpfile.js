@@ -5,7 +5,7 @@ var gulp = require('gulp')
 var autoprefixer = require('autoprefixer')
 var postcss = require('gulp-postcss')
 var less = require('gulp-less')
-var minifycss = require('gulp-minify-css') // CSS压缩
+var cleanCSS = require('gulp-clean-css') // CSS压缩
 var concat = require('gulp-concat')       // 合并文件
 var rename = require('gulp-rename')        // 重命名
 var clean = require('gulp-clean')
@@ -45,7 +45,7 @@ gulp.task('dist', function () {
     .pipe(header(banner, {pkg: pkg}))
     .pipe(gulp.dest('dist'))
     .pipe(rename({suffix: '.min'}))
-    .pipe(minifycss())
+    .pipe(cleanCSS())
     .pipe(gulp.dest('dist'))
 })
 
