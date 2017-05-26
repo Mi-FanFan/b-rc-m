@@ -52,6 +52,9 @@ export const menus = [
       },{
         label: 'InputNumber',
         to: '/input-number'
+      },{
+        label: 'Picker',
+        to: '/picker'
       },
     ]
   },

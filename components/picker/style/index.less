@@ -2,3 +2,118 @@
  * Created by freeman on 17-5-25.
  */
 @import "../../style/themes/default";
+
+@pickerPrefixCls: mi-picker;
+/* loading */
+.@{pickerPrefixCls} {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: @pickerZIndex;
+  backface-visibility: hidden;
+  transform: translateY(100%);
+  transition: transform @animation-duration-slow;
+
+  &__hd {
+    display: flex;
+    padding: 20px 30px;
+    background-color: #fbf9fe;
+    position: relative;
+    text-align: center;
+  }
+
+  &__action {
+    display: block;
+    flex: 1;
+    color: #586c94;
+  }
+  &__action:first-child {
+    text-align: left;
+  }
+  &__action:last-child {
+    text-align: right;
+  }
+
+  &__bd {
+    display: flex;
+    position: relative;
+    background-color: #fff;
+    height: 476px;
+    overflow: hidden;
+  }
+
+  &__group{
+    display: flex;
+    flex:1;
+    position: relative;
+    height: 100%;
+  }
+
+  &__mask{
+    top: 0;
+    height: 100%;
+    margin: 0 auto;
+    background: linear-gradient(180deg,hsla(0,0%,100%,.95),hsla(0,0%,100%,.6)),linear-gradient(0deg,hsla(0,0%,100%,.95),hsla(0,0%,100%,.6));
+    background-position: top,bottom;
+    background-size: 100% 204px;
+    background-repeat: no-repeat;
+    transform: translateZ(0);
+  }
+
+  &__indicator {
+    box-sizing: border-box;
+    height: 68px;
+    top: 204px;
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+  }
+
+  &__indicator, &__mask {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+  }
+  &__indicator:before {
+    top: 0;
+    border-top: 2px solid #e5e5e5;
+    transform-origin: 0 0;
+    transform: scaleY(.5);
+  }
+  &__indicator:after {
+    bottom: 0;
+    border-bottom: 2px solid #e5e5e5;
+    transform-origin: 0 100%;
+    transform: scaleY(.5);
+  }
+
+  &__indicator:after, &__indicator:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    color: #e5e5e5;
+  }
+
+  &__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  &__item {
+    text-align: center;
+    color: #000;
+    font-size: 32px;
+    height: 68px;
+    line-height: 68px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    &_disabled {
+      color: #999;
+    }
+  }
+}

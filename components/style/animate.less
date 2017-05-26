@@ -1,0 +1,64 @@
+@import "./themes/default";
+.mi-animate{
+  .effect() {
+    animation-duration: @animation-duration-slow;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+  }
+
+  &-fade-in{
+    .effect();
+    animation-name: fadeIn;
+  }
+
+  &-fade-out{
+    .effect();
+    animation-name: fadeOut;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  &-slide-up{
+    .effect();
+    animation-name: slideUp;
+  }
+
+  &-slide-down{
+    .effect();
+    animation-name: slideDown;
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translate3d(0,100%,0);
+    }
+    100% {
+      transform: translateZ(0);
+    }
+  }
+
+  @keyframes slideDown {
+    0% {
+      transform: translateZ(0);
+    }
+    100% {
+      transform: translate3d(0,100%,0);
+    }
+  }
+}

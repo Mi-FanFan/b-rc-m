@@ -21,6 +21,7 @@ import PopoverPage from './pages/popover';
 import TabsPage from './pages/tabs';
 import ListViewPage from './pages/listview';
 import InputNumberPage from './pages/inputnumber';
+import PickerPage from './pages/picker';
 
 
 
@@ -46,6 +47,7 @@ ReactDOM.render((
       <Route path="tabs" component={TabsPage}/>
       <Route path="listview" component={ListViewPage}/>
       <Route path="input-number" component={InputNumberPage}/>
+      <Route path="picker" component={PickerPage}/>
     </Route>
   </Router>
 ), document.getElementById('container'));
