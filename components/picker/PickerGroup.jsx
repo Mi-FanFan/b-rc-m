@@ -4,14 +4,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import omit from 'lodash/omit'
 export default class PickerGroup extends Component {
 
 
   static propTypes = {
     height: PropTypes.number,
-    itemHeight: PropTypes.number,
-    indicatorTop: PropTypes.number,
-    indicatorHeight: PropTypes.number,
     onChange: PropTypes.func,
     animation: PropTypes.bool,
     groupIndex: PropTypes.number,
@@ -21,9 +19,6 @@ export default class PickerGroup extends Component {
 
   static defaultProps = {
     height: 476,
-    itemHeight: 50 + 18, //content + padding
-    indicatorTop: 204,
-    indicatorHeight: 68,
     animation: true,
     groupIndex: -1,
     defaultIndex: -1,
@@ -46,7 +41,10 @@ export default class PickerGroup extends Component {
       translate: 0,
       totalHeight: 0,
       selected: 0,
-      animating: props.animation
+      animating: props.animation,
+      itemHeight: 50 + 18,//content + padding
+      indicatorTop: 204,//content + padding
+      indicatorHeight: 68,//content + padding
     };
   }
 
@@ -59,7 +57,10 @@ export default class PickerGroup extends Component {
   }
 
   adjustPosition(props){
-    const { items, itemHeight, indicatorTop, defaultIndex } = props;
+    const {items, defaultIndex} = props;
+    let itemHeight = this.indicator.offsetHeight
+    let indicatorTop = this.indicator.offsetTop
+    let indicatorHeight = itemHeight
     const totalHeight = items.length * itemHeight;
     let translate = totalHeight <= indicatorTop ? indicatorTop : 0;
 
@@ -88,11 +89,15 @@ export default class PickerGroup extends Component {
       ogTranslate: translate,
       totalHeight,
       translate,
+      itemHeight,
+      indicatorTop,
+      indicatorHeight,
     }, () => defaultIndex > -1 ? this.updateSelected(false) : this.updateSelected() );
   }
 
   updateSelected(propagate = true){
-    const { items, itemHeight, indicatorTop, indicatorHeight, onChange, groupIndex } = this.props;
+    const {items, onChange, groupIndex} = this.props;
+    const {itemHeight, indicatorTop, indicatorHeight,} = this.state
     let selected = 0;
     items.forEach( (item, i) => {
       //console.log(i, this.state.translate, (this.state.translate + (itemHeight * i)), indicatorTop, this.state.translate + (itemHeight * i) + itemHeight , indicatorTop + indicatorHeight)
@@ -135,7 +140,8 @@ export default class PickerGroup extends Component {
   handleTouchEnd(e){
     if (!this.state.touching || this.props.items.length <= 1) return;
 
-    const { indicatorTop, indicatorHeight, itemHeight } = this.props;
+    const {indicatorTop, indicatorHeight, itemHeight} = this.state;
+
     let translate = this.state.translate;
 
     if ( Math.abs(translate - this.state.ogTranslate) < ( itemHeight * .51 ) ){
@@ -173,20 +179,21 @@ export default class PickerGroup extends Component {
 
 
   render () {
-    const {items, className, height, itemHeight, indicatorTop, indicatorHeight, onChange, animation, groupIndex, defaultIndex, mapKeys, ...others} = this.props
+    const {items, className, mapKeys} = this.props
+    const otherProps = omit(this.props, 'items', 'className', 'height', 'onChange', 'animation', 'groupIndex', 'defaultIndex', 'mapKeys',)
     const cls = classNames('mi-picker__group', className)
     const styles = {
       'transform': `translate(0, ${this.state.translate}px)`,
       'transition': this.state.animating ? 'transform .3s' : 'none'
     }
     return (
-      <div className={cls} { ...others }
+      <div className={cls} { ...otherProps }
            onTouchStart={this.handleTouchStart}
            onTouchMove={this.handleTouchMove}
            onTouchEnd={this.handleTouchEnd}
       >
         <div className="mi-picker__mask"/>
-        <div className="mi-picker__indicator"/>
+        <div className="mi-picker__indicator" ref={ref => this.indicator = ref}/>
         <div
           className="mi-picker__content"
           style={styles}

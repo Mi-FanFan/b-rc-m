@@ -21,4 +21,5 @@ export {default as ListView} from './list-view';
 //Data Entry
 export {default as InputNumber} from './input-number';
 export {default as Picker} from './picker';
+export {default as CityPicker} from './city-picker';
 
