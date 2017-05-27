@@ -42,9 +42,9 @@ export default class PickerGroup extends Component {
       totalHeight: 0,
       selected: 0,
       animating: props.animation,
-      itemHeight: 50 + 18,//content + padding
-      indicatorTop: 204,//content + padding
-      indicatorHeight: 68,//content + padding
+      itemHeight: 72,
+      indicatorTop: 216,
+      indicatorHeight: 72,
     };
   }
 
@@ -101,13 +101,14 @@ export default class PickerGroup extends Component {
     let selected = 0;
     items.forEach( (item, i) => {
       //console.log(i, this.state.translate, (this.state.translate + (itemHeight * i)), indicatorTop, this.state.translate + (itemHeight * i) + itemHeight , indicatorTop + indicatorHeight)
-      if ( !item.disabled && (this.state.translate + (itemHeight * i)) >= indicatorTop &&
-        ( this.state.translate + (itemHeight * i) + itemHeight ) <= indicatorTop + indicatorHeight ){
+      if ( !item.disabled && (this.state.translate + (itemHeight * i)) >= indicatorTop && ( this.state.translate + (itemHeight * i) + itemHeight ) <= indicatorTop + indicatorHeight ){
         selected = i;
       }
     });
 
-    if (onChange && propagate) onChange(items[selected], selected, groupIndex);
+    if (onChange && propagate) {
+      onChange(items[selected], selected, groupIndex);
+    }
   }
 
   handleTouchStart(e){
@@ -203,7 +204,8 @@ export default class PickerGroup extends Component {
             items.map((item, j) => {
               const label = item[mapKeys.label]
               const itemCls = classNames('mi-picker__item', {
-                'mi-picker__item_disabled': item.disabled
+                'mi-picker__item_disabled': item.disabled,
+                'mi-picker__item_selected':this.state.selected === j
               })
 
               return (

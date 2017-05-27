@@ -39,7 +39,7 @@
     display: flex;
     position: relative;
     background-color: #fff;
-    height: 476px;
+    height: 504px;//高度等于indicator top*2 + indicator的高度(也等于content下item的高度) = 216*2 + 72
     overflow: hidden;
   }
 
@@ -56,17 +56,17 @@
     margin: 0 auto;
     background: linear-gradient(180deg,hsla(0,0%,100%,.95),hsla(0,0%,100%,.6)),linear-gradient(0deg,hsla(0,0%,100%,.95),hsla(0,0%,100%,.6));
     background-position: top,bottom;
-    background-size: 100% 204px;
+    background-size: 100% 216px;
     background-repeat: no-repeat;
     transform: translateZ(0);
   }
 
   &__indicator {
     box-sizing: border-box;
-    height: 68px;
-    top: 204px;
-    border-top:1px solid #ddd;
-    border-bottom:1px solid #ddd;
+    height: 72px;
+    top: 216px;
+    border-top:1PX solid #ddd;
+    border-bottom:1PX solid #ddd;
   }
 
   &__indicator, &__mask {
@@ -106,14 +106,17 @@
   &__item {
     text-align: center;
     color: #000;
-    font-size: 32px;
-    height: 68px;
-    line-height: 68px;
+    font-size: 34px;
+    height: 72px;
+    line-height: 72px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     &_disabled {
       color: #999;
+    }
+    &_selected {
+      font-size: 36px;
     }
   }
 }

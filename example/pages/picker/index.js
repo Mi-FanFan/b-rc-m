@@ -36,21 +36,22 @@ export default class extends React.Component {
               {
                 items: [
                   {
-                    label: 'Item1'
+                    label: '男'
                   },
                   {
-                    label: 'Item2 (Disabled)',
+                    label: '女'
+                  },
+                  {
+                    label: '保密'
+                  },
+                  {
+                    label: '不男',
                     disabled: true
                   },
                   {
-                    label: 'Item3'
+                    label: '不女',
+                    disabled: true
                   },
-                  {
-                    label: 'Item4'
-                  },
-                  {
-                    label: 'Item5'
-                  }
                 ]
               }
             ]}
