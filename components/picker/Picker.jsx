@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Mask from '../mask'
 import PickerGroup from './PickerGroup'
+import omit from 'lodash/omit'
 export default class Picker extends Component {
 
   static propTypes = {
@@ -140,8 +141,8 @@ export default class Picker extends Component {
 
   render () {
 
-    const {className, show, groups, onCancel, ...others} = this.props
-
+    const {className, show, onCancel,} = this.props
+    const others = omit(this.props,'className','show','onCancel','onGroupChange','defaultSelect','groups')
     const maskCls = classNames({
       'mi-animate-fade-in': show && !this.state.closing,
       'mi-animate-fade-out': this.state.closing,
