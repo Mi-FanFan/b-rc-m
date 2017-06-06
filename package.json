@@ -1,6 +1,6 @@
 {
   "name": "b-rc-m",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "react components for budee front-end mobile project",
   "main": "./lib",
   "scripts": {
@@ -96,7 +96,7 @@
     "style-loader": "0.17.0",
     "sw-precache-webpack-plugin": "0.9.1",
     "url-loader": "0.5.8",
-    "webpack": "2.5.1",
-    "webpack-dev-server": "2.4.5"
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }
