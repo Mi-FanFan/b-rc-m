@@ -7,21 +7,20 @@ import classNames from 'classnames'
 import omit from 'lodash/omit'
 export default class PickerGroup extends Component {
 
-
   static propTypes = {
     height: PropTypes.number,
     onChange: PropTypes.func,
     animation: PropTypes.bool,
     groupIndex: PropTypes.number,
     defaultIndex: PropTypes.number,
-    mapKeys:PropTypes.object,
+    mapKeys: PropTypes.object,
   }
 
   static defaultProps = {
     height: 476,
     animation: true,
     groupIndex: -1,
-    defaultIndex: -1,
+    defaultIndex: 0,
     mapKeys: {
       label: 'label'
     }
@@ -32,7 +31,7 @@ export default class PickerGroup extends Component {
     this.handleTouchStart = this.handleTouchStart.bind(this)
     this.handleTouchMove = this.handleTouchMove.bind(this)
     this.handleTouchEnd = this.handleTouchEnd.bind(this)
-    this.updateSelected = this.updateSelected.bind(this);
+    this.updateSelected = this.updateSelected.bind(this)
     this.state = {
       touching: false,
       ogY: 0,
@@ -45,43 +44,41 @@ export default class PickerGroup extends Component {
       itemHeight: 72,
       indicatorTop: 216,
       indicatorHeight: 72,
-    };
+    }
   }
 
-  componentDidMount(){
-    this.adjustPosition(this.props);
+  componentDidMount () {
+    this.adjustPosition(this.props)
   }
 
-  componentWillReceiveProps(nextProps){
-    this.adjustPosition(nextProps);
+  componentWillReceiveProps (nextProps) {
+    this.adjustPosition(nextProps)
   }
 
-  adjustPosition(props){
-    const {items, defaultIndex} = props;
+  adjustPosition (props) {
+    const {items, defaultIndex} = props
     let itemHeight = this.indicator.offsetHeight
     let indicatorTop = this.indicator.offsetTop
     let indicatorHeight = itemHeight
-    const totalHeight = items.length * itemHeight;
-    let translate = totalHeight <= indicatorTop ? indicatorTop : 0;
+    const totalHeight = items.length * itemHeight
+    let translate = totalHeight <= indicatorTop ? indicatorTop : 0
 
-    if (defaultIndex > -1) {
-      if (translate === 0){
-        let upperCount = Math.floor(indicatorTop / itemHeight);
-        if ( defaultIndex > upperCount ){
-          //over
-          let overCount = defaultIndex - upperCount;
-          translate -= overCount * itemHeight;
-        } else if ( defaultIndex === upperCount){
-          translate = 0;
-        } else {
-          //less
-          translate += ( Math.abs(upperCount - defaultIndex) * itemHeight);
-        }
-        //if(props.groupIndex == 2) console.log(defaultIndex,translate, upperCount)
+    if (translate === 0) {
+      let upperCount = Math.floor(indicatorTop / itemHeight)
+      if (defaultIndex > upperCount) {
+        //over
+        let overCount = defaultIndex - upperCount
+        translate -= overCount * itemHeight
+      } else if (defaultIndex === upperCount) {
+        translate = 0
       } else {
-        //total item less than indicator height
-        translate -= itemHeight * defaultIndex;
+        //less
+        translate += ( Math.abs(upperCount - defaultIndex) * itemHeight)
       }
+      //if(props.groupIndex == 2) console.log(defaultIndex,translate, upperCount)
+    } else {
+      //total item less than indicator height
+      translate -= itemHeight * defaultIndex
     }
 
     this.setState({
@@ -92,27 +89,27 @@ export default class PickerGroup extends Component {
       itemHeight,
       indicatorTop,
       indicatorHeight,
-    }, () => defaultIndex > -1 ? this.updateSelected(false) : this.updateSelected() );
+    }, () => defaultIndex > -1 ? this.updateSelected(false) : this.updateSelected())
   }
 
-  updateSelected(propagate = true){
-    const {items, onChange, groupIndex} = this.props;
+  updateSelected (propagate = true) {
+    const {items, onChange, groupIndex} = this.props
     const {itemHeight, indicatorTop, indicatorHeight,} = this.state
-    let selected = 0;
-    items.forEach( (item, i) => {
+    let selected = 0
+    items.forEach((item, i) => {
       //console.log(i, this.state.translate, (this.state.translate + (itemHeight * i)), indicatorTop, this.state.translate + (itemHeight * i) + itemHeight , indicatorTop + indicatorHeight)
-      if ( !item.disabled && (this.state.translate + (itemHeight * i)) >= indicatorTop && ( this.state.translate + (itemHeight * i) + itemHeight ) <= indicatorTop + indicatorHeight ){
-        selected = i;
+      if (!item.disabled && (this.state.translate + (itemHeight * i)) >= indicatorTop && ( this.state.translate + (itemHeight * i) + itemHeight ) <= indicatorTop + indicatorHeight) {
+        selected = i
       }
-    });
+    })
 
     if (onChange && propagate) {
-      onChange(items[selected], selected, groupIndex);
+      onChange(items[selected], selected, groupIndex)
     }
   }
 
-  handleTouchStart(e){
-    if (this.state.touching || this.props.items.length <= 1) return;
+  handleTouchStart (e) {
+    if (this.state.touching || this.props.items.length <= 1) return
 
     this.setState({
       touching: true,
@@ -120,52 +117,52 @@ export default class PickerGroup extends Component {
       touchId: e.targetTouches[0].identifier,
       ogY: this.state.translate === 0 ? e.targetTouches[0].pageY : e.targetTouches[0].pageY - this.state.translate,
       animating: false
-    });
+    })
   }
 
-  handleTouchMove(e){
-    if (!this.state.touching || this.props.items.length <= 1) return;
-    if (e.targetTouches[0].identifier !== this.state.touchId) return;
+  handleTouchMove (e) {
+    if (!this.state.touching || this.props.items.length <= 1) return
+    if (e.targetTouches[0].identifier !== this.state.touchId) return
 
     //prevent move background
-    e.preventDefault();
+    e.preventDefault()
 
-    const pageY = e.targetTouches[0].pageY;
-    const diffY = pageY - this.state.ogY;
+    const pageY = e.targetTouches[0].pageY
+    const diffY = pageY - this.state.ogY
 
     this.setState({
       translate: diffY
-    });
+    })
   }
 
-  handleTouchEnd(e){
-    if (!this.state.touching || this.props.items.length <= 1) return;
+  handleTouchEnd (e) {
+    if (!this.state.touching || this.props.items.length <= 1) return
 
-    const {indicatorTop, indicatorHeight, itemHeight} = this.state;
+    const {indicatorTop, indicatorHeight, itemHeight} = this.state
 
-    let translate = this.state.translate;
+    let translate = this.state.translate
 
-    if ( Math.abs(translate - this.state.ogTranslate) < ( itemHeight * .51 ) ){
-      translate = this.state.ogTranslate;
+    if (Math.abs(translate - this.state.ogTranslate) < ( itemHeight * .51 )) {
+      translate = this.state.ogTranslate
     } else if (translate > indicatorTop) {
       //top boundry
-      translate = indicatorTop;
+      translate = indicatorTop
     } else if (translate + this.state.totalHeight < indicatorTop + indicatorHeight) {
       //bottom
-      translate = indicatorTop + indicatorHeight - this.state.totalHeight;
+      translate = indicatorTop + indicatorHeight - this.state.totalHeight
     } else {
       //pass single item range but not exceed boundry
-      let step = 0, adjust = 0;
-      let diff = (translate - this.state.ogTranslate) / itemHeight;
+      let step = 0, adjust = 0
+      let diff = (translate - this.state.ogTranslate) / itemHeight
 
-      if (Math.abs(diff) < 1){
-        step = diff > 0 ? 1 : -1;
+      if (Math.abs(diff) < 1) {
+        step = diff > 0 ? 1 : -1
       } else {
-        adjust = Math.abs((diff % 1) * 100) > 50 ? 1 : 0;
-        step = diff > 0 ? Math.floor(diff) + adjust : Math.ceil(diff) - adjust;
+        adjust = Math.abs((diff % 1) * 100) > 50 ? 1 : 0
+        step = diff > 0 ? Math.floor(diff) + adjust : Math.ceil(diff) - adjust
       }
 
-      translate = this.state.ogTranslate + ( step * itemHeight );
+      translate = this.state.ogTranslate + ( step * itemHeight )
     }
 
     this.setState({
@@ -175,9 +172,8 @@ export default class PickerGroup extends Component {
       ogTranslate: 0,
       animating: true,
       translate
-    }, ()=>this.updateSelected());
+    }, () => this.updateSelected())
   }
-
 
   render () {
     const {items, className, mapKeys} = this.props
@@ -205,7 +201,7 @@ export default class PickerGroup extends Component {
               const label = item[mapKeys.label]
               const itemCls = classNames('mi-picker__item', {
                 'mi-picker__item_disabled': item.disabled,
-                'mi-picker__item_selected':this.state.selected === j
+                'mi-picker__item_selected': this.state.selected === j
               })
 
               return (

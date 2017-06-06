@@ -67,7 +67,7 @@ export default class Picker extends Component {
     this.renderActions = this.renderActions.bind(this)
     this.renderGroups = this.renderGroups.bind(this)
     this.state = {
-      selected: props.defaultSelect ? props.defaultSelect : Array(props.groups.length).fill(-1),
+      selected: props.defaultSelect ? props.defaultSelect : Array(props.groups.length).fill(0),
       closing: false
     }
   }

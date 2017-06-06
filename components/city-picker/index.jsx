@@ -36,7 +36,7 @@ export default class CityPicker extends Component {
 
   static defaultProps = {
     data: [],
-    dataMap: {id: 'name', items: 'sub'},
+    dataMap: {id: 'name',code:'code',items: 'sub'},
     selected: [],
     show: false
   }
@@ -44,18 +44,42 @@ export default class CityPicker extends Component {
   constructor(props) {
     super(props);
     const {data, selected, dataMap} = this.props;
-    const {groups, newselected} = this.parseData(data, dataMap.items, selected);
+    const {groups, newselected} = this.parseData(data, dataMap.items, this.parseCodeToIndex(data,selected));
     this.state = {
       groups,
       selected: newselected,
       picker_show: false,
-      text: ''
+      text: '',
+      value: '',
     };
     //console.log(this.state.groups)
     this.updateGroup = this.updateGroup.bind(this);
     this.parseData = this.parseData.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.parseCodeToIndex = this.parseCodeToIndex.bind(this);
   }
+
+  parseCodeToIndex(data,selected){
+    let _group = JSON.parse(JSON.stringify(data));
+    let indexSelected = []
+    _group.map((province,province_index) =>{
+      if (province.code === selected[0]){
+        indexSelected.push(province_index);
+        province.sub.map((city,city_index) =>{
+          if (city.code === selected[1]){
+            indexSelected.push(city_index);
+            city.sub.map((state,state_index) =>{
+              if (state.code === selected[2]){
+                indexSelected.push(state_index);
+              }
+            })
+          }
+        })
+      }
+    })
+    return indexSelected
+  }
+
 
   //@return array of group with options
   parseData(data, subKey, selected = [], group = [], newselected = []) {
@@ -94,13 +118,16 @@ export default class CityPicker extends Component {
     const {groups, newselected} = this.parseData(data, dataMap.items, selected);
 
     let text = '';
+    let value = '';
     try {
       groups.forEach((group, _i) => {
         text += `${group['items'][selected[_i]][this.props.dataMap.id]} `;
+        value += `${group['items'][selected[_i]][this.props.dataMap.code]} `;
       });
     } catch (err) {
       //wait
       text = this.state.text;
+      value = this.state.value;
     }
 
 
@@ -108,6 +135,7 @@ export default class CityPicker extends Component {
     this.setState({
       groups,
       text,
+      value,
       selected: newselected
     });
 
@@ -118,7 +146,7 @@ export default class CityPicker extends Component {
   }
 
   handleChange() {
-    if (this.props.onChange) this.props.onChange(this.state.text);
+    if (this.props.onChange) this.props.onChange(this.state.text,this.state.value);
   }
 
   render() {

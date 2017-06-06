@@ -1,6 +1,6 @@
 {
   "name": "b-rc-m",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "react components for budee front-end mobile project",
   "main": "./lib",
   "scripts": {
@@ -52,6 +52,7 @@
     "babel-runtime": "6.23.0",
     "case-sensitive-paths-webpack-plugin": "1.1.4",
     "chalk": "1.1.3",
+    "china-city": "^1.0.1",
     "connect-history-api-fallback": "1.3.0",
     "cross-spawn": "4.0.2",
     "css-loader": "0.28.1",
