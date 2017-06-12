@@ -44,7 +44,7 @@ export default class CityPicker extends Component {
   constructor(props) {
     super(props);
     const {data, selected, dataMap} = this.props;
-    const {groups, newselected} = this.parseData(data, dataMap.items, this.parseCodeToIndex(data,selected));
+    const {groups, newselected} = this.parseData(data, dataMap.items, this.parseCodeToIndex(data,dataMap,selected));
     this.state = {
       groups,
       selected: newselected,
@@ -59,20 +59,24 @@ export default class CityPicker extends Component {
     this.parseCodeToIndex = this.parseCodeToIndex.bind(this);
   }
 
-  parseCodeToIndex(data,selected){
+  parseCodeToIndex(data,dataMap,selected){
+    const subKey = dataMap.items
+    const codeKey = dataMap.code
     let _group = JSON.parse(JSON.stringify(data));
     let indexSelected = []
     _group.map((province,province_index) =>{
-      if (province.code === selected[0]){
+      if (province[codeKey] === selected[0]){
         indexSelected.push(province_index);
-        province.sub.map((city,city_index) =>{
-          if (city.code === selected[1]){
+        province[subKey].map((city,city_index) =>{
+          if (city[codeKey] === selected[1]){
             indexSelected.push(city_index);
-            city.sub.map((state,state_index) =>{
-              if (state.code === selected[2]){
-                indexSelected.push(state_index);
-              }
-            })
+            if (typeof city[subKey] !== 'undefined' && Array.isArray(city[subKey])){
+              city[subKey].map((state,state_index) =>{
+                if (state[codeKey] === selected[2]){
+                  indexSelected.push(state_index);
+                }
+              })
+            }
           }
         })
       }
