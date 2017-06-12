@@ -91,6 +91,10 @@ export const menus = [
         label: 'Toast',
         to: '/toaster'
       },
+      {
+        label: 'Modal',
+        to: '/modal'
+      },
     ]
   },
 ]

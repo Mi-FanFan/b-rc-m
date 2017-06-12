@@ -1,0 +1,169 @@
+/**
+ * Created by freeman on 17-6-12.
+ */
+@import "../../style/themes/default";
+@import "../../style/mixins";
+
+@modalPrefixCls: mi-modal;
+/* loading */
+.@{modalPrefixCls} {
+  position: relative;
+
+  &-wrap {
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    z-index: @modalZIndex;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  &-title {
+    margin: 0;
+    font-size: @modal-font-size-heading;
+    line-height: @line-height-base;
+    color: @color-text-base;
+    text-align: center;
+  }
+
+  &-header {
+    padding: @v-spacing-sm @h-spacing-lg @v-spacing-lg;
+  }
+
+  &-content {
+    position: relative;
+    background-color: @fill-base;
+    border: 0;
+    background-clip: padding-box;
+    text-align: center;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .@{modalPrefixCls}-content {
+    border-radius: @radius-lg;
+    height: auto;
+    padding-top: @v-spacing-lg;
+
+    .@{modalPrefixCls}-body {
+      padding: 0 @h-spacing-lg @v-spacing-lg;
+    }
+  }
+
+  &-close {
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    outline: none;
+    position: absolute;
+    right: @h-spacing-lg;
+    z-index: 999;
+    height: @icon-size-sm;
+    width: @icon-size-sm;
+
+  }
+
+  &-body {
+    font-size: @font-size-base;
+    color: @color-text-caption;
+    height: 100%;
+    overflow: auto;
+  }
+
+  &&-operation {
+    .@{modalPrefixCls}-content {
+      border-radius: @radius-lg;
+      height: auto;
+      padding-top: 0;
+
+      .@{modalPrefixCls}-body {
+        padding: 0;
+      }
+
+      .@{modalPrefixCls}-button {
+        color: @color-text-base;
+        text-align: start;
+        padding-left: 30px;
+      }
+    }
+  }
+
+  .button-common() {
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: @color-link;
+    font-size: @link-button-font-size;
+    height: @across-button-height;
+    line-height: @across-button-height;
+    display: block;
+    .ellipsis();
+  }
+
+  &-button-group-h {
+    border-top: @border-width-sm solid @border-color-base;
+    display: flex;
+
+    .@{modalPrefixCls}-button {
+      -webkit-touch-callout: none;
+      flex: 1;
+      .button-common();
+
+      &:first-child {
+        color: @color-text-base;
+        border-right: @border-width-sm solid @border-color-base;
+      }
+    }
+  }
+
+  &-button-group-v {
+    .@{modalPrefixCls}-button {
+      -webkit-touch-callout: none;
+      display: block;
+      border-top: @border-width-sm solid @border-color-base;
+      .button-common();
+    }
+  }
+
+  &-button-active {
+    background-color: @fill-tap;
+  }
+
+  &-input {
+    border-left: @border-width-sm solid @border-color-base;
+    border-right: @border-width-sm solid @border-color-base;
+    border-bottom: @border-width-sm solid @border-color-base;
+
+    &:first-child {
+      margin-top: @v-spacing-md;
+      border-top: @border-width-sm solid @border-color-base;
+      border-top-left-radius: @radius-sm;
+      border-top-right-radius: @radius-sm;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: @radius-sm;
+      border-bottom-right-radius: @radius-sm;
+    }
+
+    input {
+      border: 0;
+      width: 98%;
+      box-sizing: border-box;  // maybe not need it ?
+
+      margin: 0;
+      padding: @v-spacing-xs 0;
+    }
+  }
+
+}
+
