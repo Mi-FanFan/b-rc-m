@@ -1,19 +1,17 @@
 @import './themes/default';
 
-*,
-*:before,
-*:after {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-html {
-  //font-size: 50PX;
+body, html {
+  font-family: @font-family-base;
 }
 
 body {
   user-select: none;
-  //font-size: 32px;
-  //background-color: @fill-body;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 *[contenteditable] {
@@ -30,11 +28,11 @@ a {
   outline: none;
 }
 
-.display-block{
+.display-block {
   display: block;
 }
 
-.display-none{
+.display-none {
   display: none;
 }
 
