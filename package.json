@@ -1,6 +1,6 @@
 {
   "name": "b-rc-m",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "react components for budee front-end mobile project",
   "main": "./lib",
   "scripts": {
@@ -8,7 +8,7 @@
     "clean": "rimraf ./lib ./dist",
     "build": "npm run clean  && babel ./components --out-dir ./lib --copy-files",
     "dist": "gulp default",
-    "prepublish": "npm run build && npm run dist"
+    "prepare": "npm run build && npm run dist"
   },
   "repository": {
     "type": "git",
