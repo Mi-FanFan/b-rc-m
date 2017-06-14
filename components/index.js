@@ -23,3 +23,6 @@ export {default as InputNumber} from './input-number';
 export {default as Picker} from './picker';
 export {default as CityPicker} from './city-picker';
 
+
+export {default as Modal} from './modal';
+
