@@ -25,7 +25,7 @@ export default class Modal extends Component {
      * trigger when individual group change, pass property(`item`, `item index in group`, `group index in groups`, `selected`, `picker instance`)
      *
      */
-    footer: PropTypes.bool,
+    footer: PropTypes.oneOfType(PropTypes.bool,PropTypes.node),
     /**
      * on selected change, pass property `selected` for array of slected index to `groups`
      *
@@ -35,6 +35,8 @@ export default class Modal extends Component {
     buttonStyle: PropTypes.object,
     style: PropTypes.object,
     operation: PropTypes.bool,
+    handleCancel: PropTypes.func,
+    handleOk: PropTypes.func,
   }
 
   static defaultProps = {
@@ -77,15 +79,15 @@ export default class Modal extends Component {
   }
 
   renderFooter () {
-    const {prefixCls, buttonStyle, footer, operation} = this.props
+    const {prefixCls, buttonStyle, footer, operation, handleCancel, handleOk} = this.props
     return (
       <div className={`${prefixCls}-footer`} ref="footer">
         {
           footer ? footer : <div className={`${prefixCls}-button-group-${!operation ? 'h' : 'v'}`}>
-            <a className={`${prefixCls}-button`} role="button" style={buttonStyle} href="#">
+            <a className={`${prefixCls}-button`} role="button" style={buttonStyle} onClick={handleCancel}>
               取消
             </a>
-            <a className={`${prefixCls}-button`} role="button" style={buttonStyle} href="#">
+            <a className={`${prefixCls}-button`} role="button" style={buttonStyle} onClick={handleOk}>
               确定
             </a>
           </div>
@@ -96,7 +98,7 @@ export default class Modal extends Component {
 
   render () {
 
-    const {className, prefixCls, title, show,style, onCancel,} = this.props
+    const {className, prefixCls, title, show, style,} = this.props
     const maskCls = classNames({
       'mi-animate-fade-in': show,
       'mi-animate-fade-out': !show,
