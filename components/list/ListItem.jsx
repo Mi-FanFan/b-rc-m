@@ -142,7 +142,7 @@ ListItem.propTypes = {
   style: PropTypes.any,
   activeStyle: PropTypes.any,
   className: PropTypes.string,
-  thumb: PropTypes.oneOfType([PropTypes.node, null]),
+  thumb: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   extra: PropTypes.node,
   arrow: PropTypes.oneOf(['horizontal', 'down', 'up', 'empty', '']),
   align: PropTypes.oneOf(['top', 'middle', 'bottom']),

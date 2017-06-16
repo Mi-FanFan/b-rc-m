@@ -55,6 +55,9 @@ export const menus = [
       },{
         label: 'Picker',
         to: '/picker'
+      },{
+        label: 'DatePicker',
+        to: '/date-picker'
       },
     ]
   },

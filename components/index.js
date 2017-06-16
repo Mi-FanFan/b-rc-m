@@ -22,6 +22,7 @@ export {default as ListView} from './list-view';
 export {default as InputNumber} from './input-number';
 export {default as Picker} from './picker';
 export {default as CityPicker} from './city-picker';
+export {default as DatePicker} from './date-picker';
 
 
 export {default as Modal} from './modal';
