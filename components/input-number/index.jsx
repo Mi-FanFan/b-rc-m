@@ -51,7 +51,7 @@ export default class InputNumber extends Component {
   }
 
   updateValue (v) {
-    const {disabled, onChange, min, max} = this.props
+    const {disabled, onChange, min, max,precision} = this.props
     if (disabled || !onChange) {
       return
     }
@@ -60,12 +60,12 @@ export default class InputNumber extends Component {
       return
     }
     if (min !== undefined && v < min) {
-      v = min
+       v = min
     }
     if (max !== undefined && v > max) {
       v = max
     }
-    v = parseFloat(this.toFixed(v))
+    v = precision>0 ?parseFloat(this.toFixed(v)) :parseInt(this.toFixed(v))
     this.setState({
       value: v
     })
@@ -133,7 +133,7 @@ export default class InputNumber extends Component {
   }
 
   render () {
-    const {className, prefixCls, disabled, name,} = this.props
+    const {className, prefixCls, disabled, name,readOnly} = this.props
     const inputNumberClass = classNames({
       [`${prefixCls}`]: true,
     }, className)
@@ -154,6 +154,7 @@ export default class InputNumber extends Component {
           autoComplete="off"
           disabled={disabled}
           name={name}
+          readOnly={readOnly}
           onChange={this.handleChange}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
@@ -171,6 +172,8 @@ InputNumber.defaultProps = {
   prefixCls: 'mi-input-number',
   disabled: false,
   step: 1,
+  readOnly: false,
+  precision: 0,
   onChange: () => {},
 }
 InputNumber.propTypes = {
@@ -183,4 +186,6 @@ InputNumber.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
+  readOnly: PropTypes.bool,
+  precision: PropTypes.number,
 }
