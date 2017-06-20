@@ -74,11 +74,17 @@ export default class CityPicker extends Component {
               city[subKey].map((state,state_index) =>{
                 if (state[codeKey] === selected[2]){
                   indexSelected.push(state_index);
+                }else {
+                  indexSelected.push(0);
                 }
               })
             }
+          }else {
+            indexSelected.push(0);
           }
         })
+      }else {
+        indexSelected.push(0);
       }
     })
     return indexSelected
@@ -149,8 +155,28 @@ export default class CityPicker extends Component {
     });
   }
 
-  handleChange() {
-    if (this.props.onChange) this.props.onChange(this.state.text,this.state.value);
+  handleChange(selected) {
+    const {dataMap,onChange} = this.props;
+    let text = '';
+    let value = '';
+    try {
+      this.state.groups.forEach((group, _i) => {
+        text += `${group['items'][selected[_i]][dataMap.id]} `;
+        value += `${group['items'][selected[_i]][dataMap.code]} `;
+      });
+    } catch (err) {
+      //wait
+      text = this.state.text;
+      value = this.state.value;
+    }
+    this.setState({
+      text,
+      value,
+      selected: selected
+    });
+    if (onChange){
+      onChange(text,value);
+    }
   }
 
   render() {
