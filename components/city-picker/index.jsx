@@ -74,17 +74,11 @@ export default class CityPicker extends Component {
               city[subKey].map((state,state_index) =>{
                 if (state[codeKey] === selected[2]){
                   indexSelected.push(state_index);
-                }else {
-                  indexSelected.push(0);
                 }
               })
             }
-          }else {
-            indexSelected.push(0);
           }
         })
-      }else {
-        indexSelected.push(0);
       }
     })
     return indexSelected
