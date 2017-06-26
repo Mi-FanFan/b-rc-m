@@ -27,3 +27,5 @@ export {default as DatePicker} from './date-picker';
 
 export {default as Modal} from './modal';
 
+
+export {default as Swipe} from './swipe';

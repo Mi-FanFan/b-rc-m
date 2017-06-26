@@ -24,6 +24,7 @@ import InputNumberPage from './pages/inputnumber';
 import PickerPage from './pages/picker';
 import DatePickerPage from './pages/date-picker';
 import ModalPage from './pages/modal';
+import ScrollPage from './pages/scroll';
 
 
 
@@ -52,6 +53,7 @@ ReactDOM.render((
       <Route path="picker" component={PickerPage}/>
       <Route path="date-picker" component={DatePickerPage}/>
       <Route path="modal" component={ModalPage}/>
+      <Route path="scroll" component={ScrollPage}/>
     </Route>
   </Router>
 ), document.getElementById('container'));

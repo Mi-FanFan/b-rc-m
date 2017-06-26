@@ -23,7 +23,8 @@
   "author": "Mi-FanFan",
   "license": "MIT",
   "dependencies": {
-    "classnames": "~2.2.1",
+    "classnames": "^2.2.5",
+    "hammerjs": "^2.0.8",
     "lodash": "^4.17.4",
     "mff-tabs": "^1.2.1",
     "rc-animate": "^2.3.1",
