@@ -1,6 +1,6 @@
 import React from 'react';
 import {WhiteSpace} from 'antd-mobile'
-import {Progress} from 'b-rc-m';
+import {Progress,CircularProgress} from 'b-rc-m';
 import Page from '../../component/page';
 import './progress.less';
 
@@ -23,6 +23,10 @@ export default class extends React.Component {
             </div>
             <div>40%</div>
           </div>
+          <div style={{width:'1.2rem'}}>
+            <CircularProgress percent={60} strokeWidth={10}/>
+          </div>
+
         </div>
       </Page>
     );

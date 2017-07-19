@@ -3,21 +3,19 @@
 
 @circularProgressPrefixClass: mi-circular-progress;
 .@{circularProgressPrefixClass}{
-  &-root{
-    position: relative;
-    display: inline-block;
-
-  }
-  &-wrapper{
-    display: inline-block;
-    transition: transform 20s linear;
-  }
-  &-svg{
-    position: relative;
-  }
+  width: 100%;
   &-path{
+    stroke: @circular-progress;
     stroke-linecap: round;
-    transition: all 1.5s ease-in-out;
+    transition: stroke-dashoffset 0.5s ease 0s;
   }
-
+  &-trail{
+    stroke: #d6d6d6;
+  }
+  &-text {
+    fill: #888888;
+    font-size: 26px;
+    dominant-baseline: central;
+    text-anchor: middle;
+  }
 }

@@ -8,6 +8,7 @@ export {default as Viewer} from './viewer';
 export {default as Swipeable} from './swipeable';
 export {default as Toaster} from './toaster';
 export {default as Progress} from './progress';
+export {default as CircularProgress} from './circular-progress';
 export {default as Loading} from './loading';
 export {default as NavBar} from './nav-bar';
 export {default as Popover} from './popover';

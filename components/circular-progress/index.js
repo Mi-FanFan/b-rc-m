@@ -1,67 +1,123 @@
 /**
- * Created by Freeman on 2017/2/16.
+ * Created by Freeman on 2017/7/19.
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 class CircularProgress extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+
+    this.state = {
+      percent: props.initialAnimation ? 0 : props.percent,
+    };
+  }
+
+  componentDidMount() {
+    const {initialAnimation,percent} = this.props
+    if (initialAnimation) {
+      this.initialTimeout = setTimeout(() => {
+        this.requestAnimationFrame = window.requestAnimationFrame(() => {
+          this.setState({
+            percent: percent,
+          });
+        });
+      }, 0);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      percent: nextProps.percent,
+    });
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.initialTimeout);
+    window.cancelAnimationFrame(this.requestAnimationFrame);
   }
 
   render() {
-    const {
-      style,
-      size,
-      prefixCls,
-      thickness,
-    } = this.props;
+    const {prefixCls,strokeWidth,classForPercentage,percent,textForPercentage} = this.props
+
+    const radius = (50 - strokeWidth / 2);
+    const pathDescription = `
+      M 50,50 m 0,-${radius}
+      a ${radius},${radius} 0 1 1 0,${2 * radius}
+      a ${radius},${radius} 0 1 1 0,-${2 * radius}
+    `;
+
+    const diameter = Math.PI * 2 * radius;
+    const progressStyle = {
+      strokeDasharray: `${diameter}px ${diameter}px`,
+      strokeDashoffset: `${((100 - this.state.percent) / 100 * diameter)}px`,
+    };
+
     return (
-      <div className={`${prefixCls}-root`} style={{...style}}>
-        <div ref="wrapper" className={`${prefixCls}-wrapper`}>
-          <svg
-            viewBox={`0 0 ${size} ${size}`}
-            className={`${prefixCls}-svg`}
-          >
-            <circle
-              ref="path"
-              className={`${prefixCls}-path`}
-              cx={size / 2}
-              cy={size / 2}
-              r={(size - thickness) / 2}
-              fill="none"
-              strokeWidth={thickness}
-              strokeMiterlimit="20"
-            />
-          </svg>
-        </div>
-      </div>
-    )
+      <svg
+        className={`${prefixCls} ${classForPercentage ? classForPercentage(percent) : ''}`}
+        viewBox="0 0 100 100"
+      >
+        <path
+          className={`${prefixCls}-trail`}
+          d={pathDescription}
+          strokeWidth={strokeWidth}
+          fillOpacity={0}
+        />
+
+        <path
+          className={`${prefixCls}-path`}
+          d={pathDescription}
+          strokeWidth={strokeWidth}
+          fillOpacity={0}
+          style={progressStyle}
+        />
+
+        <text
+          className={`${prefixCls}-text`}
+          x={50}
+          y={50}
+        >
+          {textForPercentage(percent)}
+        </text>
+      </svg>
+    );
   }
 }
 CircularProgress.propTypes = {
   prefixCls: PropTypes.string,
   /**
-   * The value of progress
-   */
-  percent: PropTypes.number,
+   * Percentage to display.
+   * */
+  percent: PropTypes.number.isRequired,
   /**
-   * The diameter of the progress in pixels.
-   */
-  size: PropTypes.number,
+   * Width of circular line
+   * */
+  strokeWidth: PropTypes.number,
   /**
-   * Override the inline-styles of the root element.
-   */
-  style: PropTypes.object,
+   * Toggle whether to animate progress starting from 0% on initial mount.
+   *
+   * */
+  initialAnimation: PropTypes.bool,
   /**
-   * Stroke width in pixels.
-   */
-  thickness: PropTypes.number,
+   * Function which can set an additional class to apply to top-level element,
+   * which can be used for coloring/styling percent ranges differently.
+   *
+   * e.g. (pct) => pct < 100 ? 'incomplete' : 'complete'
+   * */
+  classForPercentage: PropTypes.func,
+  /**
+   * Function which sets text formatting given a percentage.
+   *
+   * e.g. (pct) => `${pct}%`
+   * */
+  textForPercentage: PropTypes.func,
 }
 
 CircularProgress.defaultProps = {
   prefixCls: 'mi-circular-progress',
-  size: 40,
-  thickness: 3.5,
+  strokeWidth: 8,
+  textForPercentage: (percent) => `${percent}`,
+  initialAnimation: true,
 }
 
 export default CircularProgress
