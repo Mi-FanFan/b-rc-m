@@ -1,0 +1,16 @@
+@import "../../style/themes/default";
+
+@pickerPrefixCls: mi-popup;
+
+.@{pickerPrefixCls} {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  transform: translate(0, 100%);
+  backface-visibility: hidden;
+  z-index: @popupZIndex;
+  width: 100%;
+  background-color: @fill-base;
+  //slide up animation
+  transition: transform .3s;
+}

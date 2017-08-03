@@ -12,6 +12,7 @@ export {default as CircularProgress} from './circular-progress';
 export {default as Loading} from './loading';
 export {default as NavBar} from './nav-bar';
 export {default as Popover} from './popover';
+export {default as Popup} from './popup';
 export {default as Tabs} from './tabs';
 //layout
 export {default as Flex} from './flex';

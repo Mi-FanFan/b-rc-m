@@ -98,6 +98,10 @@ export const menus = [
         label: 'Modal',
         to: '/modal'
       },
+      {
+        label: 'Popup',
+        to: '/popup'
+      },
     ]
   },
 ]
