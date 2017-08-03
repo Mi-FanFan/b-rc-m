@@ -1786,7 +1786,7 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
 
-css-animation@1.x, css-animation@^1.3.0:
+css-animation@1.x, css-animation@^1.3.0, css-animation@^1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/css-animation/-/css-animation-1.3.2.tgz#df515820ef5903733ad2db0999403b3037b8b880"
   dependencies:
@@ -5802,12 +5802,20 @@ rc-align@2.x:
     prop-types "^15.5.8"
     rc-util "4.x"
 
-rc-animate@2.x, rc-animate@^2.3.1:
+rc-animate@2.x:
   version "2.3.6"
   resolved "https://registry.yarnpkg.com/rc-animate/-/rc-animate-2.3.6.tgz#4177a2822c67adf4fd5b908ceba7cee8d13c1fac"
   dependencies:
     css-animation "^1.3.0"
     prop-types "^15.5.6"
+
+rc-animate@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/rc-animate/-/rc-animate-2.4.1.tgz#df3e0f56fe106afe4bf52ff408ced241c5178919"
+  dependencies:
+    babel-runtime "6.x"
+    css-animation "^1.3.2"
+    prop-types "15.x"
 
 rc-checkbox@~2.0.0:
   version "2.0.2"
@@ -5931,12 +5939,18 @@ rc-tooltip@^3.4.2, rc-tooltip@~3.4.3:
     prop-types "^15.5.8"
     rc-trigger "1.x"
 
-rc-touchable@*, rc-touchable@^1.0.0, rc-touchable@^1.0.2:
+rc-touchable@^1.0.0, rc-touchable@^1.0.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/rc-touchable/-/rc-touchable-1.2.2.tgz#e0936ca0069b455cba728e54d4c10c0fa13558fe"
   dependencies:
     babel-runtime "6.x"
     object-assign "^4.1.0"
+
+rc-touchable@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/rc-touchable/-/rc-touchable-1.2.3.tgz#5f498324e3d0b9ba601a9c4834958eaa2c713618"
+  dependencies:
+    babel-runtime "6.x"
 
 rc-touchable@~1.1.0:
   version "1.1.4"

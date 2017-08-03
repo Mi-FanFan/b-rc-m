@@ -1,1 +1,4 @@
-lib/**/demo/*.*
+node_modules
+.idea
+example
+dist

@@ -1,6 +1,6 @@
 {
   "name": "b-rc-m",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "react components for budee front-end mobile project",
   "main": "./lib",
   "scripts": {
@@ -26,8 +26,8 @@
     "classnames": "~2.2.1",
     "lodash": "^4.17.4",
     "mff-tabs": "^1.2.1",
-    "rc-animate": "^2.3.1",
-    "rc-touchable": "*",
+    "rc-animate": "^2.4.1",
+    "rc-touchable": "^1.2.3",
     "rmc-list-view": "^0.7.6"
   },
   "devDependencies": {
