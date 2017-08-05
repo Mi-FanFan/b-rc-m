@@ -25,7 +25,7 @@ import PickerPage from './pages/picker';
 import DatePickerPage from './pages/date-picker';
 import ModalPage from './pages/modal';
 import PopupPage from './pages/popup';
-
+import Refresh from './pages/refresh'
 
 
 window.addEventListener('load', () => {
@@ -54,6 +54,7 @@ ReactDOM.render((
       <Route path="date-picker" component={DatePickerPage}/>
       <Route path="modal" component={ModalPage}/>
       <Route path="popup" component={PopupPage}/>
+      <Route path="refresh" component={Refresh} />
     </Route>
   </Router>
 ), document.getElementById('container'));
