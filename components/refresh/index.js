@@ -22,10 +22,6 @@ export default class Refresh extends Component {
     this.handleTouchMove = this.handleTouchMove.bind(this)
     this.loading = this.loading.bind(this)
   }
-  componentDidMount() {
-    console.log('tp',this.body.clientTop)
-    this.height = document.body.clientHeight - this.body.offsetTop
-  }
   handleTouchStart(event) {
     this.startY = event.touches[0].clientY
   }
@@ -68,7 +64,7 @@ export default class Refresh extends Component {
     return (
       <div
         ref={(body) => {this.body = body}} {...rest}
-        className="">
+        className={this.state.isLoading && 'refresh-loading'}>
         <div ref="ptr" className="ptr-element">
           {icon || <span className="genericon genericon-next"/>}
           {loading ||
