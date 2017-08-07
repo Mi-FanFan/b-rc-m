@@ -27,7 +27,6 @@ export default class RefreshExam extends Component{
           style={{
             textAlign: 'center'
           }}
-          loading={<div className="loading">loading</div>}
         >
           <h3>Pull down to refresh</h3>
           <div>adfasdfsdfds</div>
