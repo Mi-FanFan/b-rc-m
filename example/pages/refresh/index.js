@@ -1,9 +1,8 @@
 /**
  * Created by strong on 2017/8/5.
  */
-import './index.less'
 import React,{Component} from 'react'
-import Refresh from '../../../components/refresh'
+import {Refresh} from 'b-rc-m'
 
 export default class RefreshExam extends Component{
   constructor(props) {

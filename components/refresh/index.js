@@ -14,7 +14,6 @@ export default class Refresh extends Component {
       bodyHeight: 0
     }
     this.body = null
-    this.refresh = null
     this.startY = 0
     this.moveY = 0
     this.distance = 0
@@ -34,7 +33,7 @@ export default class Refresh extends Component {
     this.startScrollTop = this.body.scrollTop
   }
   handleTouchMove(event) {
-    const resistance = this.props.resistance || 2.5
+    const resistance = this.props.resistance
     this.distance = (event.touches[0].clientY - this.startY) / resistance
     if (this.distance < 0 || this.state.loading || this.body.scrollTop) {
       return
@@ -64,25 +63,27 @@ export default class Refresh extends Component {
     })
   }
   render() {
-    const {children, icon, loading, ...rest} = this.props
+    const {children, loading, prefixCls} = this.props,
+      bodyStyle = {height: `${this.state.bodyHeight}px`, overflow: 'scroll'},
+      moveStyle = {transform: `translate3d(0,${this.state.moveDistance}px,0)`}
     return (
       <div
-        ref={(body) => {this.body = body}} {...rest}
-        className={classNames({'refresh-loading': this.state.isLoading})}
-      style={{height: `${this.state.bodyHeight}px`, overflow: 'scroll'}}>
-        <div ref="ptr" className="ptr-element" style={{transform: `translate3d(0,${this.state.moveDistance}px,0)`}}>
-          {icon || <span className="genericon genericon-next"/>}
+        ref={(body) => {this.body = body}}
+        className={classNames({[`${prefixCls}-refresh-loading`]: this.state.isLoading})}
+        style={bodyStyle}
+      >
+        <div className={`${prefixCls}-ptr-element`} style={moveStyle}>
+          <span className={`${prefixCls}-genericon ${prefixCls}-genericon-next`}/>
           {loading ||
-          <div className="loading">
-            <span className="loading-ptr-1" />
-            <span className="loading-ptr-2" />
-            <span className="loading-ptr-3" />
+          <div className={`${prefixCls}-loading`}>
+            <span className={`${prefixCls}-loading-ptr-1`} />
+            <span className={`${prefixCls}-loading-ptr-2`} />
+            <span className={`${prefixCls}-loading-ptr-3`} />
           </div>}
         </div>
         <div
-          style={{transform: `translate3d(0,${this.state.moveDistance}px,0)`}}
-          ref={(refresh) => {this.refresh = refresh}}
-          className="refresh-view"
+          style={moveStyle}
+          className={`${prefixCls}-refresh-view`}
           onTouchStart={this.handleTouchStart}
           onTouchMove={this.handleTouchMove}
           onTouchEnd={this.handleTouchEnd}
@@ -93,3 +94,15 @@ export default class Refresh extends Component {
     )
   }
 }
+
+Refresh.propTypes = {
+  resistance: PropTypes.number,
+  loading: PropTypes.object,
+  prefixCls: PropTypes.string,
+}
+
+Refresh.defaultProps = {
+  resistance: 2.5,
+  prefixCls: 'mi-refresh'
+}
+
