@@ -15,8 +15,9 @@ export default class Refresh extends Component {
     }
     this.body = null
     this.startY = 0
-    this.moveY = 0
     this.distance = 0
+    this.isLoading = false
+    this.animation = null
     this.startScrollTop = 0
     this.handleTouchEnd = this.handleTouchEnd.bind(this)
     this.handleTouchStart = this.handleTouchStart.bind(this)
@@ -35,20 +36,26 @@ export default class Refresh extends Component {
   handleTouchMove(event) {
     const resistance = this.props.resistance
     this.distance = (event.touches[0].clientY - this.startY) / resistance
-    if (this.distance < 0 || this.state.loading || this.body.scrollTop) {
+    if (this.isLoading || this.distance < 0  || this.body.scrollTop) {
       return
     }
-    this.moveY = event.touches[0].clientY
     this.setState({
-      moveDistance: this.distance < 0 ? 0 : this.distance
+        moveDistance: this.distance
     })
+
   }
   handleTouchEnd(event) {
-    if (this.distance > 70 && !this.body.scrollTop && !this.startScrollTop) {
+    if (this.distance > 70 && !this.body.scrollTop && !this.startScrollTop && !this.isLoading) {
       this.setState({
         isLoading: true,
+        moveDistance: 0,
       })
+      this.isLoading = true
       this.loading()
+    }else {
+      this.setState({
+        moveDistance: 0,
+      })
     }
   }
   loading() {
@@ -56,23 +63,24 @@ export default class Refresh extends Component {
     new Promise((resolve, reject) => {
       onRefresh(resolve, reject)
     }).then(()=>{
+      this.isLoading = false
       this.setState({
+        isLoading: false,
         moveDistance: 0,
-        isLoading: false
       })
     })
   }
   render() {
     const {children, loading, prefixCls} = this.props,
-      bodyStyle = {height: `${this.state.bodyHeight}px`, overflow: 'scroll'},
+      bodyStyle = {height: `${this.state.bodyHeight}px`, overflow: 'scroll', position: 'relative'},
       moveStyle = {transform: `translate3d(0,${this.state.moveDistance}px,0)`}
     return (
       <div
-        ref={(body) => {this.body = body}}
+        ref={body => this.body = body}
         className={classNames({[`${prefixCls}-refresh-loading`]: this.state.isLoading})}
         style={bodyStyle}
       >
-        <div className={`${prefixCls}-ptr-element`} style={moveStyle}>
+        <div ref={animation => this.animation = animation} className={`${prefixCls}-ptr-element`} style={moveStyle}>
           <span className={`${prefixCls}-genericon ${prefixCls}-genericon-next`}/>
           {loading ||
           <div className={`${prefixCls}-loading`}>

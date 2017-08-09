@@ -15,7 +15,6 @@ export default class RefreshExam extends Component{
   handleRefresh(resolve, reject) {
     setTimeout(()=>{
       resolve()
-      console.log('loading 结束')
     },1000)
   }
   render() {
@@ -27,7 +26,6 @@ export default class RefreshExam extends Component{
             textAlign: 'center'
           }}
         >
-          <h3>Pull down to refresh</h3>
           <div>adfasdfsdfds</div>
           <div>adfasdfsdfds</div>
           <div>adfasdfsdfds</div>
