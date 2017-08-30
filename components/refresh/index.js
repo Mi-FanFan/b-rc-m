@@ -19,23 +19,26 @@ export default class Refresh extends Component {
     this.isLoading = false
     this.animation = null
     this.startScrollTop = 0
-    this.handleTouchEnd = this.handleTouchEnd.bind(this)
-    this.handleTouchStart = this.handleTouchStart.bind(this)
-    this.handleTouchMove = this.handleTouchMove.bind(this)
     this.loading = this.loading.bind(this)
+    this.handleTouchEnd = this.handleTouchEnd.bind(this)
+    this.handleTouchMove = this.handleTouchMove.bind(this)
+    this.handleTouchStart = this.handleTouchStart.bind(this)
   }
   componentDidMount() {
     this.setState({
       bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
     })
+    this.body.addEventListener('touchmove', this.handleCancelMove, false)
   }
-  handleTouchStart(event) {
-    this.startY = event.touches[0].clientY
+  handleTouchStart(e) {
+    e.nativeEvent.stopPropagation()
+    this.startY = e.touches[0].clientY
     this.startScrollTop = this.body.scrollTop
   }
-  handleTouchMove(event) {
+  handleTouchMove(e) {
     const resistance = this.props.resistance
-    this.distance = (event.touches[0].clientY - this.startY) / resistance
+    e.nativeEvent.stopPropagation()
+    this.distance = (e.touches[0].clientY - this.startY) / resistance
     if (this.isLoading || this.distance < 0  || this.body.scrollTop) {
       return
     }
@@ -58,6 +61,9 @@ export default class Refresh extends Component {
       })
     }
   }
+  handleCancelMove(e) {
+    e.preventDefault()
+  }
   loading() {
     const {onRefresh} = this.props
     new Promise((resolve, reject) => {
@@ -79,6 +85,8 @@ export default class Refresh extends Component {
         ref={body => this.body = body}
         className={classNames({[`${prefixCls}-refresh-loading`]: this.state.isLoading})}
         style={bodyStyle}
+        onTouchStart={this.handleCancelStart}
+        onTouchMove={this.handleCancelMove}
       >
         <div ref={animation => this.animation = animation} className={`${prefixCls}-ptr-element`} style={moveStyle}>
           <span className={`${prefixCls}-genericon ${prefixCls}-genericon-next`}/>
