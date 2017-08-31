@@ -13,9 +13,10 @@ export default class Refresh extends Component {
       isLoading: false,
       bodyHeight: 0
     }
-    this.body = null
     this.startY = 0
+    this.body = null
     this.distance = 0
+    this.items = null
     this.isLoading = false
     this.animation = null
     this.startScrollTop = 0
@@ -28,18 +29,25 @@ export default class Refresh extends Component {
     this.setState({
       bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
     })
-    this.body.addEventListener('touchmove', this.handleCancelMove, false)
+    this.items.addEventListener('touchmove', this.handleTouchMove, false)
+    this.items.addEventListener('touchstart', this.handleTouchStart, false)
+    this.items.addEventListener('touchend', this.handleTouchEnd, false)
+
+    document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
+  }
+  componentWillUnmount() {
+    document.removeEventListener('touchmove', this.handleCancelMove)
   }
   handleTouchStart(e) {
-    e.nativeEvent.stopPropagation()
+    e.stopPropagation()
     this.startY = e.touches[0].clientY
     this.startScrollTop = this.body.scrollTop
   }
   handleTouchMove(e) {
     const resistance = this.props.resistance
-    e.nativeEvent.stopPropagation()
     this.distance = (e.touches[0].clientY - this.startY) / resistance
     if (this.isLoading || this.distance < 0  || this.body.scrollTop) {
+      e.stopPropagation() //在正常上划浏览数据时，不会禁止document的touchmove事件。
       return
     }
     this.setState({
@@ -85,8 +93,6 @@ export default class Refresh extends Component {
         ref={body => this.body = body}
         className={classNames({[`${prefixCls}-refresh-loading`]: this.state.isLoading})}
         style={bodyStyle}
-        onTouchStart={this.handleCancelStart}
-        onTouchMove={this.handleCancelMove}
       >
         <div ref={animation => this.animation = animation} className={`${prefixCls}-ptr-element`} style={moveStyle}>
           <span className={`${prefixCls}-genericon ${prefixCls}-genericon-next`}/>
@@ -100,9 +106,7 @@ export default class Refresh extends Component {
         <div
           style={moveStyle}
           className={`${prefixCls}-refresh-view`}
-          onTouchStart={this.handleTouchStart}
-          onTouchMove={this.handleTouchMove}
-          onTouchEnd={this.handleTouchEnd}
+          ref={items => this.items = items}
         >
           {children}
         </div>
