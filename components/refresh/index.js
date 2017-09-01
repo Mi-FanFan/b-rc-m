@@ -51,12 +51,11 @@ export default class Refresh extends Component {
       return
     }
     this.setState({
-        moveDistance: this.distance
+      moveDistance: this.distance
     })
-
   }
   handleTouchEnd(event) {
-    if (this.distance > 70 && !this.body.scrollTop && !this.startScrollTop && !this.isLoading) {
+    if ((this.distance > document.documentElement.clientHeight / 10) && !this.body.scrollTop && !this.startScrollTop && !this.isLoading) {
       this.setState({
         isLoading: true,
         moveDistance: 0,
