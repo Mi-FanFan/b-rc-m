@@ -32,8 +32,6 @@ export default class Refresh extends Component {
     this.items.addEventListener('touchmove', this.handleTouchMove, false)
     this.items.addEventListener('touchstart', this.handleTouchStart, false)
     this.items.addEventListener('touchend', this.handleTouchEnd, false)
-
-    document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
   }
   componentWillUnmount() {
     document.removeEventListener('touchmove', this.handleCancelMove)
@@ -44,6 +42,7 @@ export default class Refresh extends Component {
     this.startScrollTop = this.body.scrollTop
   }
   handleTouchMove(e) {
+    document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
     if (this.isLoading || this.distance < 0  || this.body.scrollTop) {
@@ -51,11 +50,12 @@ export default class Refresh extends Component {
       return
     }
     this.setState({
-      moveDistance: this.distance
+        moveDistance: this.distance
     })
+
   }
   handleTouchEnd(event) {
-    if ((this.distance > document.documentElement.clientHeight / 10) && !this.body.scrollTop && !this.startScrollTop && !this.isLoading) {
+    if (this.distance > (document.documentElement.clientHeight / 10) && !this.body.scrollTop && !this.startScrollTop && !this.isLoading) {
       this.setState({
         isLoading: true,
         moveDistance: 0,
@@ -67,6 +67,7 @@ export default class Refresh extends Component {
         moveDistance: 0,
       })
     }
+    document.removeEventListener('touchmove', this.handleCancelMove)
   }
   handleCancelMove(e) {
     e.preventDefault()
