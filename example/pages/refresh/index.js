@@ -22,6 +22,7 @@ export default class RefreshExam extends Component{
       <div>
         <Refresh
           onRefresh={this.handleRefresh}
+          distanceToRefresh={document.documentElement.clientHeight / 10}
           style={{
             textAlign: 'center'
           }}

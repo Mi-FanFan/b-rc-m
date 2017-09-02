@@ -42,7 +42,6 @@ export default class Refresh extends Component {
     this.startScrollTop = this.body.scrollTop
   }
   handleTouchMove(e) {
-    document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
     document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
@@ -53,10 +52,10 @@ export default class Refresh extends Component {
     this.setState({
         moveDistance: this.distance
     })
-
   }
   handleTouchEnd(event) {
-    if (this.distance > (document.documentElement.clientHeight / 10) && !this.body.scrollTop && !this.startScrollTop && !this.isLoading) {
+    const {distanceToRefresh} = this.props
+    if (this.distance > distanceToRefresh && !this.body.scrollTop && !this.startScrollTop && !this.isLoading) {
       this.setState({
         isLoading: true,
         moveDistance: 0,
@@ -117,13 +116,15 @@ export default class Refresh extends Component {
 }
 
 Refresh.propTypes = {
-  resistance: PropTypes.number,
   loading: PropTypes.object,
   prefixCls: PropTypes.string,
+  resistance: PropTypes.number,
+  distanceToRefresh: PropTypes.number,
 }
 
 Refresh.defaultProps = {
   resistance: 2.5,
-  prefixCls: 'mi-refresh'
+  prefixCls: 'mi-refresh',
+  distanceToRefresh: 100,
 }
 
