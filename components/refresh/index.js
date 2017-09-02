@@ -42,9 +42,9 @@ export default class Refresh extends Component {
     this.startScrollTop = this.body.scrollTop
   }
   handleTouchMove(e) {
-    document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
+    document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
     if (this.isLoading || this.distance < 0  || this.body.scrollTop) {
       e.stopPropagation() //在正常上划浏览数据时，不会禁止document的touchmove事件。
       return
