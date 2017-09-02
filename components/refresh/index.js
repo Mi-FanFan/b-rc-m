@@ -9,9 +9,10 @@ export default class Refresh extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      bodyHeight: 0,
+      showTop: false,
       moveDistance: 0,
       isLoading: false,
-      bodyHeight: 0
     }
     this.startY = 0
     this.body = null
@@ -20,7 +21,9 @@ export default class Refresh extends Component {
     this.isLoading = false
     this.animation = null
     this.startScrollTop = 0
+    this.goToTop = this.goToTop.bind(this)
     this.loading = this.loading.bind(this)
+    this.handleScroll = this.handleScroll.bind(this)
     this.handleTouchEnd = this.handleTouchEnd.bind(this)
     this.handleTouchMove = this.handleTouchMove.bind(this)
     this.handleTouchStart = this.handleTouchStart.bind(this)
@@ -29,12 +32,16 @@ export default class Refresh extends Component {
     this.setState({
       bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
     })
+    const body = document.getElementsByTagName('body')[0]
+    body.style.height = '100%'
+    body.style.overflow = 'hidden'
     this.items.addEventListener('touchmove', this.handleTouchMove, false)
     this.items.addEventListener('touchstart', this.handleTouchStart, false)
     this.items.addEventListener('touchend', this.handleTouchEnd, false)
+    this.body.addEventListener('scroll', this.handleScroll)
   }
   componentWillUnmount() {
-    document.removeEventListener('touchmove', this.handleCancelMove)
+    this.body.removeEventListener('scroll', this.handleScroll)
   }
   handleTouchStart(e) {
     e.stopPropagation()
@@ -44,13 +51,12 @@ export default class Refresh extends Component {
   handleTouchMove(e) {
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
-    document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
     if (this.isLoading || this.distance < 0  || this.body.scrollTop) {
       e.stopPropagation() //在正常上划浏览数据时，不会禁止document的touchmove事件。
       return
     }
     this.setState({
-        moveDistance: this.distance
+      moveDistance: this.distance
     })
   }
   handleTouchEnd(event) {
@@ -67,7 +73,6 @@ export default class Refresh extends Component {
         moveDistance: 0,
       })
     }
-    document.removeEventListener('touchmove', this.handleCancelMove)
   }
   handleCancelMove(e) {
     e.preventDefault()
@@ -77,12 +82,23 @@ export default class Refresh extends Component {
     new Promise((resolve, reject) => {
       onRefresh(resolve, reject)
     }).then(()=>{
+      this.distance = 0
       this.isLoading = false
       this.setState({
-        isLoading: false,
         moveDistance: 0,
+        isLoading: false,
       })
     })
+  }
+  goToTop() {
+    this.body.scrollTop = 0
+  }
+  handleScroll() {
+    if(this.body.scrollTop > 100) {
+      this.setState({showTop: true})
+    }else {
+      this.setState({showTop: false})
+    }
   }
   render() {
     const {children, loading, prefixCls} = this.props,
@@ -109,6 +125,11 @@ export default class Refresh extends Component {
           ref={items => this.items = items}
         >
           {children}
+        </div>
+        <div>
+          {
+            this.state.showTop && <div className={`${prefixCls}-goto_top`} onClick={this.goToTop} />
+          }
         </div>
       </div>
     )
