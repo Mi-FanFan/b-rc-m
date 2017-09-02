@@ -42,7 +42,6 @@ export default class Refresh extends Component {
     this.startScrollTop = this.body.scrollTop
   }
   handleTouchMove(e) {
-    document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
     document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
