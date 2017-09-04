@@ -1,16 +1,15 @@
 /**
  * Created by strong on 2017/8/5.
  */
-import React,{Component} from 'react'
+import 'babel-polyfill'
 import {Refresh} from 'b-rc-m'
+import React,{Component} from 'react'
 
 export default class RefreshExam extends Component{
   constructor(props) {
     super(props)
     this.handleRefresh = this.handleRefresh.bind(this)
-  }
-  getDefaultProps() {
-
+    this.array = new Array(50).fill(1)
   }
   handleRefresh(resolve, reject) {
     setTimeout(()=>{
@@ -23,78 +22,17 @@ export default class RefreshExam extends Component{
         <Refresh
           onRefresh={this.handleRefresh}
           distanceToRefresh={document.documentElement.clientHeight / 10}
+          isShowGotoTop={true}
+          scrollTargetSelector=".am-drawer-content"
           style={{
             textAlign: 'center'
           }}
         >
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
-          <div>adfasdfsdfds</div>
+          {
+            this.array.map((value, index) => (
+              <div key={index}>第{index}元素</div>
+            ))
+          }
         </Refresh>
       </div>
     )

@@ -85,6 +85,10 @@ export const menus = [
         label: 'Loading',
         to: '/loading'
       },
+      {
+        label: 'Refresh',
+        to: '/refresh'
+      }
     ]
   },{
     name: 'Feedbacks',

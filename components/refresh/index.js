@@ -15,9 +15,10 @@ export default class Refresh extends Component {
       isLoading: false,
     }
     this.startY = 0
-    this.body = null
+    this.body = null //组建内部的body
     this.distance = 0
     this.items = null
+    this.realBody = null //经过处理后的body
     this.isLoading = false
     this.animation = null
     this.startScrollTop = 0
@@ -29,19 +30,20 @@ export default class Refresh extends Component {
     this.handleTouchStart = this.handleTouchStart.bind(this)
   }
   componentDidMount() {
+    const {scrollTargetSelector} = this.props
     this.setState({
       bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
     })
+    //处理浏览器下滑刷新。
     const body = document.getElementsByTagName('body')[0]
     body.style.height = '100%'
     body.style.overflow = 'hidden'
-    this.items.addEventListener('touchmove', this.handleTouchMove, false)
-    this.items.addEventListener('touchstart', this.handleTouchStart, false)
-    this.items.addEventListener('touchend', this.handleTouchEnd, false)
-    this.body.addEventListener('scroll', this.handleScroll)
+    //处理body元素，并且绑定滚动事件
+    this.realBody = scrollTargetSelector ? document.querySelector(scrollTargetSelector) : this.body
+    this.realBody.addEventListener('scroll', this.handleScroll)
   }
   componentWillUnmount() {
-    this.body.removeEventListener('scroll', this.handleScroll)
+    this.realBody.removeEventListener('scroll', this.handleScroll)
   }
   handleTouchStart(e) {
     e.stopPropagation()
@@ -51,7 +53,7 @@ export default class Refresh extends Component {
   handleTouchMove(e) {
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
-    if (this.isLoading || this.distance < 0  || this.body.scrollTop) {
+    if (this.isLoading || this.distance < 0  || this.realBody.scrollTop) {
       e.stopPropagation() //在正常上划浏览数据时，不会禁止document的touchmove事件。
       return
     }
@@ -61,7 +63,7 @@ export default class Refresh extends Component {
   }
   handleTouchEnd(event) {
     const {distanceToRefresh} = this.props
-    if (this.distance > distanceToRefresh && !this.body.scrollTop && !this.startScrollTop && !this.isLoading) {
+    if (this.distance > distanceToRefresh && !this.realBody.scrollTop && !this.startScrollTop && !this.isLoading) {
       this.setState({
         isLoading: true,
         moveDistance: 0,
@@ -91,24 +93,24 @@ export default class Refresh extends Component {
     })
   }
   goToTop() {
-    this.body.scrollTop = 0
+    this.realBody.scrollTop = 0
   }
   handleScroll() {
-    if(this.body.scrollTop > 100) {
+    if(this.realBody.scrollTop > 100) {
       this.setState({showTop: true})
     }else {
       this.setState({showTop: false})
     }
   }
   render() {
-    const {children, loading, prefixCls} = this.props,
+    const {children, loading, prefixCls, isShowGotoTop, scrollTargetSelector} = this.props,
       bodyStyle = {height: `${this.state.bodyHeight}px`, overflow: 'scroll', position: 'relative'},
       moveStyle = {transform: `translate3d(0,${this.state.moveDistance}px,0)`}
     return (
       <div
         ref={body => this.body = body}
         className={classNames({[`${prefixCls}-refresh-loading`]: this.state.isLoading})}
-        style={bodyStyle}
+        style={scrollTargetSelector ? {} : bodyStyle}
       >
         <div ref={animation => this.animation = animation} className={`${prefixCls}-ptr-element`} style={moveStyle}>
           <span className={`${prefixCls}-genericon ${prefixCls}-genericon-next`}/>
@@ -123,12 +125,15 @@ export default class Refresh extends Component {
           style={moveStyle}
           className={`${prefixCls}-refresh-view`}
           ref={items => this.items = items}
+          onTouchStart={this.handleTouchStart}
+          onTouchMove={this.handleTouchMove}
+          onTouchEnd={this.handleTouchEnd}
         >
           {children}
         </div>
         <div>
           {
-            this.state.showTop && <div className={`${prefixCls}-goto_top`} onClick={this.goToTop} />
+            isShowGotoTop && this.state.showTop && <div className={`${prefixCls}-goto_top`} onClick={this.goToTop} />
           }
         </div>
       </div>
@@ -140,12 +145,16 @@ Refresh.propTypes = {
   loading: PropTypes.object,
   prefixCls: PropTypes.string,
   resistance: PropTypes.number,
+  isShowGotoTop: PropTypes.bool,
   distanceToRefresh: PropTypes.number,
+  scrollTargetSelector: PropTypes.string,
 }
 
 Refresh.defaultProps = {
   resistance: 2.5,
-  prefixCls: 'mi-refresh',
+  isShowGotoTop: true,
   distanceToRefresh: 100,
+  prefixCls: 'mi-refresh',
+  scrollTargetSelector: '',
 }
 
