@@ -62,7 +62,6 @@ export default class Refresh extends Component {
   handleTouchMove(e) {
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
-    !this.browserIsUc && document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
     if (this.isLoading || this.distance < 0  || this.realBody.scrollTop) {
       e.stopPropagation() //在正常上划浏览数据时，不会禁止document的touchmove事件。
       return
@@ -70,6 +69,7 @@ export default class Refresh extends Component {
     this.setState({
       moveDistance: this.distance
     })
+    !this.browserIsUc && document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
   }
   handleTouchEnd(event) {
     const {distanceToRefresh} = this.props
