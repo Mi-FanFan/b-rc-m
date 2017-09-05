@@ -9,7 +9,7 @@ export default class RefreshExam extends Component{
   constructor(props) {
     super(props)
     this.handleRefresh = this.handleRefresh.bind(this)
-    this.array = new Array(50).fill(1)
+    this.array = new Array(200).fill(1)
   }
   handleRefresh(resolve, reject) {
     setTimeout(()=>{
@@ -22,7 +22,7 @@ export default class RefreshExam extends Component{
         <Refresh
           onRefresh={this.handleRefresh}
           distanceToRefresh={document.documentElement.clientHeight / 10}
-          isShowGotoTop={true}
+          isShowGotoTop={false}
           scrollTargetSelector=".am-drawer-content"
           style={{
             textAlign: 'center'

@@ -22,6 +22,7 @@ export default class Refresh extends Component {
     this.isLoading = false
     this.animation = null
     this.startScrollTop = 0
+    this.browserIsUc = false
     this.goToTop = this.goToTop.bind(this)
     this.loading = this.loading.bind(this)
     this.handleScroll = this.handleScroll.bind(this)
@@ -30,20 +31,28 @@ export default class Refresh extends Component {
     this.handleTouchStart = this.handleTouchStart.bind(this)
   }
   componentDidMount() {
+    this.browserIsUc = navigator.userAgent.indexOf('UCBrowser') !== -1
     const {scrollTargetSelector} = this.props
     this.setState({
       bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
     })
-    //处理浏览器下滑刷新。
-    const body = document.getElementsByTagName('body')[0]
-    body.style.height = '100%'
-    body.style.overflow = 'hidden'
+    //兼容uc浏览器下滑刷新。
+    if(this.browserIsUc) {
+      const body = document.getElementsByTagName('body')[0]
+      body.style.height = '100%'
+      body.style.overflow = 'hidden'
+    }
     //处理body元素，并且绑定滚动事件
     this.realBody = scrollTargetSelector ? document.querySelector(scrollTargetSelector) : this.body
     this.realBody.addEventListener('scroll', this.handleScroll)
+
+    this.items.addEventListener('touchmove', this.handleTouchMove, false)
+    this.items.addEventListener('touchstart', this.handleTouchStart, false)
+    this.items.addEventListener('touchend', this.handleTouchEnd, false)
   }
   componentWillUnmount() {
     this.realBody.removeEventListener('scroll', this.handleScroll)
+    !this.browserIsUc && document.removeEventListener('touchmove', this.handleCancelMove)
   }
   handleTouchStart(e) {
     e.stopPropagation()
@@ -53,6 +62,7 @@ export default class Refresh extends Component {
   handleTouchMove(e) {
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
+    !this.browserIsUc && document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
     if (this.isLoading || this.distance < 0  || this.realBody.scrollTop) {
       e.stopPropagation() //在正常上划浏览数据时，不会禁止document的touchmove事件。
       return
@@ -90,6 +100,7 @@ export default class Refresh extends Component {
         moveDistance: 0,
         isLoading: false,
       })
+      !this.browserIsUc && document.removeEventListener('touchmove', this.handleCancelMove, {passive: false})
     })
   }
   goToTop() {
@@ -125,9 +136,6 @@ export default class Refresh extends Component {
           style={moveStyle}
           className={`${prefixCls}-refresh-view`}
           ref={items => this.items = items}
-          onTouchStart={this.handleTouchStart}
-          onTouchMove={this.handleTouchMove}
-          onTouchEnd={this.handleTouchEnd}
         >
           {children}
         </div>
