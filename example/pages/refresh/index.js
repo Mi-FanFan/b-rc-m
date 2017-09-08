@@ -3,6 +3,7 @@
  */
 import 'babel-polyfill'
 import {Refresh} from 'b-rc-m'
+// import GotoTop from './GotoTop'
 import React,{Component} from 'react'
 
 export default class RefreshExam extends Component{
@@ -16,14 +17,18 @@ export default class RefreshExam extends Component{
       resolve()
     },1000)
   }
+  handleOperation() {
+    console.log('operation')
+  }
   render() {
     return (
       <div>
         <Refresh
           onRefresh={this.handleRefresh}
           distanceToRefresh={document.documentElement.clientHeight / 10}
-          isShowGotoTop={false}
+          isShowGotoTop={true}
           scrollTargetSelector=".am-drawer-content"
+          operationCallback={this.handleOperation}
           style={{
             textAlign: 'center'
           }}

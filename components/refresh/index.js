@@ -55,9 +55,11 @@ export default class Refresh extends Component {
     !this.browserIsUc && document.removeEventListener('touchmove', this.handleCancelMove)
   }
   handleTouchStart(e) {
+    const {operationCallback} = this.props
     e.stopPropagation()
     this.startY = e.touches[0].clientY
     this.startScrollTop = this.body.scrollTop
+    operationCallback&&operationCallback()
   }
   handleTouchMove(e) {
     const resistance = this.props.resistance
@@ -114,9 +116,10 @@ export default class Refresh extends Component {
     }
   }
   render() {
-    const {children, loading, prefixCls, isShowGotoTop, scrollTargetSelector} = this.props,
+    const {children, loading, prefixCls, isShowGotoTop, scrollTargetSelector, GotoTop} = this.props,
       bodyStyle = {height: `${this.state.bodyHeight}px`, overflow: 'scroll', position: 'relative'},
       moveStyle = {transform: `translate3d(0,${this.state.moveDistance}px,0)`}
+      // console.log(isShowGotoTop && this.state.showTop && (gotoTop || <div className={`${prefixCls}-goto_top`} onClick={this.goToTop} />))
     return (
       <div
         ref={body => this.body = body}
@@ -141,7 +144,10 @@ export default class Refresh extends Component {
         </div>
         <div>
           {
-            isShowGotoTop && this.state.showTop && <div className={`${prefixCls}-goto_top`} onClick={this.goToTop} />
+
+            isShowGotoTop && this.state.showTop && <div onClick={this.goToTop}>
+              {GotoTop || <div className={`${prefixCls}-goto_top`}  />}
+            </div>
           }
         </div>
       </div>
@@ -154,6 +160,7 @@ Refresh.propTypes = {
   prefixCls: PropTypes.string,
   resistance: PropTypes.number,
   isShowGotoTop: PropTypes.bool,
+  operationCallback: PropTypes.func,
   distanceToRefresh: PropTypes.number,
   scrollTargetSelector: PropTypes.string,
 }
