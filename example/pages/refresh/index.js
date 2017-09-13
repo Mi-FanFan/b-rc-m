@@ -29,6 +29,7 @@ export default class RefreshExam extends Component{
           isShowGotoTop={true}
           scrollTargetSelector=".am-drawer-content"
           operationCallback={this.handleOperation}
+          defaultScrollTop={window.REFRESH_DEFAULT_SCROLL_TOP}
           style={{
             textAlign: 'center'
           }}

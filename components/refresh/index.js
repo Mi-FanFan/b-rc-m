@@ -31,8 +31,8 @@ export default class Refresh extends Component {
     this.handleTouchStart = this.handleTouchStart.bind(this)
   }
   componentDidMount() {
+    const {scrollTargetSelector, defaultScrollTop} = this.props
     this.browserIsUc = navigator.userAgent.indexOf('UCBrowser') !== -1
-    const {scrollTargetSelector} = this.props
     this.setState({
       bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
     })
@@ -44,6 +44,7 @@ export default class Refresh extends Component {
     }
     //处理body元素，并且绑定滚动事件
     this.realBody = scrollTargetSelector ? document.querySelector(scrollTargetSelector) : this.body
+    this.realBody.scrollTop = defaultScrollTop
     this.realBody.addEventListener('scroll', this.handleScroll)
 
     this.items.addEventListener('touchmove', this.handleTouchMove, false)
@@ -53,6 +54,7 @@ export default class Refresh extends Component {
   componentWillUnmount() {
     this.realBody.removeEventListener('scroll', this.handleScroll)
     !this.browserIsUc && document.removeEventListener('touchmove', this.handleCancelMove)
+    window.REFRESH_DEFAULT_SCROLL_TOP = this.realBody.scrollTop
   }
   handleTouchStart(e) {
     const {operationCallback} = this.props
@@ -161,12 +163,14 @@ Refresh.propTypes = {
   resistance: PropTypes.number,
   isShowGotoTop: PropTypes.bool,
   operationCallback: PropTypes.func,
+  defaultScrollTop: PropTypes.number,
   distanceToRefresh: PropTypes.number,
   scrollTargetSelector: PropTypes.string,
 }
 
 Refresh.defaultProps = {
   resistance: 2.5,
+  defaultScrollTop: 0,
   isShowGotoTop: true,
   distanceToRefresh: 100,
   prefixCls: 'mi-refresh',
