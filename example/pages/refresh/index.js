@@ -27,7 +27,6 @@ export default class RefreshExam extends Component{
           onRefresh={this.handleRefresh}
           distanceToRefresh={document.documentElement.clientHeight / 10}
           isShowGotoTop={true}
-          scrollTargetSelector=".am-drawer-content"
           operationCallback={this.handleOperation}
           defaultScrollTop={window.REFRESH_DEFAULT_SCROLL_TOP}
           style={{

@@ -121,11 +121,10 @@ export default class Refresh extends Component {
     const {children, loading, prefixCls, isShowGotoTop, scrollTargetSelector, GotoTop} = this.props,
       bodyStyle = {height: `${this.state.bodyHeight}px`, overflow: 'scroll', position: 'relative'},
       moveStyle = {transform: `translate3d(0,${this.state.moveDistance}px,0)`}
-      // console.log(isShowGotoTop && this.state.showTop && (gotoTop || <div className={`${prefixCls}-goto_top`} onClick={this.goToTop} />))
     return (
       <div
         ref={body => this.body = body}
-        className={classNames({[`${prefixCls}-refresh-loading`]: this.state.isLoading})}
+        className={classNames(`${prefixCls}-body`,{[`${prefixCls}-refresh-loading`]: this.state.isLoading})}
         style={scrollTargetSelector ? {} : bodyStyle}
       >
         <div ref={animation => this.animation = animation} className={`${prefixCls}-ptr-element`} style={moveStyle}>
