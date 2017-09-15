@@ -89,6 +89,7 @@ export default class Refresh extends Component {
         moveDistance: 0,
       })
     }
+    !this.browserIsUc && document.removeEventListener('touchmove', this.handleCancelMove, {passive: false})
   }
   handleCancelMove(e) {
     e.preventDefault()
@@ -104,7 +105,6 @@ export default class Refresh extends Component {
         moveDistance: 0,
         isLoading: false,
       })
-      !this.browserIsUc && document.removeEventListener('touchmove', this.handleCancelMove, {passive: false})
     })
   }
   goToTop() {
