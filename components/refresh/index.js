@@ -23,6 +23,7 @@ export default class Refresh extends Component {
     this.animation = null
     this.startScrollTop = 0
     this.browserIsUc = false
+    this.passiveSupported = false //判断是否支持addEventlistener 的 passive属性。
     this.goToTop = this.goToTop.bind(this)
     this.loading = this.loading.bind(this)
     this.handleScroll = this.handleScroll.bind(this)
@@ -31,8 +32,9 @@ export default class Refresh extends Component {
     this.handleTouchStart = this.handleTouchStart.bind(this)
   }
   componentDidMount() {
-    const {scrollTargetSelector, defaultScrollTop} = this.props
-    this.browserIsUc = navigator.userAgent.indexOf('UCBrowser') !== -1
+    const {scrollTargetSelector, defaultScrollTop} = this.props,
+      self = this
+    // this.browserIsUc = navigator.userAgent.indexOf('UCBrowser') !== -1
     this.setState({
       bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
     })
@@ -50,6 +52,20 @@ export default class Refresh extends Component {
     this.items.addEventListener('touchmove', this.handleTouchMove, false)
     this.items.addEventListener('touchstart', this.handleTouchStart, false)
     this.items.addEventListener('touchend', this.handleTouchEnd, false)
+
+    //判断 addEventListener('test', null, {passive: false}) 绑定方式是否支持。
+    //主要是兼容uc浏览器
+    try {
+      const options = Object.defineProperty({}, "passive", {
+        get: function() {
+          self.passiveSupported = true;
+        }
+      });
+
+      window.addEventListener("test", null, options);
+    } catch(err) {
+      alert(err)
+    }
   }
   componentWillUnmount() {
     this.realBody.removeEventListener('scroll', this.handleScroll)
@@ -73,7 +89,7 @@ export default class Refresh extends Component {
     this.setState({
       moveDistance: this.distance
     })
-    !this.browserIsUc && document.addEventListener('touchmove', this.handleCancelMove, {passive: false})
+    document.addEventListener('touchmove', this.handleCancelMove, this.passiveSupported ? {passive: false} : false)
   }
   handleTouchEnd(event) {
     const {distanceToRefresh} = this.props
@@ -89,7 +105,7 @@ export default class Refresh extends Component {
         moveDistance: 0,
       })
     }
-    !this.browserIsUc && document.removeEventListener('touchmove', this.handleCancelMove, {passive: false})
+    document.removeEventListener('touchmove', this.handleCancelMove)
   }
   handleCancelMove(e) {
     e.preventDefault()
