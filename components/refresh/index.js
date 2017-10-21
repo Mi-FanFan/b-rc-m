@@ -24,12 +24,6 @@ export default class Refresh extends Component {
     this.startScrollTop = 0
     this.browserIsUc = false
     this.passiveSupported = false //判断是否支持addEventlistener 的 passive属性。
-    this.goToTop = this.goToTop.bind(this)
-    this.loading = this.loading.bind(this)
-    this.handleScroll = this.handleScroll.bind(this)
-    this.handleTouchEnd = this.handleTouchEnd.bind(this)
-    this.handleTouchMove = this.handleTouchMove.bind(this)
-    this.handleTouchStart = this.handleTouchStart.bind(this)
   }
   componentDidMount() {
     const {scrollTargetSelector, defaultScrollTop} = this.props,
@@ -72,14 +66,14 @@ export default class Refresh extends Component {
     !this.browserIsUc && document.removeEventListener('touchmove', this.handleCancelMove)
     window.REFRESH_DEFAULT_SCROLL_TOP = this.realBody.scrollTop
   }
-  handleTouchStart(e) {
+  handleTouchStart = (e)  => {
     const {operationCallback} = this.props
     e.stopPropagation()
     this.startY = e.touches[0].clientY
     this.startScrollTop = this.body.scrollTop
     operationCallback&&operationCallback()
   }
-  handleTouchMove(e) {
+  handleTouchMove = (e) => {
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
     if (this.isLoading || this.distance < 0  || this.realBody.scrollTop) {
@@ -91,7 +85,7 @@ export default class Refresh extends Component {
     })
     document.addEventListener('touchmove', this.handleCancelMove, this.passiveSupported ? {passive: false} : false)
   }
-  handleTouchEnd(event) {
+  handleTouchEnd = (event) => {
     const {distanceToRefresh} = this.props
     if (this.distance > distanceToRefresh && !this.realBody.scrollTop && !this.startScrollTop && !this.isLoading) {
       this.setState({
@@ -107,26 +101,23 @@ export default class Refresh extends Component {
     }
     document.removeEventListener('touchmove', this.handleCancelMove)
   }
-  handleCancelMove(e) {
+  handleCancelMove = (e) => {
     e.preventDefault()
   }
-  loading() {
+  loading = async () => {
     const {onRefresh} = this.props
-    new Promise((resolve, reject) => {
-      onRefresh(resolve, reject)
-    }).then(()=>{
-      this.distance = 0
-      this.isLoading = false
-      this.setState({
-        moveDistance: 0,
-        isLoading: false,
-      })
+    await new Promise((resolve, reject) => {onRefresh(resolve, reject)})
+    this.distance = 0
+    this.isLoading = false
+    this.setState({
+      moveDistance: 0,
+      isLoading: false,
     })
   }
-  goToTop() {
+  goToTop = () => {
     this.realBody.scrollTop = 0
   }
-  handleScroll() {
+  handleScroll = () => {
     if(this.realBody.scrollTop > 100) {
       this.setState({showTop: true})
     }else {
@@ -161,7 +152,6 @@ export default class Refresh extends Component {
         </div>
         <div>
           {
-
             isShowGotoTop && this.state.showTop && <div onClick={this.goToTop}>
               {GotoTop || <div className={`${prefixCls}-goto_top`}  />}
             </div>

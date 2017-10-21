@@ -3,7 +3,6 @@
  */
 import 'babel-polyfill'
 import {Refresh} from 'b-rc-m'
-// import GotoTop from './GotoTop'
 import React,{Component} from 'react'
 
 export default class RefreshExam extends Component{
