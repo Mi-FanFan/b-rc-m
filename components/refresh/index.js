@@ -22,22 +22,16 @@ export default class Refresh extends Component {
     this.isLoading = false
     this.animation = null
     this.startScrollTop = 0
-    this.browserIsUc = false
     this.passiveSupported = false //判断是否支持addEventlistener 的 passive属性。
   }
   componentDidMount() {
     const {scrollTargetSelector, defaultScrollTop} = this.props,
       self = this
-    // this.browserIsUc = navigator.userAgent.indexOf('UCBrowser') !== -1
+
     this.setState({
       bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
     })
-    //兼容uc浏览器下滑刷新。
-    if(this.browserIsUc) {
-      const body = document.getElementsByTagName('body')[0]
-      body.style.height = '100%'
-      body.style.overflow = 'hidden'
-    }
+
     //处理body元素，并且绑定滚动事件
     this.realBody = scrollTargetSelector ? document.querySelector(scrollTargetSelector) : this.body
     this.realBody.scrollTop = defaultScrollTop
