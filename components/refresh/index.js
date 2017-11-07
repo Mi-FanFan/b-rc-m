@@ -27,15 +27,22 @@ export default class Refresh extends Component {
   componentDidMount() {
     const {scrollTargetSelector, defaultScrollTop} = this.props,
       self = this
-
+    
     this.setState({
       bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
     })
 
     //处理body元素，并且绑定滚动事件
-    this.realBody = scrollTargetSelector ? document.querySelector(scrollTargetSelector) : this.body
+    this.realBody = scrollTargetSelector ? this.getScrollTarget(scrollTargetSelector) : this.body
     this.realBody.scrollTop = defaultScrollTop
     this.realBody.addEventListener('scroll', this.handleScroll)
+
+    /*
+     * 使用原生事件绑定方式，主要是因为react独特的事件绑定方式。
+     * react 会把事件绑定到document上面，这样就无法在第一时间禁止掉document的touchmove事件，导致页面下滑刷新整个页面。
+     * 如果没有在第一时间将document的touchmove禁止掉，就会发生如下warning：
+     * Ignored attempt to cancel a touchmove event with cancelable=false, for example because scrolling is in progress and cannot be interrupted.
+    */
 
     this.items.addEventListener('touchmove', this.handleTouchMove, false)
     this.items.addEventListener('touchstart', this.handleTouchStart, false)
@@ -65,7 +72,7 @@ export default class Refresh extends Component {
     e.stopPropagation()
     this.startY = e.touches[0].clientY
     this.startScrollTop = this.body.scrollTop
-    operationCallback&&operationCallback()
+    operationCallback && operationCallback()
   }
   handleTouchMove = (e) => {
     const resistance = this.props.resistance
@@ -117,6 +124,18 @@ export default class Refresh extends Component {
     }else {
       this.setState({showTop: false})
     }
+  }
+  /**
+   * 类似于jquery的元素选择器，
+   * 当传入'document'或'body'时做特殊处理
+   * @param {String} target 
+   */
+  getScrollTarget(target) {
+    return target === 'document' 
+      ? document
+      : target === 'body' 
+      ? document.body
+      : document.querySelector(target)
   }
   render() {
     const {children, loading, prefixCls, isShowGotoTop, scrollTargetSelector, GotoTop} = this.props,
@@ -174,5 +193,6 @@ Refresh.defaultProps = {
   distanceToRefresh: 100,
   prefixCls: 'mi-refresh',
   scrollTargetSelector: '',
+  operationCallback: function() {},
 }
 
