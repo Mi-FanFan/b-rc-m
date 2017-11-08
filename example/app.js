@@ -56,29 +56,24 @@ export default class App extends React.Component {
       position: this.state.position,
       onOpenChange: this.onOpenChange,
     };
-    // return (
-    //   <div style={{height: '100%'}}>
-    //     <div className="demo-drawer-trigger">
-    //       <NavBar iconName="bars" onLeftClick={this.onOpenChange}></NavBar>
-    //     </div>
-    //     <div className="demo-drawer-container">
-    //       <Drawer
-    //         className="my-drawer"
-    //         sidebar={sidebar}
-    //         dragHandleStyle={{display: 'none'}}
-    //         contentStyle={{color: '#A6A6A6', textAlign: 'center'}}
-    //         {...drawerProps}
-    //       >
-    //         {this.props.children}
-    //       </Drawer>
-    //     </div>
-    //   </div>
-    // );
     return (
-      <div>
-        {this.props.children}
+      <div style={{height: '100%'}}>
+        <div className="demo-drawer-trigger">
+          <NavBar iconName="bars" onLeftClick={this.onOpenChange}></NavBar>
+        </div>
+        <div className="demo-drawer-container">
+          <Drawer
+            className="my-drawer"
+            sidebar={sidebar}
+            dragHandleStyle={{display: 'none'}}
+            contentStyle={{color: '#A6A6A6', textAlign: 'center'}}
+            {...drawerProps}
+          >
+            {this.props.children}
+          </Drawer>
+        </div>
       </div>
-    )
+    );
   }
 }
 
