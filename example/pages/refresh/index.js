@@ -10,6 +10,9 @@ export default class RefreshExam extends Component{
     super(props)
     this.handleRefresh = this.handleRefresh.bind(this)
     this.array = new Array(200).fill(1)
+    this.state = {
+      target: false
+    }
   }
   handleRefresh(resolve, reject) {
     setTimeout(()=>{
@@ -22,12 +25,15 @@ export default class RefreshExam extends Component{
   render() {
     return (
       <div>
+        <button onClick={()=>this.setState({target: !this.state.target})} >切换目标</button>
         <Refresh
           onRefresh={this.handleRefresh}
           distanceToRefresh={document.documentElement.clientHeight / 10}
           isShowGotoTop={true}
           operationCallback={this.handleOperation}
           defaultScrollTop={window.REFRESH_DEFAULT_SCROLL_TOP}
+          scrollTargetSelector={this.state.target && 'document'}
+          scroll
           style={{
             textAlign: 'center'
           }}

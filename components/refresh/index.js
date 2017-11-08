@@ -31,9 +31,8 @@ export default class Refresh extends Component {
     this.setState({
       bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
     })
-
     //处理body元素，并且绑定滚动事件
-    this.realBody = scrollTargetSelector ? this.getScrollTarget(scrollTargetSelector) : this.body
+    this.realBody = this.getScrollTarget(scrollTargetSelector)
     this.realBody.scrollTop = defaultScrollTop
     this.realBody.addEventListener('scroll', this.handleScroll)
 
@@ -56,10 +55,25 @@ export default class Refresh extends Component {
           self.passiveSupported = true;
         }
       });
-
       window.addEventListener("test", null, options);
     } catch(err) {
       alert(err)
+    }
+  }
+  /**
+   * 
+   * 处理在网页的轮动条滚动时，改变监控的滚动条对象。  
+   */
+  componentWillReceiveProps({scrollTargetSelector}) {
+    const {defaultScrollTop} = this.props
+    
+    if(scrollTargetSelector !== this.props.scrollTargetSelector) {
+      //在绑定之前先将之前realbody的绑定事件去掉
+      this.realBody.removeEventListener('scroll', this.handleScroll)
+      //处理新的realbody
+      this.realBody = this.getScrollTarget(scrollTargetSelector)
+      this.realBody.scrollTop = defaultScrollTop
+      this.realBody.addEventListener('scroll', this.handleScroll)
     }
   }
   componentWillUnmount() {
@@ -70,14 +84,20 @@ export default class Refresh extends Component {
   handleTouchStart = (e)  => {
     const {operationCallback} = this.props
     e.stopPropagation()
+
     this.startY = e.touches[0].clientY
     this.startScrollTop = this.body.scrollTop
+
+    // 当触碰到整个组件的时候，调用回调函数
+    if(operationCallback && typeof operationCallback !== 'function') {
+      throw new Error('handleScrollToZero must be a function')
+    }
     operationCallback && operationCallback()
   }
   handleTouchMove = (e) => {
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
-    if (this.isLoading || this.distance < 0  || this.realBody.scrollTop) {
+    if (this.isLoading || this.distance < 0  || this.getRealBodyScrollTop()) {
       e.stopPropagation() //在正常上划浏览数据时，不会禁止document的touchmove事件。
       return
     }
@@ -88,7 +108,7 @@ export default class Refresh extends Component {
   }
   handleTouchEnd = (event) => {
     const {distanceToRefresh} = this.props
-    if (this.distance > distanceToRefresh && !this.realBody.scrollTop && !this.startScrollTop && !this.isLoading) {
+    if (this.distance > distanceToRefresh && !this.getRealBodyScrollTop() && !this.startScrollTop && !this.isLoading) {
       this.setState({
         isLoading: true,
         moveDistance: 0,
@@ -119,6 +139,14 @@ export default class Refresh extends Component {
     this.realBody.scrollTop = 0
   }
   handleScroll = () => {
+    const {handleScrollToZero} = this.props
+
+    if(handleScrollToZero && typeof handleScrollToZero !== 'function') {
+      throw new Error('handleScrollToZero must be a function')
+    }
+
+    handleScrollToZero && handleScrollToZero()
+
     if(this.realBody.scrollTop > 100) {
       this.setState({showTop: true})
     }else {
@@ -127,25 +155,36 @@ export default class Refresh extends Component {
   }
   /**
    * 类似于jquery的元素选择器，
-   * 当传入'document'或'body'时做特殊处理
    * @param {String} target 
    */
-  getScrollTarget(target) {
-    return target === 'document' 
+  getScrollTarget = (target) => {
+    return !target 
+      ? this.body 
+      : target === 'document'
       ? document
       : target === 'body' 
       ? document.body
       : document.querySelector(target)
   }
+  /**
+   * 返回指定dom的滚动条高度
+   */
+  getRealBodyScrollTop = () => {
+    return this.realBody === document ? document.documentElement.scrollTop : this.realBody.scrollTop
+  }
   render() {
-    const {children, loading, prefixCls, isShowGotoTop, scrollTargetSelector, GotoTop} = this.props,
-      bodyStyle = {height: `${this.state.bodyHeight}px`, overflow: 'scroll', position: 'relative'},
-      moveStyle = {transform: `translate3d(0,${this.state.moveDistance}px,0)`}
+    const {children, loading, prefixCls, isShowGotoTop, GotoTop} = this.props,
+      bodyStyle = {
+        ...(this.realBody === document ? {} : { height:`${this.state.bodyHeight}px`}),
+        overflow: 'scroll', 
+        position: 'relative'},
+        moveStyle = {transform: `translate3d(0,${this.state.moveDistance}px,0)`
+      }
     return (
       <div
         ref={body => this.body = body}
         className={classNames(`${prefixCls}-body`,{[`${prefixCls}-refresh-loading`]: this.state.isLoading})}
-        style={scrollTargetSelector ? {} : bodyStyle}
+        style={bodyStyle}
       >
         <div ref={animation => this.animation = animation} className={`${prefixCls}-ptr-element`} style={moveStyle}>
           <span className={`${prefixCls}-genericon ${prefixCls}-genericon-next`}/>
@@ -193,6 +232,5 @@ Refresh.defaultProps = {
   distanceToRefresh: 100,
   prefixCls: 'mi-refresh',
   scrollTargetSelector: '',
-  operationCallback: function() {},
 }
 
