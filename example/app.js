@@ -48,14 +48,15 @@ export default class App extends React.Component {
           ))
         }
       </div>
-
-
     );
     const drawerProps = {
       open: this.state.open,
       position: this.state.position,
       onOpenChange: this.onOpenChange,
     };
+
+    //在example的演示中，含有外面一层组件
+    
     return (
       <div style={{height: '100%'}}>
         <div className="demo-drawer-trigger">
@@ -74,6 +75,12 @@ export default class App extends React.Component {
         </div>
       </div>
     );
+
+    // 直接显示开发组件，不包含外面得包装组件。
+
+    // return (
+    //   <div>{this.props.children}</div>
+    // )
   }
 }
 
