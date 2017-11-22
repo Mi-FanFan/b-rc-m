@@ -55,8 +55,8 @@ export default class App extends React.Component {
       onOpenChange: this.onOpenChange,
     };
 
-    //在example的演示中，含有外面一层组件
-    
+    // 在example的演示中，含有外面一层组件
+
     return (
       <div style={{height: '100%'}}>
         <div className="demo-drawer-trigger">

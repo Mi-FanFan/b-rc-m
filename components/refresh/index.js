@@ -27,7 +27,7 @@ export default class Refresh extends Component {
   componentDidMount() {
     const {scrollTargetSelector, defaultScrollTop} = this.props,
       self = this
-    
+
     this.setState({
       bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
     })
@@ -35,7 +35,7 @@ export default class Refresh extends Component {
     this.realBody = this.getScrollTarget(scrollTargetSelector)
     this.realBody.scrollTop = defaultScrollTop
     this.realBody.addEventListener('scroll', this.handleScroll)
-
+    document.addEventListener('scroll', ()=>{console.log(document.body.scrollTop)})
     /*
      * 使用原生事件绑定方式，主要是因为react独特的事件绑定方式。
      * react 会把事件绑定到document上面，这样就无法在第一时间禁止掉document的touchmove事件，导致页面下滑刷新整个页面。
@@ -61,12 +61,12 @@ export default class Refresh extends Component {
     }
   }
   /**
-   * 
-   * 处理在网页的轮动条滚动时，改变监控的滚动条对象。  
+   *
+   * 处理在网页的轮动条滚动时，改变监控的滚动条对象。
    */
   componentWillReceiveProps({scrollTargetSelector}) {
     const {defaultScrollTop} = this.props
-    
+
     if(scrollTargetSelector !== this.props.scrollTargetSelector) {
       //重新设定body的高度。
       this.setState({
@@ -160,14 +160,14 @@ export default class Refresh extends Component {
   }
   /**
    * 类似于jquery的元素选择器，
-   * @param {String} target 
+   * @param {String} target
    */
   getScrollTarget = (target) => {
-    return !target 
-      ? this.body 
+    return !target
+      ? this.body
       : target === 'document'
       ? document
-      : target === 'body' 
+      : target === 'body'
       ? document.body
       : document.querySelector(target)
   }
@@ -175,13 +175,14 @@ export default class Refresh extends Component {
    * 返回指定dom的滚动条高度
    */
   getRealBodyScrollTop = () => {
-    return this.realBody === document ? document.documentElement.scrollTop : this.realBody.scrollTop
+    //chrome一众浏览器获取滚动条高度通过document.documentElement而uc浏览器是通过document.body获取
+    return this.realBody === document ? (document.documentElement.scrollTop || document.body.scrollTop): this.realBody.scrollTop
   }
   render() {
     const {children, loading, prefixCls, isShowGotoTop, GotoTop} = this.props,
       bodyStyle = {
         ...(this.realBody === document ? {} : { height:`${this.state.bodyHeight}px`}),
-        overflow: 'scroll', 
+        overflow: 'scroll',
         position: 'relative'},
         moveStyle = {transform: `translate3d(0,${this.state.moveDistance}px,0)`
       }
