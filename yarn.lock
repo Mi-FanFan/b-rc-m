@@ -398,6 +398,17 @@ axobject-query@^0.1.0:
   dependencies:
     ast-types-flow "0.0.7"
 
+b-rc-m@^0.8.14:
+  version "0.8.14"
+  resolved "https://registry.yarnpkg.com/b-rc-m/-/b-rc-m-0.8.14.tgz#21eaa330236278bc504163edcd46f556be03f40d"
+  dependencies:
+    classnames "~2.2.1"
+    lodash "^4.17.4"
+    mff-tabs "^1.2.1"
+    rc-animate "^2.4.1"
+    rc-touchable "^1.2.3"
+    rmc-list-view "^0.7.6"
+
 babel-cli@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-cli/-/babel-cli-6.24.1.tgz#207cd705bba61489b2ea41b5312341cf6aca2283"

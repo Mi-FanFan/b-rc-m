@@ -9,7 +9,6 @@ export default class Refresh extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      bodyHeight: 0,
       showTop: false,
       moveDistance: 0,
       isLoading: false,
@@ -27,15 +26,10 @@ export default class Refresh extends Component {
   componentDidMount() {
     const {scrollTargetSelector, defaultScrollTop} = this.props,
       self = this
-
-    this.setState({
-      bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
-    })
     //处理body元素，并且绑定滚动事件
     this.realBody = this.getScrollTarget(scrollTargetSelector)
     this.realBody.scrollTop = defaultScrollTop
     this.realBody.addEventListener('scroll', this.handleScroll)
-    document.addEventListener('scroll', ()=>{console.log(document.body.scrollTop)})
     /*
      * 使用原生事件绑定方式，主要是因为react独特的事件绑定方式。
      * react 会把事件绑定到document上面，这样就无法在第一时间禁止掉document的touchmove事件，导致页面下滑刷新整个页面。
@@ -68,11 +62,7 @@ export default class Refresh extends Component {
     const {defaultScrollTop} = this.props
 
     if(scrollTargetSelector !== this.props.scrollTargetSelector) {
-      //重新设定body的高度。
-      this.setState({
-        bodyHeight: document.documentElement.clientHeight - this.body.getBoundingClientRect().top
-      })
-
+      console.log('in different')
       //在绑定之前先将之前realbody的绑定事件去掉
       this.realBody.removeEventListener('scroll', this.handleScroll)
       //处理新的realbody
@@ -102,6 +92,7 @@ export default class Refresh extends Component {
   handleTouchMove = (e) => {
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
+    console.log(this.realBody)
     if (this.isLoading || this.distance < 0  || this.getRealBodyScrollTop()) {
       e.stopPropagation() //在正常上划浏览数据时，不会禁止document的touchmove事件。
       return
@@ -160,6 +151,7 @@ export default class Refresh extends Component {
   }
   /**
    * 类似于jquery的元素选择器，
+   *  target 为空返回document
    * @param {String} target
    */
   getScrollTarget = (target) => {
@@ -169,7 +161,7 @@ export default class Refresh extends Component {
       ? document
       : target === 'body'
       ? document.body
-      : document.querySelector(target)
+      : document.querySelector(target) || document
   }
   /**
    * 返回指定dom的滚动条高度
@@ -181,11 +173,8 @@ export default class Refresh extends Component {
   render() {
     const {children, loading, prefixCls, isShowGotoTop, GotoTop} = this.props,
       bodyStyle = {
-        ...(this.realBody === document ? {} : { height:`${this.state.bodyHeight}px`}),
-        overflow: 'scroll',
         position: 'relative'},
-        moveStyle = {transform: `translate3d(0,${this.state.moveDistance}px,0)`
-      }
+        moveStyle = {transform: `translate3d(0,${this.state.moveDistance}px,0)`}
     return (
       <div
         ref={body => this.body = body}

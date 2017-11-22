@@ -19,6 +19,11 @@ export default class RefreshExam extends Component{
       resolve()
     },1000)
   }
+  componentDidMount() {
+    this.setState({
+      target: '#app'
+    })
+  }
   handleOperation() {
     console.log('operation')
   }
@@ -32,7 +37,7 @@ export default class RefreshExam extends Component{
           isShowGotoTop={true}
           operationCallback={this.handleOperation}
           defaultScrollTop={window.REFRESH_DEFAULT_SCROLL_TOP}
-          scrollTargetSelector={'document'}
+          scrollTargetSelector={this.state.target}
           scroll
           style={{
             textAlign: 'center'

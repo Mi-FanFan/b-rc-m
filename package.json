@@ -1,6 +1,6 @@
 {
   "name": "b-rc-m",
-  "version": "0.8.14",
+  "version": "0.8.15",
   "description": "react components for budee front-end mobile project",
   "main": "./lib",
   "scripts": {
@@ -23,6 +23,7 @@
   "author": "Mi-FanFan",
   "license": "MIT",
   "dependencies": {
+    "b-rc-m": "^0.8.14",
     "classnames": "~2.2.1",
     "lodash": "^4.17.4",
     "mff-tabs": "^1.2.1",
@@ -101,6 +102,6 @@
     "webpack-dev-server": "^2.4.5"
   },
   "engines": {
-    "npm":">=5.0.0"
+    "npm": ">=5.0.0"
   }
 }
