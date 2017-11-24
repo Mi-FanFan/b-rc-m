@@ -62,7 +62,6 @@ export default class Refresh extends Component {
     const {defaultScrollTop} = this.props
 
     if(scrollTargetSelector !== this.props.scrollTargetSelector) {
-      console.log('in different')
       //在绑定之前先将之前realbody的绑定事件去掉
       this.realBody.removeEventListener('scroll', this.handleScroll)
       //处理新的realbody
@@ -92,7 +91,6 @@ export default class Refresh extends Component {
   handleTouchMove = (e) => {
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
-    console.log(this.realBody)
     if (this.isLoading || this.distance < 0  || this.getRealBodyScrollTop()) {
       e.stopPropagation() //在正常上划浏览数据时，不会禁止document的touchmove事件。
       return
