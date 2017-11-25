@@ -54,22 +54,7 @@ export default class Refresh extends Component {
       alert(err)
     }
   }
-  /**
-   *
-   * 处理在网页的轮动条滚动时，改变监控的滚动条对象。
-   */
-  componentWillReceiveProps({scrollTargetSelector}) {
-    const {defaultScrollTop} = this.props
 
-    if(scrollTargetSelector !== this.props.scrollTargetSelector) {
-      //在绑定之前先将之前realbody的绑定事件去掉
-      this.realBody.removeEventListener('scroll', this.handleScroll)
-      //处理新的realbody
-      this.realBody = this.getScrollTarget(scrollTargetSelector)
-      this.realBody.scrollTop = defaultScrollTop
-      this.realBody.addEventListener('scroll', this.handleScroll)
-    }
-  }
   componentWillUnmount() {
     this.realBody.removeEventListener('scroll', this.handleScroll)
     !this.browserIsUc && document.removeEventListener('touchmove', this.handleCancelMove)
