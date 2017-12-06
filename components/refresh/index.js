@@ -54,10 +54,10 @@ export default class Refresh extends Component {
       alert(err)
     }
   }
-  /**
-    *
-    * 处理在网页的轮动条滚动时，改变监控的滚动条对象。
-    */
+
+
+   // 处理在网页的轮动条滚动时，改变监控的滚动条对象。和react的渲染机制进行匹配。
+
    componentWillReceiveProps({scrollTargetSelector, defaultScrollTop}) {
      if(scrollTargetSelector !== this.props.scrollTargetSelector) {
        //在绑定之前先将之前realbody的绑定事件去掉
@@ -73,10 +73,9 @@ export default class Refresh extends Component {
     !this.browserIsUc && document.removeEventListener('touchmove', this.handleCancelMove)
     window.REFRESH_DEFAULT_SCROLL_TOP = this.realBody.scrollTop
   }
+
   handleTouchStart = (e)  => {
     const {operationCallback} = this.props
-    e.stopPropagation()
-
     this.startY = e.touches[0].clientY
     this.startScrollTop = this.body.scrollTop
 
