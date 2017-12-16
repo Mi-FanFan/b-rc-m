@@ -13,6 +13,7 @@ class Mask extends Component{
 
   constructor (props) {
     super(props)
+    this.scrollTop = 0
     this.show = this.show.bind(this)
     this.destroy = this.destroy.bind(this)
   }
@@ -21,10 +22,13 @@ class Mask extends Component{
     // Use regex to prevent matching `mask-open` as part of a different class, e.g. `my-mask-opened`
     const classes = document.body.className.replace(/(^| )mask-open( |$)/, ' ');
     document.body.className = classNames(classes).trim();
+    document.documentElement.scrollTop = this.scrollTop
+    document.body.scrollTop = this.scrollTop
   }
 
   show() {
     const classes = document.body.className;
+    this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
     document.body.className = classNames(classes,'mask-open');
   }
 
