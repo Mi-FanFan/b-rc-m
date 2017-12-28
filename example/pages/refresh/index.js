@@ -27,9 +27,12 @@ export default class RefreshExam extends Component{
   handleOperation() {
     console.log('operation')
   }
+  handleClick() {
+    console.log('click')
+  }
   render() {
     return (
-      <div>
+      <div onClick={this.handleClick}>
         <button onClick={()=>this.setState({target: !this.state.target})} >切换目标</button>
         <Refresh
           onRefresh={this.handleRefresh}

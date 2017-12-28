@@ -89,7 +89,6 @@ export default class Refresh extends Component {
     const resistance = this.props.resistance
     this.distance = (e.touches[0].clientY - this.startY) / resistance
     if (this.isLoading || this.distance < 0  || this.getRealBodyScrollTop()) {
-      e.stopPropagation() //在正常上划浏览数据时，不会禁止document的touchmove事件。
       return
     }
     this.setState({
