@@ -1,6 +1,6 @@
 {
   "name": "b-rc-m",
-  "version": "0.8.21",
+  "version": "0.8.22",
   "description": "react components for budee front-end mobile project",
   "main": "./lib",
   "scripts": {
