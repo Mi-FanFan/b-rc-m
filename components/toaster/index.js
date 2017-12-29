@@ -35,9 +35,9 @@ class Toaster extends Component {
   }
 
   render() {
-    const {msg} = this.props
+    const {msg, className} = this.props
     return (
-        <Toptips show={this.state.show} type={msg.type}>{msg.content}</Toptips>
+        <Toptips show={this.state.show} type={msg.type} className={className} >{msg.content}</Toptips>
     )
   }
 }

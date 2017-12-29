@@ -40,7 +40,7 @@ export default class ButtonDemo extends React.Component {
               <Button className="toast-btn" onClick={()=>this.handle('primary','Primary Toptip')} type="default">Primary Toptip</Button>
               <Button className="toast-btn" onClick={()=>this.handle('info','Info Toptip')} type="default">Info Toptip</Button>
               <Button className="toast-btn" onClick={()=>this.handle('warn','Warn Toptip')} type="default">Warn Toptip</Button>
-              <Toaster msg={this.state.msg} hideCallBack={this.handleHide}/>
+              <Toaster msg={this.state.msg} hideCallBack={this.handleHide} className="moidify"/>
             </Page>
         );
     }
