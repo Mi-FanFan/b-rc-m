@@ -41,7 +41,7 @@ export default class RefreshExam extends Component{
           operationCallback={this.handleOperation}
           defaultScrollTop={window.REFRESH_DEFAULT_SCROLL_TOP}
           scrollTargetSelector={this.state.target}
-          scroll
+          isRefresh={false}
           style={{
             textAlign: 'center'
           }}

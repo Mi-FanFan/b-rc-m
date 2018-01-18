@@ -86,7 +86,10 @@ export default class Refresh extends Component {
     operationCallback && operationCallback()
   }
   handleTouchMove = (e) => {
-    const resistance = this.props.resistance
+    const {resistance, isRefresh} = this.props
+    if(!isRefresh) {
+      return
+    }
     this.distance = (e.touches[0].clientY - this.startY) / resistance
     if (this.isLoading || this.distance < 0  || this.getRealBodyScrollTop()) {
       return
@@ -204,6 +207,7 @@ export default class Refresh extends Component {
 }
 
 Refresh.propTypes = {
+  isRefresh: PropTypes.bool,
   loading: PropTypes.object,
   prefixCls: PropTypes.string,
   resistance: PropTypes.number,
@@ -215,6 +219,7 @@ Refresh.propTypes = {
 }
 
 Refresh.defaultProps = {
+  isRefresh: true,
   resistance: 2.5,
   defaultScrollTop: 0,
   isShowGotoTop: true,
