@@ -15,7 +15,7 @@ export default class extends React.Component {
   render() {
     return (
       <Page className="button" title="Tabs " subTitle="标签页">
-        <Tabs  onChange={callback} onTabClick={handleTabClick}>
+        <Tabs  onChange={callback} onTabClick={handleTabClick} hasTabHeader={false}>
           <TabPane tab="选项卡一" key="4">
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '5rem', backgroundColor: '#fff' }}>
               选项卡一内容

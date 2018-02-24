@@ -49,49 +49,51 @@ class Tabs extends Component {
   render () {
     return (
       <MffTabs
-        renderTabBar={this.renderTabBar}
-        renderTabContent={this.renderTabContent}
         {...this.props}
+        renderTabBar={this.renderTabBar}
+        hasTabHeader={this.props.hasTabHeader}
+        renderTabContent={this.renderTabContent}
       />
     )
   }
 
 }
 Tabs.propTypes = {
-
-  activeKey: PropTypes.string,
-  defaultActiveKey: PropTypes.string,
-  onChange: PropTypes.func,
-  onTabClick: PropTypes.func,
-  onPrevClick: PropTypes.func,
-  onNextClick: PropTypes.func,
-  tabBarExtraContent: PropTypes.node,
-  tabBarStyle: PropTypes.object,
-  tabPosition: PropTypes.oneOf(['top', 'bottom']),
   style: PropTypes.object,
-  prefixCls: PropTypes.string,
-  className: PropTypes.string,
-  animated: PropTypes.bool,
-  swipeable: PropTypes.bool,
-  children: PropTypes.any,
-  destroyInactiveTabPane: PropTypes.bool,
-  pageSize: PropTypes.number,
   speed: PropTypes.number,
-  tabBarhammerOptions: PropTypes.any,
+  children: PropTypes.any,
+  animated: PropTypes.bool,
+  onChange: PropTypes.func,
+  swipeable: PropTypes.bool,
+  onTabClick: PropTypes.func,
+  pageSize: PropTypes.number,
+  prefixCls: PropTypes.string,
+  activeKey: PropTypes.string,
+  className: PropTypes.string,
+  onNextClick: PropTypes.func,
+  onPrevClick: PropTypes.func,
+  hasTabHeader: PropTypes.bool,
   hammerOptions: PropTypes.any,
+  tabBarStyle: PropTypes.object,
+  tabBarExtraContent: PropTypes.node,
+  tabBarhammerOptions: PropTypes.any,
+  defaultActiveKey: PropTypes.string,
+  destroyInactiveTabPane: PropTypes.bool,
+  tabPosition: PropTypes.oneOf(['top', 'bottom']),
 }
 
 Tabs.defaultProps = {
-  prefixCls: 'mi-tabs',
+  speed: 8,
+  pageSize: 4,
+  onChange() {},
   animated: true,
   swipeable: true,
-  tabBarPosition: 'top',
-  hammerOptions: {},
-  tabBarhammerOptions: {},
-  pageSize: 4,
-  speed: 8,
-  onChange() {},
   onTabClick() {},
+  hammerOptions: {},
+  hasTabHeader: true,
+  prefixCls: 'mi-tabs',
+  tabBarPosition: 'top',
+  tabBarhammerOptions: {},
 }
 
 Tabs.TabPane = TabPane

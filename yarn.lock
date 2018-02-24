@@ -4736,9 +4736,9 @@ mff-tabs@^1.2.1:
     prop-types "15.x"
     react-hammerjs "~0.5.0"
 
-mff-tabs@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/mff-tabs/-/mff-tabs-1.2.3.tgz#f021438503599266ebba88fcc5bd5f6a620f65e2"
+mff-tabs@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/mff-tabs/-/mff-tabs-1.2.4.tgz#3239e19f90c94e83f1f0f7678df70ab4e69617d9"
   dependencies:
     babel-runtime "6.x"
     classnames "2.x"
