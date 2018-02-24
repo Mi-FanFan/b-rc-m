@@ -4724,6 +4724,16 @@ mff-tabs@^1.2.1:
     prop-types "15.x"
     react-hammerjs "~0.5.0"
 
+mff-tabs@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/mff-tabs/-/mff-tabs-1.2.2.tgz#407f2511ad488cc7a17742fa96fcd99b72f97d77"
+  dependencies:
+    babel-runtime "6.x"
+    classnames "2.x"
+    create-react-class "15.x"
+    prop-types "15.x"
+    react-hammerjs "^1.0.1"
+
 micromatch@^2.1.5, micromatch@^2.3.11, micromatch@^2.3.7:
   version "2.3.11"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-2.3.11.tgz#86677c97d1720b363431d04d0d15293bd38c1565"
@@ -6068,6 +6078,12 @@ react-error-overlay@^1.0.3:
     react-dev-utils "^2.0.1"
     settle-promise "1.0.0"
     source-map "0.5.6"
+
+react-hammerjs@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-hammerjs/-/react-hammerjs-1.0.1.tgz#bc1ed9e9ef7da057163fb169ce12917b6d6ca7d8"
+  dependencies:
+    hammerjs "^2.0.8"
 
 react-hammerjs@~0.5.0:
   version "0.5.0"
