@@ -8,11 +8,11 @@ import SwipeableInkTabBar from 'mff-tabs/lib/SwipeableInkTabBar'
 import InkTabBar from 'mff-tabs/lib/InkTabBar'
 import SwipeableTabContent from 'mff-tabs/lib/SwipeableTabContent'
 import TabContent from 'mff-tabs/lib/TabContent'
+
 class Tabs extends Component {
   constructor (props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
-
   }
 
   handleChange (activeKey) {

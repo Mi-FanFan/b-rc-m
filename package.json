@@ -1,6 +1,6 @@
 {
   "name": "b-rc-m",
-  "version": "0.8.24",
+  "version": "0.8.25",
   "description": "react components for budee front-end mobile project",
   "main": "./lib",
   "scripts": {
@@ -26,7 +26,7 @@
     "b-rc-m": "^0.8.14",
     "classnames": "~2.2.1",
     "lodash": "^4.17.4",
-    "mff-tabs": "^1.2.2",
+    "mff-tabs": "^1.2.3",
     "rc-animate": "^2.4.1",
     "rc-touchable": "^1.2.3",
     "rmc-list-view": "^0.7.6"
@@ -88,10 +88,10 @@
     "postcss-pxtorem": "^4.0.0",
     "promise": "7.1.1",
     "prop-types": "^15.5.8",
-    "react": "^15.5.4",
+    "react": "16.2.0",
     "react-addons-test-utils": "^15.5.1",
     "react-dev-utils": "^1.0.3",
-    "react-dom": "^15.5.4",
+    "react-dom": "16.2.0",
     "react-error-overlay": "^1.0.3",
     "react-router": "^3.0.0",
     "rimraf": "*",
