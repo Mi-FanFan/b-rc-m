@@ -1,9 +1,10 @@
 {
   "name": "b-rc-m",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "react components for budee front-end mobile project",
   "main": "./lib",
   "module": "./es",
+  "sideEffects": false,
   "scripts": {
     "start": "node scripts/start.js",
     "clean": "rimraf ./lib ./dist ./es",
@@ -27,6 +28,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "@babel/runtime": "^7.3.1",
     "b-rc-m": "^0.8.14",
     "classnames": "~2.2.1",
     "lodash": "^4.17.4",
