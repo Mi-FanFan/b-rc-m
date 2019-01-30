@@ -1,7 +1,7 @@
 /**
  * Created by strong on 2017/8/5.
  */
-import 'babel-polyfill'
+// import '@babel/polyfill'
 import {Refresh} from 'b-rc-m'
 import React,{Component} from 'react'
 
